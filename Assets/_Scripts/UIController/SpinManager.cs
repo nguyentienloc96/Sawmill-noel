@@ -140,7 +140,7 @@ public class SpinManager : MonoBehaviour
                 dollarRecive = GameManager.Instance.lsLocation[locationEnd].lsWorking[jobEnd].price;
             }
         }
-        StartCoroutine(IEOpenGive(dollar * dollarRecive / 5f));
+        StartCoroutine(IEOpenGive(dollar * dollarRecive / 2.5f));
     }
 
     public IEnumerator IEOpenGive(double dollar)
