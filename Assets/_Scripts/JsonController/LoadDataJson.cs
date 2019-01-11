@@ -152,8 +152,6 @@ public class LoadDataJson : MonoBehaviour
         }
 
         dollarRecive = dollarReciveCurrent;
-        //Debug.Log(GameManager.Instance.gold);
-        //Debug.Log(PlayerPrefs.GetInt("GoldPre"));
         if (GameManager.Instance.gold > 0 && dollarRecive > 0)
         {
             if (GameManager.Instance.gold >= 5)
