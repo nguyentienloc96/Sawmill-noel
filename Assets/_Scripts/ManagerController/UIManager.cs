@@ -169,6 +169,7 @@ public class UIManager : MonoBehaviour
     public GameObject adsSpin;
     public Image imgCheckTime;
     public Sprite spGiveSpin;
+    public Text txtCountSpinMain;
 
     [Header("GiveXXXMoney")]
     public GameObject panelGiveXXXMoney;
@@ -332,12 +333,25 @@ public class UIManager : MonoBehaviour
             }
             for (int i = 0; i < lsItem.Length; i++)
             {
-                lsItem[i].timeItem = 0;
-                lsItem[i].timeItemTatol = 0;
-                lsItem[i].imgItem.fillAmount = 0;
-                lsItem[i].isOnItem = false;
+
+                if (i != 6)
+                {
+                    lsItem[i].timeItem = 0;
+                    lsItem[i].timeItemTatol = 0;
+                    lsItem[i].imgItem.fillAmount = 0;
+                    lsItem[i].isOnItem = false;
+                }
+                else
+                {
+                    lsItem[i].timeItem = 15 * 60;
+                    lsItem[i].timeItemTatol = 15 * 60;
+                    lsItem[i].imgItem.fillAmount = 1;
+                    lsItem[i].isOnItem = true;
+                }
                 lsItem[i].obj.SetActive(false);
             }
+            GameManager.Instance.countSpin = 0;
+            txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
             GameManager.Instance.ClearLocation();
             GameManager.Instance.CreatLocation(lsLocationUI[0], true);
             handWorld.position = lsLocationUI[0].transform.GetChild(0).position - new Vector3(0f, 0.25f, 0f);
@@ -959,7 +973,7 @@ public class UIManager : MonoBehaviour
     {
         panelSpin.SetActive(true);
         txtCountSpin.text = "x" + GameManager.Instance.countSpin;
-        if(GameManager.Instance.countSpin > 0)
+        if (GameManager.Instance.countSpin > 0)
         {
             adsSpin.SetActive(false);
             UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);

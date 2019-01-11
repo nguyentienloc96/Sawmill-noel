@@ -128,6 +128,8 @@ public class DataPlayer : MonoBehaviour
         GameManager.Instance.dateGame = DateTime.Parse(objJson["dateGame"]);
         UIManager.Instance.txtDollar.text = UIManager.Instance.ConvertNumber(GameManager.Instance.dollar);
         GameManager.Instance.countSpin = objJson["countSpin"].AsInt;
+        UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
+
         var lsItem = objJson["lsItem"].AsArray;
         for (int i = 6; i < UIManager.Instance.lsItem.Length; i++)
         {

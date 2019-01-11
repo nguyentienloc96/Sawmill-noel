@@ -29,6 +29,7 @@ public class SpinManager : MonoBehaviour
                 UIManager.Instance.lsItem[6].timeItemTatol = 15 * 60;
                 UIManager.Instance.lsItem[6].isOnItem = true;
             }
+            UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
             UIManager.Instance.txtCountSpin.text = "x" + GameManager.Instance.countSpin;
             StartCoroutine(RotationSpin());
         }

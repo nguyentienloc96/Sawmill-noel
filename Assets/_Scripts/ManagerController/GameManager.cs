@@ -310,6 +310,10 @@ public class GameManager : MonoBehaviour
                            lsLocation[UIManager.Instance.lsItem[i].idLocation].lsWorking[UIManager.Instance.lsItem[i].indexType].icon.sprite,
                            lsLocation[UIManager.Instance.lsItem[i].idLocation].lsWorking[UIManager.Instance.lsItem[i].indexType].price
                        );
+                    }else if(i == 6)
+                    {
+                        countSpin++;
+                        UIManager.Instance.txtCountSpinMain.text = "x" + countSpin;
                     }
 
                     else if (i == 7)
@@ -358,6 +362,7 @@ public class GameManager : MonoBehaviour
         else if (r == 7)
         {
             countSpin++;
+            UIManager.Instance.txtCountSpinMain.text = "x" + countSpin;
             UIManager.Instance.adsSpin.SetActive(false);
             UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);
             UIManager.Instance.txtCountSpin.text = "x" + countSpin;
@@ -457,6 +462,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.lsItem[6].isOnItem = false;
         UIManager.Instance.adsSpin.SetActive(false);
         UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);
+        UIManager.Instance.txtCountSpinMain.text = "x" + countSpin;
         UIManager.Instance.txtCountSpin.text = "x" + countSpin;
         UIManager.Instance.panelGiveRandom.SetActive(true);
         UIManager.Instance.iconRandom.sprite = UIManager.Instance.spGiveSpin;
