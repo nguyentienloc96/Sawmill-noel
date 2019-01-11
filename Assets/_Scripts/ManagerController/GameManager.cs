@@ -275,12 +275,22 @@ public class GameManager : MonoBehaviour
             if (UIManager.Instance.lsItem[i].isOnItem)
             {
                 UIManager.Instance.lsItem[i].timeItem -= Time.deltaTime;
-                UIManager.Instance.lsItem[i].imgItem.fillAmount = UIManager.Instance.lsItem[i].timeItem / UIManager.Instance.lsItem[i].timeItemTatol;
+                if (i != 6)
+                {
+                    UIManager.Instance.lsItem[i].imgItem.fillAmount = UIManager.Instance.lsItem[i].timeItem / UIManager.Instance.lsItem[i].timeItemTatol;
+                }
+                else
+                {
+                    UIManager.Instance.imgCheckTime.fillAmount = UIManager.Instance.lsItem[i].timeItem / UIManager.Instance.lsItem[i].timeItemTatol;
+                }
                 if (UIManager.Instance.lsItem[i].timeItem <= 0)
                 {
                     UIManager.Instance.lsItem[i].timeItem = 0;
                     UIManager.Instance.lsItem[i].isOnItem = false;
-                    UIManager.Instance.lsItem[i].obj.SetActive(false);
+                    if (i != 6)
+                    {
+                        UIManager.Instance.lsItem[i].obj.SetActive(false);
+                    }
 
                     if (i == 2)
                     {
@@ -328,7 +338,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 //r = UnityEngine.Random.Range(0, 8);
-                r = 3;
+                r = 7;
                 // anh muốn test cái item nào anh thay ròng trên bằng cho số bất kì từ 0-6 là được anh nhá
             }
         }
@@ -440,6 +450,10 @@ public class GameManager : MonoBehaviour
     public void GiveSpin()
     {
         countSpin++;
+        UIManager.Instance.imgCheckTime.fillAmount = 0;
+        UIManager.Instance.lsItem[6].timeItem = 0;
+        UIManager.Instance.lsItem[6].timeItemTatol = 15 * 60;
+        UIManager.Instance.lsItem[6].isOnItem = false;
         UIManager.Instance.adsSpin.SetActive(false);
         UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);
         UIManager.Instance.txtCountSpin.text = "x" + countSpin;

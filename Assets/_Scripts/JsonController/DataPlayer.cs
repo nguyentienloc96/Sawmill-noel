@@ -137,7 +137,7 @@ public class DataPlayer : MonoBehaviour
             UIManager.Instance.lsItem[i].money = lsItem[i]["money"].AsDouble;
             UIManager.Instance.lsItem[i].random = lsItem[i]["random"].AsInt;
 
-            if (UIManager.Instance.lsItem[i].isOnItem)
+            if (UIManager.Instance.lsItem[i].isOnItem && i != 6)
             {
                 UIManager.Instance.lsItem[i].obj.SetActive(true);
             }
@@ -327,7 +327,7 @@ public class DataPlayer : MonoBehaviour
         {
             if (jobEnd == -1)
             {
-                dollarRecive = 0;
+                dollarRecive = GameManager.Instance.lsLocation[0].lsWorking[0].price;
             }
             else
             {

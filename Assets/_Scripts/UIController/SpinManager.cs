@@ -22,11 +22,13 @@ public class SpinManager : MonoBehaviour
         if (GameManager.Instance.countSpin > 0 && !UIManager.Instance.lsItem[6].isOnItem)
         {
             GameManager.Instance.countSpin--;
-            UIManager.Instance.lsItem[6].obj.SetActive(true);
-            UIManager.Instance.lsItem[6].timeItem = 15 * 60;
-            UIManager.Instance.lsItem[6].timeItemTatol = 15 * 60;
-            UIManager.Instance.lsItem[6].isOnItem = true;
-            UIManager.Instance.lsItem[6].txtNameItem.text = "";
+            if (GameManager.Instance.countSpin <= 0)
+            {
+                UIManager.Instance.imgCheckTime.fillAmount = 1;
+                UIManager.Instance.lsItem[6].timeItem = 15 * 60;
+                UIManager.Instance.lsItem[6].timeItemTatol = 15 * 60;
+                UIManager.Instance.lsItem[6].isOnItem = true;
+            }
             UIManager.Instance.txtCountSpin.text = "x" + GameManager.Instance.countSpin;
             StartCoroutine(RotationSpin());
         }
@@ -34,7 +36,7 @@ public class SpinManager : MonoBehaviour
 
     public IEnumerator RotationSpin()
     {
-        float timeRandom = Random.Range(4.5f, 6.5f);
+        float timeRandom = Random.Range(1f, 3f);
         transform.DORotate(new Vector3(0, 0, -360), 2, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
         yield return new WaitForSeconds(timeRandom);
         transform.DOPause();
@@ -130,7 +132,7 @@ public class SpinManager : MonoBehaviour
         {
             if (jobEnd == -1)
             {
-                dollarRecive = 0;
+                dollarRecive = GameManager.Instance.lsLocation[0].lsWorking[0].price;
             }
             else
             {

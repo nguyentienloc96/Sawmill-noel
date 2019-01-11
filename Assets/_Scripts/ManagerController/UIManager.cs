@@ -167,6 +167,7 @@ public class UIManager : MonoBehaviour
     public Text txtCountSpin;
     public Image bgSpin;
     public GameObject adsSpin;
+    public Image imgCheckTime;
 
     [Header("GiveXXXMoney")]
     public GameObject panelGiveXXXMoney;
@@ -327,6 +328,14 @@ public class UIManager : MonoBehaviour
             if (GameManager.Instance.gold < GameConfig.Instance.goldStart)
             {
                 GameManager.Instance.gold = GameConfig.Instance.goldStart;
+            }
+            for (int i = 0; i < lsItem.Length; i++)
+            {
+                lsItem[i].timeItem = 0;
+                lsItem[i].timeItemTatol = 0;
+                lsItem[i].imgItem.fillAmount = 0;
+                lsItem[i].isOnItem = false;
+                lsItem[i].obj.SetActive(false);
             }
             GameManager.Instance.ClearLocation();
             GameManager.Instance.CreatLocation(lsLocationUI[0], true);
@@ -952,6 +961,12 @@ public class UIManager : MonoBehaviour
         if(GameManager.Instance.countSpin > 0)
         {
             adsSpin.SetActive(false);
+            UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            UIManager.Instance.adsSpin.SetActive(true);
+            UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 128);
         }
     }
 }

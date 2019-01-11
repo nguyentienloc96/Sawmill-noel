@@ -180,7 +180,7 @@ public class Ads : MonoBehaviour
         {
             if (jobEnd == -1)
             {
-                dollarRecive = 0;
+                dollarRecive = GameManager.Instance.lsLocation[0].lsWorking[0].price;
             }
             else
             {
@@ -213,7 +213,7 @@ public class Ads : MonoBehaviour
         {
             if (jobEnd == -1)
             {
-                dollarRecive = 0;
+                dollarRecive = GameManager.Instance.lsLocation[0].lsWorking[0].price;
             }
             else
             {
@@ -245,7 +245,7 @@ public class Ads : MonoBehaviour
         {
             if (jobEnd == -1)
             {
-                dollarRecive = 0;
+                dollarRecive = GameManager.Instance.lsLocation[0].lsWorking[0].price;
             }
             else
             {
