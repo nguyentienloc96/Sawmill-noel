@@ -168,6 +168,8 @@ public class UIManager : MonoBehaviour
     public Image bgSpin;
     public GameObject adsSpin;
     public Image imgCheckTime;
+    public Sprite spGiveSpin;
+    public Text txtCountSpinMain;
 
     [Header("GiveXXXMoney")]
     public GameObject panelGiveXXXMoney;
@@ -178,6 +180,10 @@ public class UIManager : MonoBehaviour
     public bool isOnClickTrunk;
     public float speedTrunkTutorial;
     public List<string> arrAlphabetNeed = new List<string>();
+
+    private bool isEndTutorial;
+    private float timeNextEndTutorial;
+    private int countEndTutorial;
 
     private string[] arrAlphabet = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
 
@@ -286,7 +292,33 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        if (isEndTutorial)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                timeNextEndTutorial = 0;
+            }
+            timeNextEndTutorial -= Time.deltaTime;
+            if (timeNextEndTutorial <= 0f)
+            {
+                if (countEndTutorial == 0)
+                {
+                    txtWait.text = "Don't forget to UPGRADE YOUR NEWEST workshop/truck, or your products from previous workshops will be STUCK at the last workshop.";
+                }
+                else if (countEndTutorial == 1)
+                {
+                    txtWait.text = "It's your show now. Good luck! ";
 
+                }
+                else if(countEndTutorial >= 2)
+                {
+                    HidePanelWait();
+                    isEndTutorial = false;
+                }
+                timeNextEndTutorial = 3f;
+                countEndTutorial++;
+            }
+        }
     }
 
 
@@ -331,12 +363,25 @@ public class UIManager : MonoBehaviour
             }
             for (int i = 0; i < lsItem.Length; i++)
             {
-                lsItem[i].timeItem = 0;
-                lsItem[i].timeItemTatol = 0;
-                lsItem[i].imgItem.fillAmount = 0;
-                lsItem[i].isOnItem = false;
+
+                if (i != 6)
+                {
+                    lsItem[i].timeItem = 0;
+                    lsItem[i].timeItemTatol = 0;
+                    lsItem[i].imgItem.fillAmount = 0;
+                    lsItem[i].isOnItem = false;
+                }
+                else
+                {
+                    lsItem[i].timeItem = 15 * 60;
+                    lsItem[i].timeItemTatol = 15 * 60;
+                    lsItem[i].imgItem.fillAmount = 1;
+                    lsItem[i].isOnItem = true;
+                }
                 lsItem[i].obj.SetActive(false);
             }
+            GameManager.Instance.countSpin = 0;
+            txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
             GameManager.Instance.ClearLocation();
             GameManager.Instance.CreatLocation(lsLocationUI[0], true);
             handWorld.position = lsLocationUI[0].transform.GetChild(0).position - new Vector3(0f, 0.25f, 0f);
@@ -651,8 +696,9 @@ public class UIManager : MonoBehaviour
             }
             GameManager.Instance.lsLocation[0].GetComponent<ScrollRect>().vertical = true;
             PlayerPrefs.SetInt("isTutorial", 1);
-            txtWait.text = "It's your show now. Good luck!";
-            Invoke("HidePanelWait", 3f);
+            isEndTutorial = true;
+            txtWait.text = "ONLY the OUTPUT of your last workshop will be sold to the market. Whenever you build a new workshop, the output of previous one will be input to this new workshop.";
+            timeNextEndTutorial = 6f;
         }
     }
 
@@ -958,7 +1004,7 @@ public class UIManager : MonoBehaviour
     {
         panelSpin.SetActive(true);
         txtCountSpin.text = "x" + GameManager.Instance.countSpin;
-        if(GameManager.Instance.countSpin > 0)
+        if (GameManager.Instance.countSpin > 0)
         {
             adsSpin.SetActive(false);
             UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);
