@@ -60,6 +60,16 @@ public class GameConfig : MonoBehaviour
     public string kProductID50 = "consumable";
     public string kProductID300 = "consumable";
     public string kProductID5000 = "consumable";
+    public List<string> richness = new List<string>();
+    public float Carup;
+    public int Pinc;
+    public float Iso;
+    public float Upmachine;
+    public float Prein;
+    public int Rein;
+    public float Pfire;
+    public int Tchal;
+
     string app42_apiKey = "41b8289bb02efae4f37f1c9d891b09bb43f6f801bdbbf17a557bc4598ddf836b";
     string app42_secretKey = "35d9a321b8d4cfc3b375b5f212f15ffab98bb2b53e4b9da20d22881fc01a0efa";
 

@@ -93,6 +93,18 @@ public class LoadDataJson : MonoBehaviour
             GameConfig.Instance.link_ios = objJson["link_ios"];
             GameConfig.Instance.link_android = objJson["link_android"];
             GameConfig.Instance.string_Share = objJson["string_Share"];
+            GameConfig.Instance.Carup = objJson["Carup"].AsFloat;
+            GameConfig.Instance.Pinc = objJson["Pinc"].AsInt;
+            GameConfig.Instance.Iso = objJson["Iso"].AsFloat;
+            GameConfig.Instance.Upmachine = objJson["Upmachine"].AsFloat;
+            GameConfig.Instance.Prein = objJson["Prein"].AsFloat;
+            GameConfig.Instance.Rein = objJson["Rein"].AsInt;
+            GameConfig.Instance.Pfire = objJson["Pfire"].AsFloat;
+            GameConfig.Instance.Tchal = objJson["Tchal"].AsInt;
+            for (int j = 0; j < objJson["richness"].Count; j++)
+            {
+                GameConfig.Instance.richness.Add(objJson["richness"][j]);
+            }
         }
 
         LoadInformation();
@@ -152,8 +164,6 @@ public class LoadDataJson : MonoBehaviour
         }
 
         dollarRecive = dollarReciveCurrent;
-        //Debug.Log(GameManager.Instance.gold);
-        //Debug.Log(PlayerPrefs.GetInt("GoldPre"));
         if (GameManager.Instance.gold > 0 && dollarRecive > 0)
         {
             if (GameManager.Instance.gold >= 5)
