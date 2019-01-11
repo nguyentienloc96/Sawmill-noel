@@ -310,7 +310,7 @@ public class UIManager : MonoBehaviour
                     txtWait.text = "It's your show now. Good luck! ";
 
                 }
-                else if(countEndTutorial >= 2)
+                else if (countEndTutorial >= 2)
                 {
                     HidePanelWait();
                     isEndTutorial = false;
@@ -363,24 +363,14 @@ public class UIManager : MonoBehaviour
             }
             for (int i = 0; i < lsItem.Length; i++)
             {
+                lsItem[i].timeItem = 0;
+                lsItem[i].timeItemTatol = 0;
+                lsItem[i].imgItem.fillAmount = 0;
+                lsItem[i].isOnItem = false;
 
-                if (i != 6)
-                {
-                    lsItem[i].timeItem = 0;
-                    lsItem[i].timeItemTatol = 0;
-                    lsItem[i].imgItem.fillAmount = 0;
-                    lsItem[i].isOnItem = false;
-                }
-                else
-                {
-                    lsItem[i].timeItem = 15 * 60;
-                    lsItem[i].timeItemTatol = 15 * 60;
-                    lsItem[i].imgItem.fillAmount = 1;
-                    lsItem[i].isOnItem = true;
-                }
                 lsItem[i].obj.SetActive(false);
             }
-            GameManager.Instance.countSpin = 0;
+            GameManager.Instance.countSpin = 1;
             txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
             GameManager.Instance.ClearLocation();
             GameManager.Instance.CreatLocation(lsLocationUI[0], true);
