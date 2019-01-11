@@ -168,6 +168,7 @@ public class UIManager : MonoBehaviour
     public Image bgSpin;
     public GameObject adsSpin;
     public Image imgCheckTime;
+    public Sprite spGiveSpin;
 
     [Header("GiveXXXMoney")]
     public GameObject panelGiveXXXMoney;

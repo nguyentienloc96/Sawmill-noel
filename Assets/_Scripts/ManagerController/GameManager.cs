@@ -362,7 +362,8 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);
             UIManager.Instance.txtCountSpin.text = "x" + countSpin;
             UIManager.Instance.panelGiveRandom.SetActive(true);
-            UIManager.Instance.iconRandom.sprite = UIManager.Instance.lsItem[r - 1].imgItem.transform.GetChild(0).GetComponent<Image>().sprite;
+            UIManager.Instance.iconRandom.sprite = UIManager.Instance.spGiveSpin;
+
             UIManager.Instance.infoRandom.text = "You have been rewarded with a draw of lucky spin";
         }
         else if (r == 8)
@@ -458,6 +459,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);
         UIManager.Instance.txtCountSpin.text = "x" + countSpin;
         UIManager.Instance.panelGiveRandom.SetActive(true);
+        UIManager.Instance.iconRandom.sprite = UIManager.Instance.spGiveSpin;
         UIManager.Instance.infoRandom.text = "You have been rewarded with a draw of lucky spin";
         Invoke("HideGiveRandom", 3f);
     }
