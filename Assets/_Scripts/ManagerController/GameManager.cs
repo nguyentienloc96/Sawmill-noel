@@ -486,4 +486,56 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.panelGiveXXXMoney.SetActive(false);
 
     }
+
+
+    public double PriceHomeEnd()
+    {
+        int locationEnd = lsLocation.Count - 1;
+        int jobEnd = lsLocation[locationEnd].countType;
+        double dollarRecive = 0;
+        if (lsLocation.Count > 1)
+        {
+            if (jobEnd == -1)
+            {
+                locationEnd--;
+                jobEnd = lsLocation[locationEnd].countType;
+            }
+            dollarRecive = lsLocation[locationEnd].lsWorking[jobEnd].price;
+        }
+        else
+        {
+            if (jobEnd == -1)
+            {
+                dollarRecive = lsLocation[0].lsWorking[0].price;
+            }
+            else
+            {
+                dollarRecive = lsLocation[locationEnd].lsWorking[jobEnd].price;
+            }
+        }
+        return dollarRecive;
+    }
+
+    public int CountHome()
+    {
+        int sumHome = 0;
+        int locationEnd = lsLocation.Count - 1;
+        int jobEnd = lsLocation[locationEnd].countType;
+        sumHome = sumHomeAll + lsLocation[locationEnd].countType;
+        if (lsLocation.Count > 1)
+        {
+            if (jobEnd == -1)
+            {
+                sumHome++;
+            }
+        }
+        else
+        {
+            if (jobEnd == -1)
+            {
+                sumHome = 0;
+            }
+        }
+        return sumHome;
+    }
 }
