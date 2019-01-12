@@ -228,6 +228,7 @@ public class DataPlayer : MonoBehaviour
                 location.lsWorking[j].input = lsWorking[j]["input"].AsDouble;
                 location.lsWorking[j].output = lsWorking[j]["output"].AsDouble;
                 location.lsWorking[j].priceOutput = lsWorking[j]["priceOutput"].AsDouble;
+                location.lsWorking[j].isISO = lsWorking[j]["isISO"].AsBool;
 
                 location.lsWorking[j].maxOutputMade = lsWorking[j]["maxOutputMade"].AsDouble;
                 location.lsWorking[j].maxOutputMadeStart = lsWorking[j]["maxOutputMadeStart"].AsDouble;
@@ -245,6 +246,12 @@ public class DataPlayer : MonoBehaviour
                 location.lsWorking[j].priceUpgradeStart = lsWorking[j]["priceUpgradeStart"].AsDouble;
                 location.lsWorking[j].price = lsWorking[j]["price"].AsDouble;
                 location.lsWorking[j].UN2 = lsWorking[j]["UN2"].AsFloat;
+
+                if (location.lsWorking[j].isISO)
+                {
+                    location.lsWorking[j].iso.SetActive(true);
+                }
+
                 if (location.lsWorking[j].id <= location.countType)
                 {
                     location.lsWorking[j].info.SetActive(true);

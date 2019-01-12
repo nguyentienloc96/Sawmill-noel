@@ -138,6 +138,19 @@ public class UIManager : MonoBehaviour
     public GameObject panelISO;
     public Text txtInfoISO;
     public Text txtPriceISO;
+    public Button btnYesISO;
+
+    [Header("UpgradeMachineJob")]
+    public GameObject panelUpgradeMachineJob;
+    public Text txtInfoMachineJob;
+    public Text txtPriceMachineJob;
+    public Button btnYesMachineJob;
+
+    [Header("UpgradeMachineTrunk")]
+    public GameObject panelUpgradeMachineTrunk;
+    public Text txtInfoMachineTrunk;
+    public Text txtPriceMachineTrunk;
+    public Button btnYesMachineTrunk;
 
     [Header("Achievement")]
     public GameObject Achievement;
@@ -989,6 +1002,39 @@ public class UIManager : MonoBehaviour
         {
             UIManager.Instance.adsSpin.SetActive(true);
             UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 128);
+        }
+    }
+
+    public void UpgradeISO()
+    {
+        int id = GameManager.Instance.IDLocation;
+        int indexType = GameManager.Instance.lsLocation[id].indexType;
+        panelISO.SetActive(true);
+        txtInfoISO.text = "It makes the price of product increase "+GameConfig.Instance.Pinc+" %.";
+        txtPriceISO.text = ConvertNumber(GameConfig.Instance.Iso * GameManager.Instance.lsLocation[id].lsWorking[indexType].price);
+        
+        if (GameManager.Instance.dollar >= GameConfig.Instance.Iso * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
+        {
+            btnYesISO.interactable = true;
+        }
+        else
+        {
+            btnYesISO.interactable = false;
+        }
+    }
+
+    public void YesUpgradeISO()
+    {
+        int id = GameManager.Instance.IDLocation;
+        int indexType = GameManager.Instance.lsLocation[id].indexType;
+        if (GameManager.Instance.dollar >= GameConfig.Instance.Iso * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
+        {
+            GameManager.Instance.dollar -= GameConfig.Instance.Iso * GameManager.Instance.lsLocation[id].lsWorking[indexType].price;
+            GameManager.Instance.lsLocation[id].lsWorking[indexType].priceOutput += System.Math.Floor(GameManager.Instance.lsLocation[id].lsWorking[indexType].priceOutput * ((float)GameConfig.Instance.Pinc / 100f));
+            GameManager.Instance.lsLocation[id].lsWorking[indexType].isISO = true;
+            GameManager.Instance.lsLocation[id].lsWorking[indexType].iso.SetActive(true);
+            btnISO.SetActive(false);
+            panelISO.SetActive(false);
         }
     }
 }
