@@ -34,6 +34,7 @@ public struct TypeOfWorkST
     public Text textInput;
     public Text textOutput;
     public GameObject info;
+    public GameObject iso;
 
     [Header("Parameters")]
     public double input;
