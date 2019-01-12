@@ -135,18 +135,21 @@ public class LoadDataJson : MonoBehaviour
         TextAsset _text = Resources.Load(_nameJson) as TextAsset;
         return _text.text;
     }
-
+    double dollarRecive = 0;
+    int goldExchange = 0;
     public void GoldToDollar()
     {
-        double dollarRecive = GameManager.Instance.PriceHomeEnd() * 0.5f;
-        int goldExchange = 5 + GameManager.Instance.CountHome();
+        dollarRecive = GameManager.Instance.PriceHomeEnd() * 0.5f;
+        goldExchange = 5 + GameManager.Instance.sumHomeAll;
 
-        if (GameManager.Instance.gold > goldExchange)
+        if (GameManager.Instance.gold >= goldExchange)
         {
             GameManager.Instance.gold -= goldExchange;
             GameManager.Instance.AddDollar(+dollarRecive);
-            UIManager.Instance.PushGiveGold("You have received " + UIManager.Instance.ConvertNumber(dollarRecive) + "$");
-
+            //UIManager.Instance.PushGiveGold("You have received " + UIManager.Instance.ConvertNumber(dollarRecive) + "$");
+            UIManager.Instance.imgGoldToDollar_Anim.GetComponent<Animator>().Play("ExchangeGold 1");
+            UIManager.Instance.buttonExchangeGold.interactable = false;
+            Invoke("WaitExchange",1f);
             if (GameManager.Instance.gold > 10)// && Mathf.Abs(PlayerPrefs.GetInt("GoldPre", 0) - PlayerPrefs.GetInt("Gold", 10)) >= 50)
             {
                 PlayerPrefs.SetInt("GoldPre", (int)GameManager.Instance.gold);
@@ -159,6 +162,11 @@ public class LoadDataJson : MonoBehaviour
             UIManager.Instance.panelDollar.SetActive(false);
             UIManager.Instance.panelGold.SetActive(true);
         }
+    }
+
+    void WaitExchange()
+    {
+        UIManager.Instance.buttonExchangeGold.interactable = true;
     }
 
     public void RestoreProgess()
