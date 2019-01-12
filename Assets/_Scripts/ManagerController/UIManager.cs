@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
     public Text txtRevenue;
     public GameObject panelDollar;
     public GameObject panelGold;
+    public Button buttonExchangeGold;
     public Text txtGoldToDollar_Gold;
     public Text txtGoldToDollar_Dollar;
     public Image imgGoldToDollar_Anim;
