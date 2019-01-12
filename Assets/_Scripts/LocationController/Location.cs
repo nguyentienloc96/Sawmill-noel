@@ -224,11 +224,11 @@ public class Location : MonoBehaviour
         }
         isLoaded = true;
         isLoadFull = true;
-        if (!UIManager.Instance.isContinue)
-        {
-            ScenesManager.Instance.isNextScene = true;
-            GameManager.Instance.sumHomeAll += lsWorking.Length;
-        }
+        //if (!UIManager.Instance.isContinue)
+        //{
+        //    ScenesManager.Instance.isNextScene = true;
+        //    GameManager.Instance.sumHomeAll += lsWorking.Length;
+        //}
     }
 
 
@@ -501,6 +501,7 @@ public class Location : MonoBehaviour
         {
             GameManager.Instance.AddDollar(-lsWorking[countType + 1].price);
             countType++;
+            GameManager.Instance.sumHomeAll++;
             indexType = countType;
             lsWorking[countType].icon.color = Color.white;
             lsWorking[countType].animLock.gameObject.SetActive(false);
@@ -516,7 +517,7 @@ public class Location : MonoBehaviour
                     int indexLsLocation = GameManager.Instance.lsLocation.Count;
                     GameManager.Instance.CreatLocation(UIManager.Instance.lsLocationUI[indexLsLocation]);
                     UIManager.Instance.handWorld.position = UIManager.Instance.lsLocationUI[indexLsLocation].transform.GetChild(0).position - new Vector3(0f, 0.25f, 0f);
-                    GameManager.Instance.sumHomeAll += lsWorking.Length;
+                    
                 }
             }
             else

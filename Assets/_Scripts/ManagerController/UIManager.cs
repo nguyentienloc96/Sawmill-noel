@@ -47,8 +47,8 @@ public class UIManager : MonoBehaviour
     public Text txtRevenue;
     public GameObject panelDollar;
     public GameObject panelGold;
-    public Text txtDollarVideoAds;
-    public Text txtDollarRecive;
+    public Text txtGoldToDollar_Gold;
+    public Text txtGoldToDollar_Dollar;
     public Button btnGoldToDollar;
     public Button btnVideoAds;
     public Image txtUIDollarRecive;
@@ -779,41 +779,20 @@ public class UIManager : MonoBehaviour
         if (!panelDollar.activeSelf)
         {
             panelDollar.SetActive(true);
-            int locationEnd = GameManager.Instance.lsLocation.Count - 1;
-            int jobEnd = GameManager.Instance.lsLocation[locationEnd].countType;
-            double dollarRecive = 0;
-            if (GameManager.Instance.lsLocation.Count > 1)
-            {
-                if (jobEnd == -1)
-                {
-                    locationEnd--;
-                    jobEnd = GameManager.Instance.lsLocation[locationEnd].countType;
-                }
-                dollarRecive = GameManager.Instance.lsLocation[locationEnd].lsWorking[jobEnd].price;
-            }
-            else
-            {
-                if (jobEnd == -1)
-                {
-                    dollarRecive = 0;
-                }
-                else
-                {
-                    dollarRecive = GameManager.Instance.lsLocation[locationEnd].lsWorking[jobEnd].price;
-                }
-            }
-            txtDollarVideoAds.text = ConvertNumber(dollarRecive / 2) + "$";
-            txtDollarRecive.text = ConvertNumber(dollarRecive / 5) + "$";
-            if (GameManager.Instance.gold > 0)
-            {
-                btnGoldToDollar.interactable = true;
-                txtUIDollarRecive.color = new Color(255, 255, 255);
-            }
-            else
-            {
-                btnGoldToDollar.interactable = false;
-                txtUIDollarRecive.color = new Color(150, 150, 150);
-            }
+            double dollarRecive = GameManager.Instance.PriceHomeEnd()*0.5f;
+            int goldExchange = 5 + GameManager.Instance.CountHome();
+            txtGoldToDollar_Dollar.text = ConvertNumber(dollarRecive) + "$";
+            txtGoldToDollar_Gold.text = goldExchange.ToString();
+            //if (GameManager.Instance.gold > 0)
+            //{
+            //    btnGoldToDollar.interactable = true;
+            //    txtUIDollarRecive.color = new Color(255, 255, 255);
+            //}
+            //else
+            //{
+            //    btnGoldToDollar.interactable = false;
+            //    txtUIDollarRecive.color = new Color(150, 150, 150);
+            //}
         }
         else
             panelDollar.SetActive(false);
