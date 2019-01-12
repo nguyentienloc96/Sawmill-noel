@@ -266,6 +266,15 @@ public class Location : MonoBehaviour
             UIManager.Instance.btnISO.SetActive(true);
 
         }
+        if (lsWorking[idType].isUpgradeMachineJob)
+        {
+            UIManager.Instance.btnUpMachineJob.SetActive(false);
+        }
+        else
+        {
+            UIManager.Instance.btnUpMachineJob.SetActive(true);
+
+        }
         UIManager.Instance.arrXJob[0].transform.GetChild(1).gameObject.SetActive(true);
         UIManager.Instance.arrXJob[1].transform.GetChild(1).gameObject.SetActive(false);
         UIManager.Instance.arrXJob[0].color = new Color32(255, 255, 255, 255);
@@ -409,6 +418,15 @@ public class Location : MonoBehaviour
             lsWorking[indexType].priceUpgradeTruck
         );
         UIManager.Instance.TruckUpgrade.SetActive(true);
+        if (lsWorking[idType].isUpgradeMachineTrunk)
+        {
+            UIManager.Instance.btnUpMachineTrunk.SetActive(false);
+        }
+        else
+        {
+            UIManager.Instance.btnUpMachineTrunk.SetActive(true);
+
+        }
         UIManager.Instance.arrXTrunk[0].transform.GetChild(1).gameObject.SetActive(true);
         UIManager.Instance.arrXTrunk[1].transform.GetChild(1).gameObject.SetActive(false);
         UIManager.Instance.arrXTrunk[0].color = new Color32(255, 255, 255, 255);
