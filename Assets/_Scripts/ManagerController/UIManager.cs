@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
     public GameObject panelGold;
     public Text txtGoldToDollar_Gold;
     public Text txtGoldToDollar_Dollar;
+    public Image imgGoldToDollar_Anim;
     public Button btnGoldToDollar;
     public Button btnVideoAds;
     public Image txtUIDollarRecive;
@@ -773,7 +774,7 @@ public class UIManager : MonoBehaviour
         {
             panelDollar.SetActive(true);
             double dollarRecive = GameManager.Instance.PriceHomeEnd()*0.5f;
-            int goldExchange = 5 + GameManager.Instance.CountHome();
+            int goldExchange = 5 + GameManager.Instance.sumHomeAll;
             txtGoldToDollar_Dollar.text = ConvertNumber(dollarRecive) + "$";
             txtGoldToDollar_Gold.text = goldExchange.ToString();
             //if (GameManager.Instance.gold > 0)

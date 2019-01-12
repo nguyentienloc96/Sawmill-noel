@@ -138,15 +138,16 @@ public class LoadDataJson : MonoBehaviour
 
     public void GoldToDollar()
     {
+        Debug.Log(GameManager.Instance.sumHomeAll);
         double dollarRecive = GameManager.Instance.PriceHomeEnd() * 0.5f;
-        int goldExchange = 5 + GameManager.Instance.CountHome();
+        int goldExchange = 5 + GameManager.Instance.sumHomeAll;
 
-        if (GameManager.Instance.gold > goldExchange)
+        if (GameManager.Instance.gold >= goldExchange)
         {
             GameManager.Instance.gold -= goldExchange;
             GameManager.Instance.AddDollar(+dollarRecive);
             UIManager.Instance.PushGiveGold("You have received " + UIManager.Instance.ConvertNumber(dollarRecive) + "$");
-
+            UIManager.Instance.imgGoldToDollar_Anim.GetComponent<Animator>().Play("ExchangeGold 1");
             if (GameManager.Instance.gold > 10)// && Mathf.Abs(PlayerPrefs.GetInt("GoldPre", 0) - PlayerPrefs.GetInt("Gold", 10)) >= 50)
             {
                 PlayerPrefs.SetInt("GoldPre", (int)GameManager.Instance.gold);

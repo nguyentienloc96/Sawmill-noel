@@ -515,27 +515,4 @@ public class GameManager : MonoBehaviour
         }
         return dollarRecive;
     }
-
-    public int CountHome()
-    {
-        int sumHome = 0;
-        int locationEnd = lsLocation.Count - 1;
-        int jobEnd = lsLocation[locationEnd].countType;
-        sumHome = sumHomeAll + lsLocation[locationEnd].countType;
-        if (lsLocation.Count > 1)
-        {
-            if (jobEnd == -1)
-            {
-                sumHome++;
-            }
-        }
-        else
-        {
-            if (jobEnd == -1)
-            {
-                sumHome = 0;
-            }
-        }
-        return sumHome;
-    }
 }
