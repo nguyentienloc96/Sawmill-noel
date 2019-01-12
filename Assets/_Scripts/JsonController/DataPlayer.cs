@@ -229,6 +229,8 @@ public class DataPlayer : MonoBehaviour
                 location.lsWorking[j].output = lsWorking[j]["output"].AsDouble;
                 location.lsWorking[j].priceOutput = lsWorking[j]["priceOutput"].AsDouble;
                 location.lsWorking[j].isISO = lsWorking[j]["isISO"].AsBool;
+                location.lsWorking[j].isUpgradeMachineJob = lsWorking[j]["isUpgradeMachineJob"].AsBool;
+                location.lsWorking[j].isUpgradeMachineTrunk = lsWorking[j]["isUpgradeMachineTrunk"].AsBool;
 
                 location.lsWorking[j].maxOutputMade = lsWorking[j]["maxOutputMade"].AsDouble;
                 location.lsWorking[j].maxOutputMadeStart = lsWorking[j]["maxOutputMadeStart"].AsDouble;

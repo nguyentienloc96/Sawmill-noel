@@ -147,12 +147,14 @@ public class UIManager : MonoBehaviour
     public Text txtInfoMachineJob;
     public Text txtPriceMachineJob;
     public Button btnYesMachineJob;
+    public GameObject btnUpMachineJob;
 
     [Header("UpgradeMachineTrunk")]
     public GameObject panelUpgradeMachineTrunk;
     public Text txtInfoMachineTrunk;
     public Text txtPriceMachineTrunk;
     public Button btnYesMachineTrunk;
+    public GameObject btnUpMachineTrunk;
 
     [Header("Achievement")]
     public GameObject Achievement;
@@ -1037,6 +1039,69 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.lsLocation[id].lsWorking[indexType].iso.SetActive(true);
             btnISO.SetActive(false);
             panelISO.SetActive(false);
+        }
+    }
+
+    public void btnUpgradeMachineJob()
+    {
+        int id = GameManager.Instance.IDLocation;
+        int indexType = GameManager.Instance.lsLocation[id].indexType;
+        panelUpgradeMachineJob.SetActive(true);
+        txtInfoMachineJob.text = "Apply the latest technology to double the productivity of your next " 
+            + GameManager.Instance.lsLocation[id].lsWorking[indexType].name
+            + " workshops";
+        if(GameManager.Instance.dollar >= GameConfig.Instance.Upmachine * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
+        {
+            btnYesMachineJob.interactable = true;
+        }
+        else
+        {
+            btnYesMachineJob.interactable = false;
+        }
+    }
+
+    public void btnUpgradeMachineTrunk()
+    {
+        int id = GameManager.Instance.IDLocation;
+        int indexType = GameManager.Instance.lsLocation[id].indexType;
+        panelUpgradeMachineTrunk.SetActive(true);
+        txtInfoMachineTrunk.text = "Apply the latest technology to double the productivity of your next "
+            + GameManager.Instance.lsLocation[id].lsWorking[indexType].name
+            + " workshops";
+        if (GameManager.Instance.dollar >= GameConfig.Instance.Uptruck * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
+        {
+            btnYesMachineTrunk.interactable = true;
+        }
+        else
+        {
+            btnYesMachineTrunk
+.interactable = false;
+        }
+    }
+
+    public void YesUpgradeMachineJob()
+    {
+        int id = GameManager.Instance.IDLocation;
+        int indexType = GameManager.Instance.lsLocation[id].indexType;
+        if (GameManager.Instance.dollar >= GameConfig.Instance.Upmachine * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
+        {
+            GameManager.Instance.dollar -= GameConfig.Instance.Upmachine * GameManager.Instance.lsLocation[id].lsWorking[indexType].price;
+            GameManager.Instance.lsLocation[id].lsWorking[indexType].isUpgradeMachineJob = true;
+            btnUpMachineJob.SetActive(false);
+            panelUpgradeMachineJob.SetActive(false);
+        }
+    }
+
+    public void YesUpgradeMachineTrunk()
+    {
+        int id = GameManager.Instance.IDLocation;
+        int indexType = GameManager.Instance.lsLocation[id].indexType;
+        if (GameManager.Instance.dollar >= GameConfig.Instance.Uptruck * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
+        {
+            GameManager.Instance.dollar -= GameConfig.Instance.Uptruck * GameManager.Instance.lsLocation[id].lsWorking[indexType].price;
+            GameManager.Instance.lsLocation[id].lsWorking[indexType].isUpgradeMachineTrunk = true;
+            btnUpMachineTrunk.SetActive(false);
+            panelUpgradeMachineTrunk.SetActive(false);
         }
     }
 }
