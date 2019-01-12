@@ -20,6 +20,8 @@ public class TruckManager : MonoBehaviour
     private bool isRetrograde;
     private bool isOnTutorial;
 
+    public GameObject upgradeMe;
+
     public void LoadTruck()
     {
         if (!isRun)

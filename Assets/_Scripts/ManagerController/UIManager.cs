@@ -131,6 +131,13 @@ public class UIManager : MonoBehaviour
     public Animator animIconHome;
     public Animator animClock;
     public bool isWaitingSell;
+    public GameObject btnISO;
+    public GameObject btnUpMachine;
+
+    [Header("ISO")]
+    public GameObject panelISO;
+    public Text txtInfoISO;
+    public Text txtPriceISO;
 
     [Header("Achievement")]
     public GameObject Achievement;
