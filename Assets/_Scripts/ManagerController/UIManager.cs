@@ -209,6 +209,9 @@ public class UIManager : MonoBehaviour
     public GameObject panelGiveXXXMoney;
     public Text txtGiveXXXMoney;
 
+    [Header("SeclectTree")]
+    public GameObject panelSeclectTree;
+
     [Header("BuyTree")]
     public GameObject panelBuyTree;
     public Text txtInfoBuyTree;
