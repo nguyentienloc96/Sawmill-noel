@@ -215,8 +215,13 @@ public class LoadDataJson : MonoBehaviour
 
     public void CheckDateGift()
     {
-        Debug.Log(GetDatePassed());
+        //Debug.Log(GetDatePassed());        
+        if (PlayerPrefs.GetInt("DayGift") > 15)
+        {
+            PlayerPrefs.SetInt("DayGift", 0);
+        }
         int _dayGift = PlayerPrefs.GetInt("DayGift");
+
         if (GetDatePassed() >= 24)
         {
             UIManager.Instance.panelGiftDay.SetActive(true);
