@@ -56,6 +56,16 @@ public class UIManager : MonoBehaviour
     public Image txtUIDollarRecive;
     public GameObject panelLoadingIAP;
 
+    [Header("Gift Day")]
+    public GameObject panelGiftDay;
+    public List<ItemGiftDay> itemsGiftDay;
+    public GameObject panelBackgroundGiftDay;
+    public GameObject panelOpenGiftDay;
+    public Image imgGiftAnim;
+    public Image imgGoldFly;
+    public Image imgSpinFly;
+    public Text txtGoldGiftDay;
+
 
     [Header("Setting")]
     public GameObject panelSetting;
@@ -1103,5 +1113,53 @@ public class UIManager : MonoBehaviour
             btnUpMachineTrunk.SetActive(false);
             panelUpgradeMachineTrunk.SetActive(false);
         }
+    }
+
+    public void btnGiftDay()
+    {
+        panelBackgroundGiftDay.SetActive(true);
+        imgGiftAnim.enabled = true;
+    }
+
+    public void btnGiftDay_OpenGift()
+    {
+        imgGiftAnim.GetComponent<Animator>().Play("Gift 1");
+        Invoke("ActivePanelOpenGiftDay", 0.5f);
+        int _goldGiftDay = 5 * (PlayerPrefs.GetInt("DayGift") + 1);
+        if (_goldGiftDay >= 20)
+            _goldGiftDay = 20;
+        txtGoldGiftDay.text = _goldGiftDay.ToString();
+    }
+
+    void ActivePanelOpenGiftDay()
+    {
+        panelOpenGiftDay.SetActive(true);
+    }
+
+    int c = 0;
+    public void btnGiftDay_ClaimGift()
+    {
+        if (c > 0)
+            return;
+        imgGoldFly.gameObject.SetActive(true);
+        imgSpinFly.gameObject.SetActive(true);
+        //imgGoldFly.GetComponent<Animator>().Play("GoldFly");
+        //imgSpinFly.GetComponent<Animator>().Play("SpinFly");
+        int _goldGiftDay = 5 * (PlayerPrefs.GetInt("DayGift") + 1);
+        if (_goldGiftDay >= 20)
+            _goldGiftDay = 20;
+        GameManager.Instance.gold += _goldGiftDay;
+        GameManager.Instance.countSpin += 1;
+        PlayerPrefs.SetInt("DayGift", PlayerPrefs.GetInt("DayGift") + 1);
+        PlayerPrefs.SetString("DateLastLaunch", System.DateTime.Now.ToString());
+        c++;
+        Invoke("DeactiveGiftDay", 0.5f);
+    }
+
+    void DeactiveGiftDay()
+    {
+        panelGiftDay.SetActive(false);
+        panelOpenGiftDay.SetActive(false);
+        panelBackgroundGiftDay.SetActive(false);
     }
 }

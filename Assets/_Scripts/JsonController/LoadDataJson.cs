@@ -32,6 +32,7 @@ public class LoadDataJson : MonoBehaviour
 #endif
         Purchaser.Instance.Init();
         Ads.Instance.HideBanner();
+        GetDateLauch();
     }
 
     void InitUnityAds()
@@ -151,7 +152,7 @@ public class LoadDataJson : MonoBehaviour
             //UIManager.Instance.PushGiveGold("You have received " + UIManager.Instance.ConvertNumber(dollarRecive) + "$");
             UIManager.Instance.imgGoldToDollar_Anim.GetComponent<Animator>().Play("ExchangeGold 1");
             UIManager.Instance.buttonExchangeGold.interactable = false;
-            Invoke("WaitExchange",1f);
+            Invoke("WaitExchange", 1f);
             if (GameManager.Instance.gold > 10)// && Mathf.Abs(PlayerPrefs.GetInt("GoldPre", 0) - PlayerPrefs.GetInt("Gold", 10)) >= 50)
             {
                 PlayerPrefs.SetInt("GoldPre", (int)GameManager.Instance.gold);
@@ -180,5 +181,69 @@ public class LoadDataJson : MonoBehaviour
 
         UIManager.Instance.PushGiveGold("Waiting ...");
     }
+
+    #region ===GIFT DAY===
+    private System.DateTime dateLastLaunch;
+    private System.DateTime today;
+    /// <summary>
+    /// Lay ra ngay khi chay game
+    /// </summary>
+    void GetDateLauch()
+    {
+        if (PlayerPrefs.HasKey("DateLastLaunch"))
+        {
+            dateLastLaunch = System.Convert.ToDateTime(PlayerPrefs.GetString("DateLastLaunch"));
+        }
+        else
+        {
+            dateLastLaunch = System.DateTime.Now;
+            PlayerPrefs.SetString("DateLastLaunch", dateLastLaunch.ToString());
+        }
+        CheckDateGift();
+    }
+
+    double GetDatePassed()
+    {
+        Debug.Log(dateLastLaunch);
+        today = System.DateTime.Now;
+        Debug.Log(today);
+        System.TimeSpan elapsed = today.Subtract(dateLastLaunch);
+        double hours = elapsed.TotalHours;
+
+        return hours;
+    }
+
+    public void CheckDateGift()
+    {
+        Debug.Log(GetDatePassed());
+        int _dayGift = PlayerPrefs.GetInt("DayGift");
+        if (GetDatePassed() >= 24)
+        {
+            UIManager.Instance.panelGiftDay.SetActive(true);
+            UIManager.Instance.itemsGiftDay[_dayGift].Set_ClaimNow();
+            for (int i = 0; i < UIManager.Instance.itemsGiftDay.Count; i++)
+            {
+                if (i < _dayGift)
+                {
+                    UIManager.Instance.itemsGiftDay[i].Set_Claimed();
+                }
+                else if (i == _dayGift)
+                {
+                    UIManager.Instance.itemsGiftDay[i].Set_ClaimNow();
+                }
+                else
+                {
+                    UIManager.Instance.itemsGiftDay[i].Set_ClaimNot();
+                }
+
+            }
+        }
+        else
+        {
+            if (UIManager.Instance.panelGiftDay.activeSelf)
+                UIManager.Instance.panelGiftDay.SetActive(false);
+        }
+    }
+    #endregion
 
 }
