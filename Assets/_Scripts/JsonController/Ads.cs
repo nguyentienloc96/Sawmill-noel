@@ -22,7 +22,8 @@ public class Ads : MonoBehaviour
 
     [Header("Time")]
     public float timeAds = 1;
-
+    public float timeRate = 1;
+    int countRate = 0;
     public static Ads Instance = new Ads();
     void Awake()
     {
@@ -45,7 +46,9 @@ public class Ads : MonoBehaviour
     void Update()
     {
         timeAds += Time.deltaTime;
+        timeRate += Time.deltaTime;
         ShowInterstitialAd();
+        RateInApp();
     }
 
     #region ===ADMOB===
@@ -256,6 +259,17 @@ public class Ads : MonoBehaviour
         GameManager.Instance.AddDollar(+Math.Floor(dollarRecive)); // số tiền nhà cuối
         UIManager.Instance.PushGiveGold("You have recived " + UIManager.Instance.ConvertNumber(dollarRecive) + "$");
         panelPlane.SetActive(false);
+    }
+    #endregion
+
+    #region ===RATE IN APP===
+    void RateInApp()
+    {
+        if (timeRate >= 10 * 7 && PlayerPrefs.GetInt("isTutorial") == 1 && countRate == 0)// && PlayerPrefs.GetInt("isRate") != 1)
+        {
+            EPPZ.Rate.Rate.RequestReviewIfAppropriate();
+            countRate = 1;
+        }
     }
     #endregion
 }
