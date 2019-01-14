@@ -9,6 +9,7 @@ public class ItemGiftDay : MonoBehaviour {
     public Image imgClaimNot;
     public Image imgTick;
     public bool isClaim = false;
+    public int a = 1;
 	// Use this for initialization
 	void Start () {
 		
