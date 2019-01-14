@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 114425536289731506}
   - component: {fileID: 114562162823397646}
   m_Layer: 5
-  m_Name: GiftDay
+  m_Name: GiftDay123
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
