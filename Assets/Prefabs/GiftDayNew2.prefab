@@ -975,9 +975,8 @@ GameObject:
   - component: {fileID: 224158316114065360}
   - component: {fileID: 222556185199544294}
   - component: {fileID: 114918906591820524}
-  - component: {fileID: 95156822995834856}
   m_Layer: 5
-  m_Name: GiftDayNew
+  m_Name: GiftDayNew2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1920,23 +1919,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &95156822995834856
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1510172242934530}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c4d059b8094dce34c8f0a6dafc876b72, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95274625934311086
 Animator:
   serializedVersion: 3
