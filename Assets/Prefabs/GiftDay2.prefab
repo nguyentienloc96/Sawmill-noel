@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 114425536289731506}
   - component: {fileID: 114562162823397646}
   m_Layer: 5
-  m_Name: GiftDay123
+  m_Name: GiftDay2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,6 +297,7 @@ MonoBehaviour:
   imgClaimNot: {fileID: 114083718154837820}
   imgTick: {fileID: 114225395386564358}
   isClaim: 0
+  a: 1
 --- !u!114 &114838265134433660
 MonoBehaviour:
   m_ObjectHideFlags: 1
