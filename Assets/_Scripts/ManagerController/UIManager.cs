@@ -341,7 +341,7 @@ public class UIManager : MonoBehaviour
             {
                 timeNextEndTutorial = 0;
             }
-            timeNextEndTutorial -= Time.deltaTime;
+            //timeNextEndTutorial -= Time.deltaTime;
             if (timeNextEndTutorial <= 0f)
             {
                 if (countEndTutorial == 0)
@@ -549,7 +549,7 @@ public class UIManager : MonoBehaviour
                 Destroy(objTutorial);
             }
             ControlHandTutorial(btnUpgradeJob.transform);
-            txtWait.text = "Upgrade the capacity of the workshop";
+            txtWait.text = "Buy more machine in workshop.";
         }
     }
 

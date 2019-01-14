@@ -443,7 +443,7 @@ public class Location : MonoBehaviour
                     Destroy(UIManager.Instance.objTutorial);
                 }
                 UIManager.Instance.ControlHandTutorial(UIManager.Instance.btnUpgradeTrunk.transform);
-                UIManager.Instance.txtWait.text = "Upgrade the capacity of the truck";
+                UIManager.Instance.txtWait.text = "Buy more truck.";
             }
         }
     }
