@@ -209,6 +209,11 @@ public class UIManager : MonoBehaviour
     public GameObject panelGiveXXXMoney;
     public Text txtGiveXXXMoney;
 
+    [Header("BuyTree")]
+    public GameObject panelBuyTree;
+    public Text txtInfoBuyTree;
+    public Text txtPriceBuyTree;
+
     public bool isClickHome;
     public bool isClickTrunk;
     public bool isOnClickTrunk;
@@ -1151,6 +1156,8 @@ public class UIManager : MonoBehaviour
             _goldGiftDay = 20;
         GameManager.Instance.gold += _goldGiftDay;
         GameManager.Instance.countSpin += 1;
+        txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
+
         PlayerPrefs.SetInt("DayGift", PlayerPrefs.GetInt("DayGift") + 1);
         PlayerPrefs.SetString("DateLastLaunch", System.DateTime.Now.ToString());
         c++;
