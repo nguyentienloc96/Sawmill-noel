@@ -209,6 +209,11 @@ public class UIManager : MonoBehaviour
     public GameObject panelGiveXXXMoney;
     public Text txtGiveXXXMoney;
 
+    [Header("BuyTree")]
+    public GameObject panelBuyTree;
+    public Text txtInfoBuyTree;
+    public Text txtPriceBuyTree;
+
     public bool isClickHome;
     public bool isClickTrunk;
     public bool isOnClickTrunk;
