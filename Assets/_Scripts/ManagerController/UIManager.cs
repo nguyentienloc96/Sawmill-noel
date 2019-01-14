@@ -1150,6 +1150,8 @@ public class UIManager : MonoBehaviour
             _goldGiftDay = 20;
         GameManager.Instance.gold += _goldGiftDay;
         GameManager.Instance.countSpin += 1;
+        txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
+
         PlayerPrefs.SetInt("DayGift", PlayerPrefs.GetInt("DayGift") + 1);
         PlayerPrefs.SetString("DateLastLaunch", System.DateTime.Now.ToString());
         c++;

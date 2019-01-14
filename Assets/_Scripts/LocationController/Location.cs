@@ -14,6 +14,7 @@ public struct ForestST
     public bool isAutoPlant;
     [HideInInspector]
     public float timeFelling;
+    public int typeTree;
 }
 
 [System.Serializable]
