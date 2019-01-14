@@ -211,6 +211,7 @@ public class UIManager : MonoBehaviour
 
     [Header("SeclectTree")]
     public GameObject panelSeclectTree;
+    public List<Transform> lsItemTreeUI;
 
     [Header("BuyTree")]
     public GameObject panelBuyTree;
@@ -1172,5 +1173,14 @@ public class UIManager : MonoBehaviour
         panelGiftDay.SetActive(false);
         panelOpenGiftDay.SetActive(false);
         panelBackgroundGiftDay.SetActive(false);
+    }
+
+    public void btnBuyTree(int idLocationCurrent,int typeTree)
+    {
+        panelBuyTree.SetActive(true);
+        txtInfoBuyTree.text = "Plan this tree to make the output price increase " 
+            + GameManager.Instance.lsLocation[idLocationCurrent].forest.typeTree * typeTree + "%?";
+        txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocationCurrent].lsWorking[0].price 
+            * typeTree);
     }
 }

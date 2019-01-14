@@ -253,8 +253,8 @@ public class Location : MonoBehaviour
             lsWorking[indexType].level,
             lsWorking[indexType].level + 1,
             (Math.Floor(lsWorking[indexType].maxOutputMade * GameConfig.Instance.r)),
-            (Math.Floor(lsWorking[indexType].maxOutputMade * GameConfig.Instance.r + 
-            (x2 *lsWorking[indexType].maxOutputMadeStart * GameConfig.Instance.r / GameConfig.Instance.capIndex))),
+            (Math.Floor(lsWorking[indexType].maxOutputMade * GameConfig.Instance.r +
+            (x2 * lsWorking[indexType].maxOutputMadeStart * GameConfig.Instance.r / GameConfig.Instance.capIndex))),
             lsWorking[indexType].priceUpgrade
         );
         UIManager.Instance.JobUpgrade.SetActive(true);
@@ -357,7 +357,7 @@ public class Location : MonoBehaviour
         {
             priceUpgradeCurrent = Math.Floor((double)(priceUpgradeCurrent * (1 + GameConfig.Instance.UN2)));
             priceUpgradeTotal += priceUpgradeCurrent;
-            maxOutputMadeCurrent = Math.Floor((double)(Math.Floor(maxOutputMadeCurrent + (x2 *lsWorking[indexType].maxOutputMadeStart / GameConfig.Instance.capIndex))));
+            maxOutputMadeCurrent = Math.Floor((double)(Math.Floor(maxOutputMadeCurrent + (x2 * lsWorking[indexType].maxOutputMadeStart / GameConfig.Instance.capIndex))));
 
         }
 
@@ -378,7 +378,7 @@ public class Location : MonoBehaviour
             {
                 priceUpgradeCurrent = Math.Floor((double)(priceUpgradeCurrent * (1 + GameConfig.Instance.UN2)));
                 priceUpgradeTotal += priceUpgradeCurrent;
-                maxOutputMadeCurrent = Math.Floor((double)(Math.Floor(maxOutputMadeCurrent + (x2 *lsWorking[indexType].maxOutputMadeStart / GameConfig.Instance.capIndex))));
+                maxOutputMadeCurrent = Math.Floor((double)(Math.Floor(maxOutputMadeCurrent + (x2 * lsWorking[indexType].maxOutputMadeStart / GameConfig.Instance.capIndex))));
 
             }
 
@@ -584,7 +584,7 @@ public class Location : MonoBehaviour
                     int indexLsLocation = GameManager.Instance.lsLocation.Count;
                     GameManager.Instance.CreatLocation(UIManager.Instance.lsLocationUI[indexLsLocation]);
                     UIManager.Instance.handWorld.position = UIManager.Instance.lsLocationUI[indexLsLocation].transform.GetChild(0).position - new Vector3(0f, 0.25f, 0f);
-                    
+
                 }
             }
             else
@@ -683,10 +683,10 @@ public class Location : MonoBehaviour
             }
         }
 
-        if(lsWorking[0].maxSent <= GameConfig.Instance.Carup * GameConfig.Instance.r * lsWorking[0].maxOutputMade)
+        if (lsWorking[0].maxSent <= GameConfig.Instance.Carup * GameConfig.Instance.r * lsWorking[0].maxOutputMade)
         {
             lsWorking[0].timeCheckUpgradeMe += Time.deltaTime;
-            if(lsWorking[0].timeCheckUpgradeMe >= 3f)
+            if (lsWorking[0].timeCheckUpgradeMe >= 3f)
             {
                 if (lsWorking[0].truckManager.upgradeMe.activeInHierarchy)
                 {
@@ -733,7 +733,7 @@ public class Location : MonoBehaviour
         }
         else
         {
-             if (id == UIManager.Instance.lsItem[0].idLocation && UIManager.Instance.lsItem[0].isOnItem && UIManager.Instance.lsItem[0].indexType == 0)
+            if (id == UIManager.Instance.lsItem[0].idLocation && UIManager.Instance.lsItem[0].isOnItem && UIManager.Instance.lsItem[0].indexType == 0)
             {
                 lsWorking[0].output += outPutValue * 2;
             }
@@ -741,7 +741,7 @@ public class Location : MonoBehaviour
             {
                 lsWorking[0].output += outPutValue;
             }
-            
+
         }
         lsWorking[0].textOutput.text = UIManager.Instance.ConvertNumber(lsWorking[0].output);
 
@@ -812,7 +812,7 @@ public class Location : MonoBehaviour
             lsWorking[idType].input -= Math.Floor(materialCurrent);
             lsWorking[idType].textInput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].input);
             outPutValue = Math.Floor((double)(GameConfig.Instance.r * materialCurrent));
-         
+
             lsWorking[idType].output += outPutValue;
             lsWorking[idType].textOutput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].output);
         }
@@ -829,7 +829,7 @@ public class Location : MonoBehaviour
             lsWorking[idType].input -= Math.Floor(materialCurrent);
             lsWorking[idType].textInput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].input);
             outPutValue = Math.Floor((double)(GameConfig.Instance.r * materialCurrent));
-           
+
             lsWorking[idType].output += outPutValue;
             lsWorking[idType].textOutput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].output);
         }
@@ -965,7 +965,7 @@ public class Location : MonoBehaviour
                 lsWorking[idType].icon.sprite,
                 lsWorking[idType].price
             );
-           
+
         }
     }
 
@@ -985,4 +985,10 @@ public class Location : MonoBehaviour
         UIManager.Instance.panelInfo.SetActive(true);
         UIManager.Instance.infoForest.text = GameManager.Instance.lsTypeMiniGame[id].info;
     }
+
+    public void btnSelectTree()
+    {
+        UIManager.Instance.panelSeclectTree.SetActive(true);
+    }
+
 }
