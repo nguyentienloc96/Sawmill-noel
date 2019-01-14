@@ -190,6 +190,9 @@ public class LoadDataJson : MonoBehaviour
     /// </summary>
     void GetDateLauch()
     {
+        if (PlayerPrefs.GetInt("isTutorial") != 1)
+            return;
+
         if (PlayerPrefs.HasKey("DateLastLaunch"))
         {
             dateLastLaunch = System.Convert.ToDateTime(PlayerPrefs.GetString("DateLastLaunch"));
