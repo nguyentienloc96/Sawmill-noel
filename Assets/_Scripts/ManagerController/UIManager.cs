@@ -346,6 +346,7 @@ public class UIManager : MonoBehaviour
                 }
                 else if (countEndTutorial >= 2)
                 {
+                    PlayerPrefs.SetString("DateLastLaunch", System.DateTime.Now.ToString());
                     HidePanelWait();
                     isEndTutorial = false;
                 }
