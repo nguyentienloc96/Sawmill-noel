@@ -1065,9 +1065,9 @@ public class UIManager : MonoBehaviour
         int id = GameManager.Instance.IDLocation;
         int indexType = GameManager.Instance.lsLocation[id].indexType;
         panelUpgradeMachineTrunk.SetActive(true);
-        txtInfoMachineTrunk.text = "Apply the latest technology to double the productivity of your next "
+        txtInfoMachineTrunk.text = "Sign a contract with Tesla Motors to double the capacity of your NEXT "
             + GameManager.Instance.lsLocation[id].lsWorking[indexType].name
-            + " workshops";
+            + " trucks";
         if (GameManager.Instance.dollar >= GameConfig.Instance.Uptruck * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
         {
             btnYesMachineTrunk.interactable = true;
