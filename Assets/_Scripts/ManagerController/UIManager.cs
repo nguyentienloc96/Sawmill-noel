@@ -1164,7 +1164,7 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("DayGift", PlayerPrefs.GetInt("DayGift") + 1);
         PlayerPrefs.SetString("DateLastLaunch", System.DateTime.Now.ToString());
         c++;
-        Invoke("DeactiveGiftDay", 0.5f);
+        Invoke("DeactiveGiftDay", 1f);
     }
 
     void DeactiveGiftDay()
