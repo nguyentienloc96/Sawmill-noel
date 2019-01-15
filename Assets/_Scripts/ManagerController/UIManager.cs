@@ -1220,13 +1220,13 @@ public class UIManager : MonoBehaviour
 
         if (typeTreeCurrent != 0)
         {
-            btnNoBuyTree.interactable = true;
+            //btnNoBuyTree.interactable = true;
             txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
             * (typeTree + 1) / 5f);
         }
         else
         {
-            btnNoBuyTree.interactable = false;
+            //btnNoBuyTree.interactable = false;
             txtPriceBuyTree.text = "0";
         }
 
@@ -1284,8 +1284,8 @@ public class UIManager : MonoBehaviour
     public void NoBuyTreeOnclick()
     {
         panelBuyTree.SetActive(false);
-        panelSeclectTree.SetActive(false);
-        GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
+        //panelSeclectTree.SetActive(false);
+        //GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
         if (PlayerPrefs.GetInt("isTutorial") == 0)
         {
             txtWait.text = "Wait to plant trees";

@@ -212,6 +212,8 @@ public class DataPlayer : MonoBehaviour
             location.forest.tree = lsData[i]["forest"]["tree"].AsInt;
             location.forest.isOnBtnAutoPlant = lsData[i]["forest"]["isOnBtnAutoPlant"].AsBool;
             location.forest.isAutoPlant = lsData[i]["forest"]["isAutoPlant"].AsBool;
+            location.forest.typeTree = lsData[i]["forest"]["typeTree"].AsInt;
+
             location.forest.forestClass.LoadTree();
 
             var lsWorking = lsData[i]["lsWorking"].AsArray;
