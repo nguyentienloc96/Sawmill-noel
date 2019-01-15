@@ -205,6 +205,7 @@ public class UIManager : MonoBehaviour
     public Image imgCheckTime;
     public Sprite spGiveSpin;
     public Text txtCountSpinMain;
+    public bool isSpinning;
 
     [Header("GiveXXXMoney")]
     public GameObject panelGiveXXXMoney;
@@ -1320,7 +1321,7 @@ public class UIManager : MonoBehaviour
         dollar_Congratulation = GameManager.Instance.dollar * 0.1f;
 
         panelCongratulation.SetActive(true);
-        txtDollar_Congratulation.text = ConvertNumber( dollar_Congratulation) + " $";
+        txtDollar_Congratulation.text = ConvertNumber(dollar_Congratulation) + " $";
         txtCoin_Congratulation.text = coin_Congratulation.ToString();
         txtNameHouse_Congratulation.text = "Double the capacity of " + GameManager.Instance.HomeRandom() + " in " + (60 / GameConfig.Instance.p0Time).ToString() + " days";
     }
@@ -1332,5 +1333,11 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.gold += coin_Congratulation;
 
         panelCongratulation.SetActive(false);
+    }
+
+    public void CloseSpin()
+    {
+        if (!isSpinning)
+            panelSpin.SetActive(false);
     }
 }

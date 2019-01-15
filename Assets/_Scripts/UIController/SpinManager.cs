@@ -17,15 +17,13 @@ public class SpinManager : MonoBehaviour
         Instance = this;
     }
 
-    public void OnEnable()
-    {
-        transform.DOPause();
-    }
+    
 
     public void BtnSpin()
     {
         if (GameManager.Instance.countSpin > 0 && !UIManager.Instance.lsItem[6].isOnItem)
         {
+            UIManager.Instance.isSpinning = true;
             GameManager.Instance.countSpin--;
             if (GameManager.Instance.countSpin <= 0)
             {
@@ -48,6 +46,8 @@ public class SpinManager : MonoBehaviour
         transform.DOPause();
         yield return new WaitForSeconds(0.05f);
         CheckComplete();
+        UIManager.Instance.isSpinning = false;
+
     }
 
     public void CheckComplete()
@@ -158,5 +158,6 @@ public class SpinManager : MonoBehaviour
             UIManager.Instance.adsSpin.SetActive(true);
             UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 128);
         }
+
     }
 }
