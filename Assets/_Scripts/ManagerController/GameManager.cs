@@ -314,6 +314,8 @@ public class GameManager : MonoBehaviour
                     {
                         countSpin++;
                         UIManager.Instance.txtCountSpinMain.text = "x" + countSpin;
+                        UIManager.Instance.txtCountSpin.text = "x" + countSpin;
+
                     }
 
                     else if (i == 7)
@@ -362,7 +364,12 @@ public class GameManager : MonoBehaviour
         else if (r == 7)
         {
             countSpin++;
+            UIManager.Instance.imgCheckTime.fillAmount = 0;
+            UIManager.Instance.lsItem[6].timeItem = 0;
+            UIManager.Instance.lsItem[6].timeItemTatol = 15 * 60;
+            UIManager.Instance.lsItem[6].isOnItem = false;
             UIManager.Instance.txtCountSpinMain.text = "x" + countSpin;
+            UIManager.Instance.txtCountSpin.text = "x" + countSpin;
             UIManager.Instance.adsSpin.SetActive(false);
             UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);
             UIManager.Instance.txtCountSpin.text = "x" + countSpin;
