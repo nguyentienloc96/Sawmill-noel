@@ -1298,13 +1298,11 @@ public class UIManager : MonoBehaviour
     int coin_Congratulation = 0;
     public void CheckBillionaire()
     {
-        if (PlayerPrefs.GetInt("Congratulation") >= GameConfig.Instance.richness.Count - 1)
+        if (PlayerPrefs.GetInt("Congratulation") > GameConfig.Instance.richness.Count - 1)
             return;
-
-        for (int i = 0; i < GameConfig.Instance.richness.Count; i++)
+        str_congratulation = "";
+        for (int i = PlayerPrefs.GetInt("Congratulation"); i < GameConfig.Instance.richness.Count; i++)
         {
-            if (i < PlayerPrefs.GetInt("Congratulation"))
-                return;
             if (GameManager.Instance.dollar >= Mathf.Pow(10, (i + 2) * 3) && GameManager.Instance.dollar < Mathf.Pow(10, (i + 3) * 3))
             {
                 str_congratulation = GameConfig.Instance.richness[i];
@@ -1314,8 +1312,8 @@ public class UIManager : MonoBehaviour
         if (str_congratulation == "")
             return;
 
-        PlayerPrefs.SetInt("Congratulation", count_congratulation);
-
+        PlayerPrefs.SetInt("Congratulation", count_congratulation + 1);
+        Debug.Log(PlayerPrefs.GetInt("Congratulation"));
         coin_Congratulation = 5 * (count_congratulation + 2);
         if (coin_Congratulation > 50)
             coin_Congratulation = 50;
