@@ -269,10 +269,4 @@ public class LoadDataJson : MonoBehaviour
     }
     #endregion
 
-    public void abc()
-    {
-        PlayerPrefs.SetInt("Congratulation", 0);
-        UIManager.Instance.CheckBillionaire();
-    }
-
 }

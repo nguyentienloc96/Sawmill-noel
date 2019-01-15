@@ -589,6 +589,8 @@ public class Location : MonoBehaviour
             }
             else
             {
+                //GameManager.Instance.GetChallenge(lsWorking[countType + 1].name, lsWorking[countType + 1].icon.sprite);
+
                 if (GameManager.Instance.dollar >= lsWorking[countType + 1].price)
                 {
                     lsWorking[countType + 1].animLock.enabled = true;

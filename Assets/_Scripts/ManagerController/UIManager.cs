@@ -233,6 +233,15 @@ public class UIManager : MonoBehaviour
     public Image imgHomeFly_Congratulation;
     public Button buttonYes_Congratulation;
 
+    [Header("Challenge")]
+    public GameObject panelChallenge;
+    public Text txtChallenge;
+    public GameObject panelChallenge_Claim;
+    public Text txtDateChallenge;
+    public Text txtDateChallenge_Done;
+    public Text txtCoin_Challenge;
+    public Image imgHouse_Challenge;
+
     public bool isClickHome;
     public bool isClickTrunk;
     public bool isOnClickTrunk;
@@ -1348,5 +1357,26 @@ public class UIManager : MonoBehaviour
     {
         if (!isSpinning)
             panelSpin.SetActive(false);
+    }
+
+    public void ShowGetChallange(int _date, int _month, int _year)
+    {
+        panelChallenge.SetActive(true);
+        //txtChallenge.text = "Build " + 
+    }
+
+    public void ShowCheckChallenge(Sprite sprHouse)
+    {
+        panelChallenge.SetActive(true);
+        System.DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
+        txtDateChallenge.text = "Target: " + _dateCheckChallenge.Day.ToString() + "/" + _dateCheckChallenge.Month.ToString() + "/" + _dateCheckChallenge.Year.ToString();
+        txtDateChallenge_Done.text = "Daone at " + GameManager.Instance.dateGame.Day.ToString() + "/" + GameManager.Instance.dateGame.Month.ToString() + "/" + GameManager.Instance.dateGame.Year.ToString();
+        txtCoin_Challenge.text = ((GameManager.Instance.sumHomeAll - 2) * 5).ToString();
+        imgHouse_Challenge.sprite = sprHouse;
+    }
+
+    public void btnYesChallenge()
+    {
+
     }
 }

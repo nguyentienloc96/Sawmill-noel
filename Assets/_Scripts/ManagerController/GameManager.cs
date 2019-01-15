@@ -167,6 +167,9 @@ public class GameManager : MonoBehaviour
         lsLocation.Add(location);
         location.LoadLocation();
         location.lsWorking[0].animLock.enabled = true;
+        //if (lsLocation.Count > 1)
+        //    GameManager.Instance.GetChallenge(location.lsWorking[0].name, location.lsWorking[0].icon.sprite);
+
         if (isStart)
         {
             UIManager.Instance.txtRevenue.text = "Revenue : 0$/day";
@@ -210,7 +213,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-       UIManager.Instance.CheckBillionaire();
+        UIManager.Instance.CheckBillionaire();
     }
 
     public void AddOutPut(double numberAddOutput, Sprite icon, Vector3 startMove, Vector3 endMove, UnityAction actionLoadScenesDone = null)
@@ -312,7 +315,8 @@ public class GameManager : MonoBehaviour
                            lsLocation[UIManager.Instance.lsItem[i].idLocation].lsWorking[UIManager.Instance.lsItem[i].indexType].icon.sprite,
                            lsLocation[UIManager.Instance.lsItem[i].idLocation].lsWorking[UIManager.Instance.lsItem[i].indexType].price
                        );
-                    }else if(i == 6)
+                    }
+                    else if (i == 6)
                     {
                         countSpin++;
                         UIManager.Instance.txtCountSpinMain.text = "x" + countSpin;
@@ -536,7 +540,7 @@ public class GameManager : MonoBehaviour
     public string HomeRandom()
     {
         int randomLocation = lsLocation.Count - 1;
-        int randomHome; 
+        int randomHome;
         if (lsLocation[randomLocation].countType <= -1)
         {
             if (lsLocation.Count <= 1)
@@ -556,5 +560,31 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.lsItem[8].timeItemTatol = 60;
         UIManager.Instance.lsItem[8].isOnItem = true;
         UIManager.Instance.lsItem[8].txtNameItem.text = lsLocation[randomLocation].lsWorking[randomHome].name;
+    }
+
+    DateTime timeChallenge;
+    public void GetChallenge(string a, Sprite s)
+    {
+        CheckChallenge(s);
+
+        PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
+
+        double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
+
+        timeChallenge.AddDays(_dayChallenge);
+
+        PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
+
+        UIManager.Instance.ShowGetChallange(timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
+    }
+
+    public void CheckChallenge(Sprite s)
+    {
+        DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
+        if (dateGame <= _dateCheckChallenge)
+        {
+            UIManager.Instance.ShowCheckChallenge(s);
+        }
+
     }
 }
