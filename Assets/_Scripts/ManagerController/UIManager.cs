@@ -246,6 +246,7 @@ public class UIManager : MonoBehaviour
 
     public void Start()
     {
+        //PlayerPrefs.SetInt("Congratulation",0);
         scene = TypeScene.HOME;
         if (!PlayerPrefs.HasKey("isTutorial"))
         {
@@ -1279,7 +1280,7 @@ public class UIManager : MonoBehaviour
     public void NoBuyTreeOnclick()
     {
         panelBuyTree.SetActive(false);
-        //panelSeclectTree.SetActive(false);
+        panelSeclectTree.SetActive(false);
         //GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
         if (PlayerPrefs.GetInt("isTutorial") == 0)
         {
@@ -1322,12 +1323,15 @@ public class UIManager : MonoBehaviour
 
     public void btnYes_Congratulation()
     {
+        imgCoinFly_Congratulation.gameObject.SetActive(true);// = true;
+        imgDollarFly_Congratulation.gameObject.SetActive(true);//.enabled = true;
+        imgHomeFly_Congratulation.gameObject.SetActive(true);//.enabled = true;
         GameManager.Instance.CongratulationsMillionaire();
         GameManager.Instance.AddDollar(+dollar_Congratulation);
         GameManager.Instance.gold += coin_Congratulation;
-        imgCoinFly_Congratulation.GetComponent<Animator>().Play("GoldFly_C");
-        imgDollarFly_Congratulation.GetComponent<Animator>().Play("DollarFly_C");
-        imgHomeFly_Congratulation.GetComponent<Animator>().Play("HomeFly_C");
+        //imgCoinFly_Congratulation.GetComponent<Animator>().Play("GoldFly_C");
+        //imgDollarFly_Congratulation.GetComponent<Animator>().Play("DollarFly_C");
+        //imgHomeFly_Congratulation.GetComponent<Animator>().Play("HomeFly_C");
         buttonYes_Congratulation.interactable = false;
         Invoke("DeactiveCongratulation", 0.75f);
     }
