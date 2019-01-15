@@ -345,14 +345,18 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                r = UnityEngine.Random.Range(0, 8);
+                int r0 = UnityEngine.Random.Range(0, 2);
+                int r1 = UnityEngine.Random.Range(4, 8);
+                r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
                 //r = 7;
                 // anh muốn test cái item nào anh thay ròng trên bằng cho số bất kì từ 0-6 là được anh nhá
             }
         }
         else
         {
-            r = UnityEngine.Random.Range(0, 8);
+            int r0 = UnityEngine.Random.Range(0, 2);
+            int r1 = UnityEngine.Random.Range(4, 8);
+            r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
             if (jobEnd == -1)
             {
                 locationEnd--;
