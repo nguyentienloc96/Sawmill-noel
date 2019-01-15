@@ -42,7 +42,7 @@
   "kProductID300": "com.lumic.wb.300",
   "kProductID5000": "com.lumic.wb.5000",
   "richness" : ["millionaire","billionaire","trillionaire"],
-  "Carup" : 0.1,
+  "Carup" : 0.5,
   "Pinc" : 20,
   "Iso" : 0.9,
   "Upmachine" : 1.3,
