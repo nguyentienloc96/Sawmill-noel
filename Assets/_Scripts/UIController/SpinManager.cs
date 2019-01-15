@@ -17,6 +17,11 @@ public class SpinManager : MonoBehaviour
         Instance = this;
     }
 
+    public void OnEnable()
+    {
+        transform.DOPause();
+    }
+
     public void BtnSpin()
     {
         if (GameManager.Instance.countSpin > 0 && !UIManager.Instance.lsItem[6].isOnItem)

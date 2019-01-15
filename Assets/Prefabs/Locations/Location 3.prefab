@@ -4682,6 +4682,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1688344125650046
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224177027435566310}
+  - component: {fileID: 222709017096697454}
+  - component: {fileID: 114609958390045852}
+  m_Layer: 5
+  m_Name: HouseGrowTree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1688543455297000
 GameObject:
   m_ObjectHideFlags: 1
@@ -13316,6 +13333,33 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114609958390045852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1688344125650046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: d5976da456bd7114ba037a2c4d5ef246, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114611983714143502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15125,6 +15169,7 @@ MonoBehaviour:
     isOnBtnAutoPlant: 0
     isAutoPlant: 0
     timeFelling: 0
+    typeTree: 0
   lsWorking:
   - name: Felling
     id: 0
@@ -15147,6 +15192,9 @@ MonoBehaviour:
     maxOutputMadeStart: 0
     timeWorking: 0
     isXJob: 0
+    isISO: 0
+    isUpgradeMachineJob: 0
+    isUpgradeMachineTrunk: 0
     levelTruck: 0
     priceUpgradeTruck: 0
     priceUpgradeTruckStart: 0
@@ -15156,6 +15204,7 @@ MonoBehaviour:
     maxSent: 0
     maxSentStart: 0
     truckManager: {fileID: 114979824618833550}
+    timeCheckUpgradeMe: 0
     priceUpgrade: 0
     priceUpgradeStart: 0
     price: 0
@@ -15181,6 +15230,9 @@ MonoBehaviour:
     maxOutputMadeStart: 0
     timeWorking: 0
     isXJob: 0
+    isISO: 0
+    isUpgradeMachineJob: 0
+    isUpgradeMachineTrunk: 0
     levelTruck: 0
     priceUpgradeTruck: 0
     priceUpgradeTruckStart: 0
@@ -15190,6 +15242,7 @@ MonoBehaviour:
     maxSent: 0
     maxSentStart: 0
     truckManager: {fileID: 114780171999802698}
+    timeCheckUpgradeMe: 0
     priceUpgrade: 0
     priceUpgradeStart: 0
     price: 0
@@ -15215,6 +15268,9 @@ MonoBehaviour:
     maxOutputMadeStart: 0
     timeWorking: 0
     isXJob: 0
+    isISO: 0
+    isUpgradeMachineJob: 0
+    isUpgradeMachineTrunk: 0
     levelTruck: 0
     priceUpgradeTruck: 0
     priceUpgradeTruckStart: 0
@@ -15224,6 +15280,7 @@ MonoBehaviour:
     maxSent: 0
     maxSentStart: 0
     truckManager: {fileID: 114490503180738466}
+    timeCheckUpgradeMe: 0
     priceUpgrade: 0
     priceUpgradeStart: 0
     price: 0
@@ -15249,6 +15306,9 @@ MonoBehaviour:
     maxOutputMadeStart: 0
     timeWorking: 0
     isXJob: 0
+    isISO: 0
+    isUpgradeMachineJob: 0
+    isUpgradeMachineTrunk: 0
     levelTruck: 0
     priceUpgradeTruck: 0
     priceUpgradeTruckStart: 0
@@ -15258,6 +15318,7 @@ MonoBehaviour:
     maxSent: 0
     maxSentStart: 0
     truckManager: {fileID: 114846961991900382}
+    timeCheckUpgradeMe: 0
     priceUpgrade: 0
     priceUpgradeStart: 0
     price: 0
@@ -15283,6 +15344,9 @@ MonoBehaviour:
     maxOutputMadeStart: 0
     timeWorking: 0
     isXJob: 0
+    isISO: 0
+    isUpgradeMachineJob: 0
+    isUpgradeMachineTrunk: 0
     levelTruck: 0
     priceUpgradeTruck: 0
     priceUpgradeTruckStart: 0
@@ -15292,6 +15356,7 @@ MonoBehaviour:
     maxSent: 0
     maxSentStart: 0
     truckManager: {fileID: 114762265168957378}
+    timeCheckUpgradeMe: 0
     priceUpgrade: 0
     priceUpgradeStart: 0
     price: 0
@@ -15317,6 +15382,9 @@ MonoBehaviour:
     maxOutputMadeStart: 0
     timeWorking: 0
     isXJob: 0
+    isISO: 0
+    isUpgradeMachineJob: 0
+    isUpgradeMachineTrunk: 0
     levelTruck: 0
     priceUpgradeTruck: 0
     priceUpgradeTruckStart: 0
@@ -15326,6 +15394,7 @@ MonoBehaviour:
     maxSent: 0
     maxSentStart: 0
     truckManager: {fileID: 114277715972209416}
+    timeCheckUpgradeMe: 0
     priceUpgrade: 0
     priceUpgradeStart: 0
     price: 0
@@ -15351,6 +15420,9 @@ MonoBehaviour:
     maxOutputMadeStart: 0
     timeWorking: 0
     isXJob: 0
+    isISO: 0
+    isUpgradeMachineJob: 0
+    isUpgradeMachineTrunk: 0
     levelTruck: 0
     priceUpgradeTruck: 0
     priceUpgradeTruckStart: 0
@@ -15360,6 +15432,7 @@ MonoBehaviour:
     maxSent: 0
     maxSentStart: 0
     truckManager: {fileID: 114159542558156986}
+    timeCheckUpgradeMe: 0
     priceUpgrade: 0
     priceUpgradeStart: 0
     price: 0
@@ -15385,6 +15458,9 @@ MonoBehaviour:
     maxOutputMadeStart: 0
     timeWorking: 0
     isXJob: 0
+    isISO: 0
+    isUpgradeMachineJob: 0
+    isUpgradeMachineTrunk: 0
     levelTruck: 0
     priceUpgradeTruck: 0
     priceUpgradeTruckStart: 0
@@ -15394,6 +15470,7 @@ MonoBehaviour:
     maxSent: 0
     maxSentStart: 0
     truckManager: {fileID: 114175411013529430}
+    timeCheckUpgradeMe: 0
     priceUpgrade: 0
     priceUpgradeStart: 0
     price: 0
@@ -15419,6 +15496,9 @@ MonoBehaviour:
     maxOutputMadeStart: 0
     timeWorking: 0
     isXJob: 0
+    isISO: 0
+    isUpgradeMachineJob: 0
+    isUpgradeMachineTrunk: 0
     levelTruck: 0
     priceUpgradeTruck: 0
     priceUpgradeTruckStart: 0
@@ -15428,6 +15508,7 @@ MonoBehaviour:
     maxSent: 0
     maxSentStart: 0
     truckManager: {fileID: 114970094834162498}
+    timeCheckUpgradeMe: 0
     priceUpgrade: 0
     priceUpgradeStart: 0
     price: 0
@@ -19367,6 +19448,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317114993617528}
+--- !u!222 &222709017096697454
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1688344125650046}
 --- !u!222 &222712448889471380
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -20369,7 +20456,7 @@ RectTransform:
   - {fileID: 224960663833549618}
   - {fileID: 224523165835015976}
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -20879,7 +20966,7 @@ RectTransform:
   - {fileID: 224897424619533686}
   - {fileID: 224180370512926570}
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -20992,7 +21079,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -21213,6 +21300,24 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80.14285, y: 55.142857}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224177027435566310
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1688344125650046}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_Children: []
+  m_Father: {fileID: 224267637948034034}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -227.00002, y: 1782.75}
+  m_SizeDelta: {x: 146.28572, y: 125.71429}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224177757854175666
 RectTransform:
@@ -21804,7 +21909,7 @@ RectTransform:
   - {fileID: 224129184479090298}
   - {fileID: 224588851315495702}
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -22013,6 +22118,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224237631104110218}
+  - {fileID: 224177027435566310}
   - {fileID: 224383080914281286}
   - {fileID: 224049313484376736}
   - {fileID: 224147659608367684}
@@ -22901,7 +23007,7 @@ RectTransform:
   - {fileID: 224991834877848114}
   - {fileID: 224893083162301146}
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -23556,7 +23662,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -24764,7 +24870,7 @@ RectTransform:
   - {fileID: 224055522224751314}
   - {fileID: 224029905220176682}
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -25297,7 +25403,7 @@ RectTransform:
   - {fileID: 224727162297394314}
   - {fileID: 224120733238055308}
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -25953,7 +26059,7 @@ RectTransform:
   - {fileID: 224870189772601126}
   - {fileID: 224721117764535968}
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -26539,7 +26645,7 @@ RectTransform:
   - {fileID: 224386720833365766}
   - {fileID: 224861296838886960}
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -27144,7 +27250,7 @@ RectTransform:
   m_Children:
   - {fileID: 224380178128889216}
   m_Father: {fileID: 224267637948034034}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
