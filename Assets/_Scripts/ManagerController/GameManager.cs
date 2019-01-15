@@ -345,8 +345,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                //r = UnityEngine.Random.Range(0, 8);
-                r = 7;
+                r = UnityEngine.Random.Range(0, 8);
+                //r = 7;
                 // anh muốn test cái item nào anh thay ròng trên bằng cho số bất kì từ 0-6 là được anh nhá
             }
         }

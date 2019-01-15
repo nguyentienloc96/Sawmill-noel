@@ -699,6 +699,13 @@ public class Location : MonoBehaviour
                 lsWorking[0].timeCheckUpgradeMe = 0;
             }
         }
+        else
+        {
+            if (lsWorking[0].truckManager.upgradeMe.activeInHierarchy)
+            {
+                lsWorking[0].truckManager.upgradeMe.SetActive(false);
+            }
+        }
 
     }
 
@@ -829,6 +836,13 @@ public class Location : MonoBehaviour
                     lsWorking[idType].truckManager.upgradeMe.SetActive(true);
                 }
                 lsWorking[idType].timeCheckUpgradeMe = 0;
+            }
+        }
+        else
+        {
+            if (lsWorking[idType].truckManager.upgradeMe.activeInHierarchy)
+            {
+                lsWorking[idType].truckManager.upgradeMe.SetActive(false);
             }
         }
 
