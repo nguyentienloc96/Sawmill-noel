@@ -41,9 +41,7 @@
   "kProductID50": "com.lumic.wb.50",
   "kProductID300": "com.lumic.wb.300",
   "kProductID5000": "com.lumic.wb.5000",
-  "richness" : [
-  "millionaire","billionaire","trillionaire","Quadrillionaire" , "Quintillionaire", "Sextillionaire","Septillionaire", "Octillionaire", "Nonillionaire", "Decillionaire", "Undecillionaire", "Duodecillionaire", "Tredecillionaire", "Quattuordecillionaire", "Quindecillionaire", "Sexdecillionaire", "Septendecillionaire", "Octodecillionaire", "Novemdecillionaire", "Vigintillionaire", "Unvigintillionaire", "Duovigintillionaire", "Trevigintillionaire", "Quattuorvigintillionaire", "Quinvigintillionaire", "Sexvigintillionaire", "Septenvigintillionaire", "Octovigintillionaire", "Novemvigintillionaire"
-  ],
+  "richness" : ["millionaire","billionaire","trillionaire"],
   "Carup" : 0.1,
   "Pinc" : 20,
   "Iso" : 0.9,
