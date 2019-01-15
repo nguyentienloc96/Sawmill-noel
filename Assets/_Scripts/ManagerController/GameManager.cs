@@ -403,6 +403,7 @@ public class GameManager : MonoBehaviour
         if (r == 1)
         {
             UIManager.Instance.infoRandom.text = UIManager.Instance.lsItem[r - 1].infoItem.Replace("X", ((int)(UIManager.Instance.lsItem[r - 1].timeItemTatol / GameConfig.Instance.p0Time)).ToString());
+            UIManager.Instance.lsItem[r - 1].txtNameItem.text = lsLocation[UIManager.Instance.lsItem[r - 1].idLocation].lsWorking[UIManager.Instance.lsItem[r - 1].indexType].name;
         }
         else if (r == 2)
         {
@@ -521,5 +522,33 @@ public class GameManager : MonoBehaviour
             }
         }
         return dollarRecive;
+    }
+
+    int randomLocation = 0;
+    int randomHome = 0;
+
+    public string HomeRandom()
+    {
+        int randomLocation = lsLocation.Count - 1;
+        int randomHome; 
+        if (lsLocation[randomLocation].countType <= -1)
+        {
+            if (lsLocation.Count <= 1)
+                return null;
+            randomLocation--;
+        }
+        randomHome = UnityEngine.Random.Range(0, lsLocation[randomLocation].countType);
+        return lsLocation[randomLocation].lsWorking[randomHome].name;
+    }
+
+    public void CongratulationsMillionaire()
+    {
+        UIManager.Instance.lsItem[8].idLocation = randomLocation;
+        UIManager.Instance.lsItem[8].indexType = randomHome;
+        UIManager.Instance.lsItem[8].obj.SetActive(true);
+        UIManager.Instance.lsItem[8].timeItem = 60;
+        UIManager.Instance.lsItem[8].timeItemTatol = 60;
+        UIManager.Instance.lsItem[8].isOnItem = true;
+        UIManager.Instance.lsItem[8].txtNameItem.text = lsLocation[randomLocation].lsWorking[randomHome].name;
     }
 }
