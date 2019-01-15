@@ -233,7 +233,7 @@ public class LoadDataJson : MonoBehaviour
 
     public void CheckDateGift()
     {
-        Debug.Log(GetDatePassed());        
+        Debug.Log(GetDatePassed());
         if (PlayerPrefs.GetInt("DayGift") > 15)
         {
             PlayerPrefs.SetInt("DayGift", 0);

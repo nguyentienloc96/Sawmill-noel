@@ -65,6 +65,7 @@ public class UIManager : MonoBehaviour
     public Image imgGoldFly;
     public Image imgSpinFly;
     public Text txtGoldGiftDay;
+    public Button buttonYesGiftDay;
 
 
     [Header("Setting")]
@@ -219,6 +220,12 @@ public class UIManager : MonoBehaviour
     public Text txtPriceBuyTree;
     public Button btnYesBuyTree;
     public Button btnNoBuyTree;
+
+    [Header("Congratulation Millionaire")]
+    public GameObject panelCongratulation;
+    public Text txtDollar_Congratulation;
+    public Text txtCoin_Congratulation;
+    public Text txtNameHouse_Congratulation;
 
     public bool isClickHome;
     public bool isClickTrunk;
@@ -1162,8 +1169,6 @@ public class UIManager : MonoBehaviour
     int c = 0;
     public void btnGiftDay_ClaimGift()
     {
-        if (c > 0)
-            return;
         imgGoldFly.gameObject.SetActive(true);
         imgSpinFly.gameObject.SetActive(true);
         //imgGoldFly.GetComponent<Animator>().Play("GoldFly");
@@ -1174,11 +1179,10 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.gold += _goldGiftDay;
         GameManager.Instance.countSpin += 1;
         txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
-
         PlayerPrefs.SetInt("DayGift", PlayerPrefs.GetInt("DayGift") + 1);
         PlayerPrefs.SetString("DateLastLaunch", System.DateTime.Now.ToString());
-        c++;
-        Invoke("DeactiveGiftDay", 1f);
+        buttonYesGiftDay.interactable = false;
+        Invoke("DeactiveGiftDay", 0.75f);
     }
 
     void DeactiveGiftDay()
@@ -1281,5 +1285,44 @@ public class UIManager : MonoBehaviour
         {
             txtWait.text = "Wait to plant trees";
         }
+    }
+
+    string str_congratulation = "";
+    int count_congratulation = 0;
+    double dollar_Congratulation = 0;
+    int coin_Congratulation = 0;
+    public void CheckBillionaire()
+    {
+        if (PlayerPrefs.GetInt("Congratulation") >= GameConfig.Instance.richness.Count - 1)
+            return;
+
+        for (int i = 0; i < GameConfig.Instance.richness.Count; i++)
+        {
+            if (GameManager.Instance.dollar >= Mathf.Pow(10, (i + 2) * 3) && GameManager.Instance.dollar < Mathf.Pow(10, (i + 3) * 3))
+            {
+                str_congratulation = GameConfig.Instance.richness[i];
+                count_congratulation = i;
+            }
+        }
+        PlayerPrefs.SetInt("Congratulation", count_congratulation);
+
+        coin_Congratulation = 5 * (count_congratulation+2);
+        if(coin_Congratulation > 50)
+            coin_Congratulation = 50;
+        dollar_Congratulation = GameManager.Instance.dollar * 0.1f;
+
+        panelCongratulation.SetActive(true);
+        txtDollar_Congratulation.text = dollar_Congratulation.ToString();
+        txtCoin_Congratulation.text = coin_Congratulation.ToString() + " $";
+        txtNameHouse_Congratulation.text = "Double the capacity of " + GameManager.Instance.HomeRandom() + " in "+ (120/GameConfig.Instance.p0Time).ToString() + " days";
+    }
+
+    public void btnYes_Congratulation()
+    {
+        GameManager.Instance.CongratulationsMillionaire();
+        GameManager.Instance.AddDollar(+dollar_Congratulation);
+        GameManager.Instance.gold += coin_Congratulation;
+
+        panelCongratulation.SetActive(false);
     }
 }
