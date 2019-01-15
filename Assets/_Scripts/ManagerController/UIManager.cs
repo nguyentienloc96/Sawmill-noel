@@ -242,7 +242,6 @@ public class UIManager : MonoBehaviour
 
     public void Start()
     {
-        PlayerPrefs.SetInt("Congratulation", 0);
         scene = TypeScene.HOME;
         if (!PlayerPrefs.HasKey("isTutorial"))
         {
@@ -1205,7 +1204,7 @@ public class UIManager : MonoBehaviour
         int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
         typeTreeCurrent = typeTree;
         panelBuyTree.SetActive(true);
-        txtInfoBuyTree.text = "Plan this tree to make the output price increase " + (typeTree + 1) * 10 + "%?";
+        txtInfoBuyTree.text = "Plan this tree to make the output price increase " + (typeTree) * 10 + "%?";
 
         for (int i = 0; i < lsItemTreeUI.Count; i++)
         {
@@ -1218,21 +1217,12 @@ public class UIManager : MonoBehaviour
                 lsItemTreeUI[i].GetChild(2).gameObject.SetActive(false);
             }
         }
-
-        if (typeTreeCurrent != 0)
-        {
-            btnNoBuyTree.interactable = true;
-            txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
-            * (typeTree + 1) / 5f);
-        }
-        else
-        {
-            btnNoBuyTree.interactable = false;
-            txtPriceBuyTree.text = "0";
-        }
+        txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
+           * (typeTree) / 5f);
+        
 
         if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
-        * (typeTreeCurrent + 1) / 5f)
+        * (typeTreeCurrent) / 5f)
         {
             btnYesBuyTree.interactable = true;
         }
@@ -1249,11 +1239,11 @@ public class UIManager : MonoBehaviour
         int idLocation = GameManager.Instance.IDLocation;
         int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
         if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
-            * (typeTreeCurrent + 1) / 5f)
+            * (typeTreeCurrent) / 5f)
         {
             if (typeTreeCurrent != 0)
             {
-                GameManager.Instance.dollar -= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * (typeTreeCurrent + 1) / 5f;
+                GameManager.Instance.dollar -= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * (typeTreeCurrent) / 5f;
 
             }
             panelBuyTree.SetActive(false);
@@ -1285,8 +1275,8 @@ public class UIManager : MonoBehaviour
     public void NoBuyTreeOnclick()
     {
         panelBuyTree.SetActive(false);
-        panelSeclectTree.SetActive(false);
-        GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
+        //panelSeclectTree.SetActive(false);
+        //GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
         if (PlayerPrefs.GetInt("isTutorial") == 0)
         {
             txtWait.text = "Wait to plant trees";

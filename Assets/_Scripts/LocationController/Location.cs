@@ -1099,7 +1099,7 @@ public class Location : MonoBehaviour
     {
         for (int j = 0; j < forest.forestClass.lsTree.Length; j++)
         {
-            forest.forestClass.lsTree[0].transform.GetChild(0).GetComponent<Image>().sprite = spNewTree;
+            forest.forestClass.lsTree[j].transform.GetChild(0).GetComponent<Image>().sprite = spNewTree;
         }
     }
 

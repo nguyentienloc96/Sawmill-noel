@@ -27,6 +27,8 @@ public class Forest : MonoBehaviour
     {
         if (location.forest.tree > 0)
         {
+            Sprite spNewTree = UIManager.Instance.lsItemTreeUI[location.forest.typeTree].GetChild(0).GetComponent<Image>().sprite;
+            location.ChangeTree(spNewTree);
             car.SetActive(false);
             for (int i = 0; i < lsTree.Length; i++)
             {

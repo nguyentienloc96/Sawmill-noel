@@ -46,7 +46,6 @@ public class SpinManager : MonoBehaviour
         transform.DOPause();
         yield return new WaitForSeconds(0.05f);
         CheckComplete();
-        UIManager.Instance.isSpinning = false;
 
     }
 
@@ -158,6 +157,7 @@ public class SpinManager : MonoBehaviour
             UIManager.Instance.adsSpin.SetActive(true);
             UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 128);
         }
+        UIManager.Instance.isSpinning = false;
 
     }
 }
