@@ -553,4 +553,27 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.lsItem[8].isOnItem = true;
         UIManager.Instance.lsItem[8].txtNameItem.text = lsLocation[randomLocation].lsWorking[randomHome].name;
     }
+
+    DateTime timeChallenge;
+    public void GetChallenge()
+    {
+        PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
+
+        double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
+
+        timeChallenge.AddDays(_dayChallenge);
+
+        PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
+
+        UIManager.Instance.ShowGetChallange(timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
+    }
+
+    public void CheckChallenge()
+    {
+        DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
+        if (dateGame <= _dateCheckChallenge)
+        {
+
+        }
+    }
 }

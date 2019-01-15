@@ -233,6 +233,10 @@ public class UIManager : MonoBehaviour
     public Image imgHomeFly_Congratulation;
     public Button buttonYes_Congratulation;
 
+    [Header("Challenge")]
+    public GameObject panelChallenge;
+    public Text txtChallenge;
+
     public bool isClickHome;
     public bool isClickTrunk;
     public bool isOnClickTrunk;
@@ -1348,5 +1352,21 @@ public class UIManager : MonoBehaviour
     {
         if (!isSpinning)
             panelSpin.SetActive(false);
+    }
+
+    public void ShowGetChallange(int _date, int _month, int _year)
+    {
+        panelChallenge.SetActive(true);
+        //txtChallenge.text = "Build " + 
+    }
+
+    public void ShowCheckChallenge()
+    {
+
+    }
+
+    public void btnYesChallenge()
+    {
+
     }
 }
