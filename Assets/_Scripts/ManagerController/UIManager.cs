@@ -1043,12 +1043,12 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.countSpin > 0)
         {
             adsSpin.SetActive(false);
-            UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 255);
+            bgSpin.color = new Color32(255, 255, 255, 255);
         }
         else
         {
-            UIManager.Instance.adsSpin.SetActive(true);
-            UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 128);
+            adsSpin.SetActive(true);
+            bgSpin.color = new Color32(255, 255, 255, 128);
         }
     }
 
@@ -1077,7 +1077,7 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.dollar >= GameConfig.Instance.Iso * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
         {
             GameManager.Instance.dollar -= GameConfig.Instance.Iso * GameManager.Instance.lsLocation[id].lsWorking[indexType].price;
-            GameManager.Instance.lsLocation[id].lsWorking[indexType].priceOutput += System.Math.Floor(GameManager.Instance.lsLocation[id].lsWorking[indexType].priceOutput * ((float)GameConfig.Instance.Pinc / 100f));
+            GameManager.Instance.lsLocation[id].lsWorking[indexType].priceOutput += (GameManager.Instance.lsLocation[id].lsWorking[indexType].priceOutput * ((float)GameConfig.Instance.Pinc / 100f));
             GameManager.Instance.lsLocation[id].lsWorking[indexType].isISO = true;
             GameManager.Instance.lsLocation[id].lsWorking[indexType].iso.SetActive(true);
             btnISO.SetActive(false);

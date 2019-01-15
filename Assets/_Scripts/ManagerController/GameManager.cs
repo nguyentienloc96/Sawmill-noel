@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
 
     public void AddDollar(double dollarBonus)
     {
-        dollar += dollarBonus;
+        dollar += System.Math.Floor(dollarBonus);
         if (dollar < 0)
         {
             dollar = 0;
