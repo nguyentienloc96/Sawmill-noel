@@ -269,22 +269,4 @@ public class LoadDataJson : MonoBehaviour
     }
     #endregion
 
-    string str_congratulation = "";
-    int count_congratulation = 0;
-    public void CheckBillionaire()
-    {
-        if (PlayerPrefs.GetInt("Congratulation") >= GameConfig.Instance.richness.Count-1)
-            return;
-
-        for (int i = 0; i < GameConfig.Instance.richness.Count; i++)
-        {
-            if (GameManager.Instance.dollar >= Mathf.Pow(10, (i + 2) * 3) && GameManager.Instance.dollar < Mathf.Pow(10, (i + 3) * 3))
-            {
-                str_congratulation = GameConfig.Instance.richness[i];
-                count_congratulation = i;
-            }
-        }
-        Debug.Log("chuc mung " + str_congratulation);
-        PlayerPrefs.SetInt("Congratulation", count_congratulation);
-    }
 }

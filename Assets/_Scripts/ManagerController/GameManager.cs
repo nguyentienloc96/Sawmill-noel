@@ -209,6 +209,8 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        UIManager.Instance.CheckBillionaire();
     }
 
     public void AddOutPut(double numberAddOutput, Sprite icon, Vector3 startMove, Vector3 endMove, UnityAction actionLoadScenesDone = null)
