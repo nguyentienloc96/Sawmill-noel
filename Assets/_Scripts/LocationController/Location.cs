@@ -1056,7 +1056,43 @@ public class Location : MonoBehaviour
 
     public void btnSelectTree()
     {
-        UIManager.Instance.panelSeclectTree.SetActive(true);
+        if (countType <= 0)
+        {
+            forest.forestClass.RunCarGrow();
+        }
+        else
+        {
+            UIManager.Instance.panelSeclectTree.SetActive(true);
+            forest.typeTree = 0;
+
+            for (int i = 0; i < UIManager.Instance.lsItemTreeUI.Count; i++)
+            {
+                if (i == 0)
+                {
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(1).gameObject.SetActive(true);
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(2).gameObject.SetActive(true);
+
+                }
+                else
+                {
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(1).gameObject.SetActive(false);
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(2).gameObject.SetActive(false);
+
+                }
+                if (i <= countType)
+                {
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(3).gameObject.SetActive(false);
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                }
+                else
+                {
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(3).gameObject.SetActive(true);
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(0, 0, 0, 255);
+                }
+            }
+            Sprite spNewTree = UIManager.Instance.lsItemTreeUI[0].GetChild(0).GetComponent<Image>().sprite;
+            ChangeTree(spNewTree);
+        }
     }
 
     public void ChangeTree(Sprite spNewTree)

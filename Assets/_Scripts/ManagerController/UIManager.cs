@@ -217,6 +217,8 @@ public class UIManager : MonoBehaviour
     public GameObject panelBuyTree;
     public Text txtInfoBuyTree;
     public Text txtPriceBuyTree;
+    public Button btnYesBuyTree;
+    public Button btnNoBuyTree;
 
     public bool isClickHome;
     public bool isClickTrunk;
@@ -1189,19 +1191,12 @@ public class UIManager : MonoBehaviour
     int typeTreeCurrent = 0;
     public void btnBuyTree(int typeTree)
     {
+        int idLocation = GameManager.Instance.IDLocation;
+        int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
         typeTreeCurrent = typeTree;
-        if (typeTree != 0)
-        {
-            panelBuyTree.SetActive(true);
-            txtInfoBuyTree.text = "Plan this tree to make the output price increase "
-                + (typeTree + 1) * 10 + "%?";
-            txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
-                * (typeTree + 1));          
-        }
-        else
-        {
-            btnYesBuyTree();
-        }
+        panelBuyTree.SetActive(true);
+        txtInfoBuyTree.text = "Plan this tree to make the output price increase " + (typeTree + 1) * 10 + "%?";
+
         for (int i = 0; i < lsItemTreeUI.Count; i++)
         {
             if (i == typeTreeCurrent)
@@ -1214,14 +1209,45 @@ public class UIManager : MonoBehaviour
             }
         }
 
-    }
-
-    public void btnYesBuyTree()
-    {
         if (typeTreeCurrent != 0)
         {
+            btnNoBuyTree.interactable = true;
+            txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
+            * (typeTree + 1) / 3f);
+        }
+        else
+        {
+            btnNoBuyTree.interactable = false;
+            txtPriceBuyTree.text = "0";
+        }
+
+        if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
+        * (typeTreeCurrent + 1) / 3f)
+        {
+            btnYesBuyTree.interactable = true;
+        }
+        else
+        {
+            btnYesBuyTree.interactable = false;
+
+        }
+
+    }
+
+    public void YesBuyTreeOnclick()
+    {
+        int idLocation = GameManager.Instance.IDLocation;
+        int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
+        if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
+            * (typeTreeCurrent + 1) / 3f)
+        {
+            if (typeTreeCurrent != 0)
+            {
+                GameManager.Instance.dollar -= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * (typeTreeCurrent + 1) / 3f;
+
+            }
             panelBuyTree.SetActive(false);
-            GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.typeTree = typeTreeCurrent;
+            GameManager.Instance.lsLocation[idLocation].forest.typeTree = typeTreeCurrent;
             for (int i = 0; i < lsItemTreeUI.Count; i++)
             {
                 if (i == typeTreeCurrent)
@@ -1234,7 +1260,7 @@ public class UIManager : MonoBehaviour
                 }
             }
             Sprite spNewTree = lsItemTreeUI[typeTreeCurrent].GetChild(0).GetComponent<Image>().sprite;
-            GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].ChangeTree(spNewTree);
+            GameManager.Instance.lsLocation[idLocation].ChangeTree(spNewTree);
         }
         panelSeclectTree.SetActive(false);
         GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
@@ -1243,10 +1269,10 @@ public class UIManager : MonoBehaviour
         {
             txtWait.text = "Wait to plant trees";
         }
-      
+
     }
 
-    public void btnNoBuyTree()
+    public void NoBuyTreeOnclick()
     {
         panelBuyTree.SetActive(false);
         panelSeclectTree.SetActive(false);
