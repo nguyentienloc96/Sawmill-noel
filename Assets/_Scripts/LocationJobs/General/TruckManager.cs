@@ -248,7 +248,7 @@ public class TruckManager : MonoBehaviour
             {
                 txtSent.text = UIManager.Instance.ConvertNumber(location.lsWorking[indexType].maxSent * 2f);
                 location.lsWorking[indexType].output -= location.lsWorking[indexType].maxSent * 2f;
-                location.lsWorking[indexType].currentSent = location.lsWorking[indexType].maxSent *2f;
+                location.lsWorking[indexType].currentSent = location.lsWorking[indexType].maxSent * 2f;
                 location.lsWorking[indexType].textOutput.text = UIManager.Instance.ConvertNumber(location.lsWorking[indexType].output);
             }
             else if (location.lsWorking[indexType].output > 0)
@@ -298,7 +298,7 @@ public class TruckManager : MonoBehaviour
         txtSent.text = "";
         if (location.countType <= indexType)
         {
-            GameManager.Instance.AddDollar(+location.lsWorking[indexType].currentSent * location.lsWorking[indexType].priceOutput);
+            GameManager.Instance.AddDollar(+location.lsWorking[indexType].currentSent * location.lsWorking[indexType].priceOutput * (1 + 0.1f * location.forest.typeTree));
             location.lsWorking[indexType].currentSent = 0;
         }
         else
