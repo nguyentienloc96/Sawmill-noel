@@ -816,10 +816,7 @@ public class UIManager : MonoBehaviour
         if (!panelDollar.activeSelf)
         {
             panelDollar.SetActive(true);
-            double dollarRecive = GameManager.Instance.PriceHomeEnd()*0.5f;
-            int goldExchange = 5 + (GameManager.Instance.sumHomeAll - 1);
-            txtGoldToDollar_Dollar.text = ConvertNumber(dollarRecive) + "$";
-            txtGoldToDollar_Gold.text = goldExchange.ToString();
+            ShowTextGoldToDollar();
             //if (GameManager.Instance.gold > 0)
             //{
             //    btnGoldToDollar.interactable = true;
@@ -833,6 +830,19 @@ public class UIManager : MonoBehaviour
         }
         else
             panelDollar.SetActive(false);
+    }
+
+    public void ShowTextGoldToDollar()
+    {
+        double dollarRecive = GameManager.Instance.PriceHomeEnd() * 0.5f;
+        double goldExchange = 5 + (GameManager.Instance.sumHomeAll - 1);
+        if (GameManager.Instance.gold < goldExchange)
+        {
+            goldExchange = GameManager.Instance.gold;
+            dollarRecive = (goldExchange * dollarRecive) / (5 + (GameManager.Instance.sumHomeAll - 1));
+        }
+        txtGoldToDollar_Dollar.text = ConvertNumber(dollarRecive) + "$";
+        txtGoldToDollar_Gold.text = goldExchange.ToString();
     }
 
     public void ShowPanelGold()

@@ -83,7 +83,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 62fd096116355f949afe83c9d1c843d5, type: 2}
+  m_Motion: {fileID: 7400000, guid: ed85a4d5b0e202a47a9ab2e948086d3d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -96,7 +96,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ExchangeGold 1
-  m_Speed: 1
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101728889697959822}
@@ -109,7 +109,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 17eff1571a195994689af8becc32bfd9, type: 2}
+  m_Motion: {fileID: 7400000, guid: a5e10086645635045939b66f5fffed4c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
