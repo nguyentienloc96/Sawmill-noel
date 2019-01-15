@@ -1067,9 +1067,8 @@ public class UIManager : MonoBehaviour
         int id = GameManager.Instance.IDLocation;
         int indexType = GameManager.Instance.lsLocation[id].indexType;
         panelUpgradeMachineJob.SetActive(true);
-        txtInfoMachineJob.text = "Apply the latest technology to double the productivity of your next " 
-            + GameManager.Instance.lsLocation[id].lsWorking[indexType].name
-            + " workshops";
+        txtInfoMachineJob.text = "Apply the latest technology to double the productivity of your next machines in this workshop.";
+        txtPriceMachineJob.text = ConvertNumber(GameConfig.Instance.Upmachine * GameManager.Instance.lsLocation[id].lsWorking[indexType].price);
         if(GameManager.Instance.dollar >= GameConfig.Instance.Upmachine * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
         {
             btnYesMachineJob.interactable = true;
@@ -1085,17 +1084,16 @@ public class UIManager : MonoBehaviour
         int id = GameManager.Instance.IDLocation;
         int indexType = GameManager.Instance.lsLocation[id].indexType;
         panelUpgradeMachineTrunk.SetActive(true);
-        txtInfoMachineTrunk.text = "Sign a contract with Tesla Motors to double the capacity of your NEXT "
-            + GameManager.Instance.lsLocation[id].lsWorking[indexType].name
-            + " trucks";
+        txtInfoMachineTrunk.text = "Sign a contract with Tesla Motors to double the capacity of your NEXT trucks in this route.";
+        txtPriceMachineTrunk.text = ConvertNumber(GameConfig.Instance.Uptruck * GameManager.Instance.lsLocation[id].lsWorking[indexType].price);
+
         if (GameManager.Instance.dollar >= GameConfig.Instance.Uptruck * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
         {
             btnYesMachineTrunk.interactable = true;
         }
         else
         {
-            btnYesMachineTrunk
-.interactable = false;
+            btnYesMachineTrunk.interactable = false;
         }
     }
 
@@ -1109,6 +1107,7 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.lsLocation[id].lsWorking[indexType].isUpgradeMachineJob = true;
             btnUpMachineJob.SetActive(false);
             panelUpgradeMachineJob.SetActive(false);
+            GameManager.Instance.lsLocation[id].CheckInfoTypeOfWorkST(indexType);
         }
     }
 
@@ -1122,6 +1121,8 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.lsLocation[id].lsWorking[indexType].isUpgradeMachineTrunk = true;
             btnUpMachineTrunk.SetActive(false);
             panelUpgradeMachineTrunk.SetActive(false);
+            GameManager.Instance.lsLocation[id].CheckInfoTruck(indexType);
+
         }
     }
 
