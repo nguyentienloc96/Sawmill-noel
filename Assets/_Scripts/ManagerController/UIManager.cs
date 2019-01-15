@@ -241,6 +241,7 @@ public class UIManager : MonoBehaviour
 
     public void Start()
     {
+        PlayerPrefs.SetInt("Congratulation", 0);
         scene = TypeScene.HOME;
         if (!PlayerPrefs.HasKey("isTutorial"))
         {
@@ -1302,6 +1303,8 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < GameConfig.Instance.richness.Count; i++)
         {
+            if (i < PlayerPrefs.GetInt("Congratulation"))
+                return;
             if (GameManager.Instance.dollar >= Mathf.Pow(10, (i + 2) * 3) && GameManager.Instance.dollar < Mathf.Pow(10, (i + 3) * 3))
             {
                 str_congratulation = GameConfig.Instance.richness[i];
