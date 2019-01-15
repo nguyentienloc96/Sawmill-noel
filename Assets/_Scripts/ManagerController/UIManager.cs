@@ -1308,6 +1308,9 @@ public class UIManager : MonoBehaviour
                 count_congratulation = i;
             }
         }
+        if (str_congratulation == "")
+            return;
+
         PlayerPrefs.SetInt("Congratulation", count_congratulation);
 
         coin_Congratulation = 5 * (count_congratulation + 2);
@@ -1316,9 +1319,9 @@ public class UIManager : MonoBehaviour
         dollar_Congratulation = GameManager.Instance.dollar * 0.1f;
 
         panelCongratulation.SetActive(true);
-        txtDollar_Congratulation.text = dollar_Congratulation.ToString();
-        txtCoin_Congratulation.text = coin_Congratulation.ToString() + " $";
-        txtNameHouse_Congratulation.text = "Double the capacity of " + GameManager.Instance.HomeRandom() + " in " + (120 / GameConfig.Instance.p0Time).ToString() + " days";
+        txtDollar_Congratulation.text = ConvertNumber( dollar_Congratulation) + " $";
+        txtCoin_Congratulation.text = coin_Congratulation.ToString();
+        txtNameHouse_Congratulation.text = "Double the capacity of " + GameManager.Instance.HomeRandom() + " in " + (60 / GameConfig.Instance.p0Time).ToString() + " days";
     }
 
     public void btnYes_Congratulation()
