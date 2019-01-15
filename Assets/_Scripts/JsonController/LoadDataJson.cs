@@ -139,13 +139,13 @@ public class LoadDataJson : MonoBehaviour
         return _text.text;
     }
     double dollarRecive = 0;
-    int goldExchange = 0;
+    double goldExchange = 0;
     public void GoldToDollar()
     {
         dollarRecive = GameManager.Instance.PriceHomeEnd() * 0.5f;
         goldExchange = 5 + (GameManager.Instance.sumHomeAll - 1);
 
-        if (GameManager.Instance.gold >= goldExchange)
+        if (GameManager.Instance.gold >= goldExchange && GameManager.Instance.gold > 0)
         {
             GameManager.Instance.gold -= goldExchange;
             GameManager.Instance.AddDollar(+dollarRecive);
@@ -153,23 +153,38 @@ public class LoadDataJson : MonoBehaviour
             UIManager.Instance.imgGoldToDollar_Anim.GetComponent<Animator>().Play("ExchangeGold 1");
             UIManager.Instance.buttonExchangeGold.interactable = false;
             Invoke("WaitExchange", 0.5f);
-            if (GameManager.Instance.gold > 10)// && Mathf.Abs(PlayerPrefs.GetInt("GoldPre", 0) - PlayerPrefs.GetInt("Gold", 10)) >= 50)
-            {
-                PlayerPrefs.SetInt("GoldPre", (int)GameManager.Instance.gold);
-                StorageService storageService = App42API.BuildStorageService();
-                storageService.UpdateDocumentByKeyValue("Db", "Data", "id", GameConfig.id, JsonUtility.ToJson(new SaveGold(GameConfig.id, (int)GameManager.Instance.gold)), new UnityCallBack2());
-            }
         }
-        else
+        else if (GameManager.Instance.gold < goldExchange && GameManager.Instance.gold > 0)
+        {
+            goldExchange = GameManager.Instance.gold;
+            dollarRecive = (goldExchange * dollarRecive) / (5 + (GameManager.Instance.sumHomeAll - 1));
+
+            GameManager.Instance.gold -= goldExchange;
+            GameManager.Instance.AddDollar(+dollarRecive);
+            //UIManager.Instance.PushGiveGold("You have received " + UIManager.Instance.ConvertNumber(dollarRecive) + "$");
+            UIManager.Instance.imgGoldToDollar_Anim.GetComponent<Animator>().Play("ExchangeGold 1");
+            UIManager.Instance.buttonExchangeGold.interactable = false;
+            Invoke("WaitExchange", 0.5f);
+        }
+        else if (GameManager.Instance.gold <= 0)
         {
             UIManager.Instance.panelDollar.SetActive(false);
             UIManager.Instance.panelGold.SetActive(true);
+        }
+
+        if (GameManager.Instance.gold > 10)// && Mathf.Abs(PlayerPrefs.GetInt("GoldPre", 0) - PlayerPrefs.GetInt("Gold", 10)) >= 50)
+        {
+            PlayerPrefs.SetInt("GoldPre", (int)GameManager.Instance.gold);
+            StorageService storageService = App42API.BuildStorageService();
+            storageService.UpdateDocumentByKeyValue("Db", "Data", "id", GameConfig.id, JsonUtility.ToJson(new SaveGold(GameConfig.id, (int)GameManager.Instance.gold)), new UnityCallBack2());
         }
     }
 
     void WaitExchange()
     {
         UIManager.Instance.buttonExchangeGold.interactable = true;
+
+        UIManager.Instance.ShowTextGoldToDollar();
     }
 
     public void RestoreProgess()
