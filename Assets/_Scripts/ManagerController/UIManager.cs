@@ -1044,9 +1044,9 @@ public class UIManager : MonoBehaviour
         int id = GameManager.Instance.IDLocation;
         int indexType = GameManager.Instance.lsLocation[id].indexType;
         panelISO.SetActive(true);
-        txtInfoISO.text = "It makes the price of product increase "+GameConfig.Instance.Pinc+" %.";
+        txtInfoISO.text = "It makes the price of product increase " + GameConfig.Instance.Pinc + " %.";
         txtPriceISO.text = ConvertNumber(GameConfig.Instance.Iso * GameManager.Instance.lsLocation[id].lsWorking[indexType].price);
-        
+
         if (GameManager.Instance.dollar >= GameConfig.Instance.Iso * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
         {
             btnYesISO.interactable = true;
@@ -1079,7 +1079,7 @@ public class UIManager : MonoBehaviour
         panelUpgradeMachineJob.SetActive(true);
         txtInfoMachineJob.text = "Apply the latest technology to double the productivity of your next machines in this workshop.";
         txtPriceMachineJob.text = ConvertNumber(GameConfig.Instance.Upmachine * GameManager.Instance.lsLocation[id].lsWorking[indexType].price);
-        if(GameManager.Instance.dollar >= GameConfig.Instance.Upmachine * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
+        if (GameManager.Instance.dollar >= GameConfig.Instance.Upmachine * GameManager.Instance.lsLocation[id].lsWorking[indexType].price)
         {
             btnYesMachineJob.interactable = true;
         }
@@ -1186,12 +1186,74 @@ public class UIManager : MonoBehaviour
         panelBackgroundGiftDay.SetActive(false);
     }
 
-    public void btnBuyTree(int idLocationCurrent,int typeTree)
+    int typeTreeCurrent = 0;
+    public void btnBuyTree(int typeTree)
     {
-        panelBuyTree.SetActive(true);
-        txtInfoBuyTree.text = "Plan this tree to make the output price increase " 
-            + GameManager.Instance.lsLocation[idLocationCurrent].forest.typeTree * typeTree + "%?";
-        txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocationCurrent].lsWorking[0].price 
-            * typeTree);
+        typeTreeCurrent = typeTree;
+        if (typeTree != 0)
+        {
+            panelBuyTree.SetActive(true);
+            txtInfoBuyTree.text = "Plan this tree to make the output price increase "
+                + (typeTree + 1) * 10 + "%?";
+            txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
+                * (typeTree + 1));          
+        }
+        else
+        {
+            btnYesBuyTree();
+        }
+        for (int i = 0; i < lsItemTreeUI.Count; i++)
+        {
+            if (i == typeTreeCurrent)
+            {
+                lsItemTreeUI[i].GetChild(2).gameObject.SetActive(true);
+            }
+            else
+            {
+                lsItemTreeUI[i].GetChild(2).gameObject.SetActive(false);
+            }
+        }
+
+    }
+
+    public void btnYesBuyTree()
+    {
+        if (typeTreeCurrent != 0)
+        {
+            panelBuyTree.SetActive(false);
+            GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.typeTree = typeTreeCurrent;
+            for (int i = 0; i < lsItemTreeUI.Count; i++)
+            {
+                if (i == typeTreeCurrent)
+                {
+                    lsItemTreeUI[i].GetChild(1).gameObject.SetActive(true);
+                }
+                else
+                {
+                    lsItemTreeUI[i].GetChild(1).gameObject.SetActive(false);
+                }
+            }
+            Sprite spNewTree = lsItemTreeUI[typeTreeCurrent].GetChild(0).GetComponent<Image>().sprite;
+            GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].ChangeTree(spNewTree);
+        }
+        panelSeclectTree.SetActive(false);
+        GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
+
+        if (PlayerPrefs.GetInt("isTutorial") == 0)
+        {
+            txtWait.text = "Wait to plant trees";
+        }
+      
+    }
+
+    public void btnNoBuyTree()
+    {
+        panelBuyTree.SetActive(false);
+        panelSeclectTree.SetActive(false);
+        GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
+        if (PlayerPrefs.GetInt("isTutorial") == 0)
+        {
+            txtWait.text = "Wait to plant trees";
+        }
     }
 }

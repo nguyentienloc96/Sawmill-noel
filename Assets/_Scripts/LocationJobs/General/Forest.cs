@@ -68,6 +68,9 @@ public class Forest : MonoBehaviour
 
         if (location.forest.isAutoPlant)
         {
+            location.forest.typeTree = 0;
+            Sprite spNewTree = UIManager.Instance.lsItemTreeUI[0].GetChild(0).GetComponent<Image>().sprite;
+            GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].ChangeTree(spNewTree);
             RunCarGrow();
         }
     }
@@ -76,11 +79,13 @@ public class Forest : MonoBehaviour
     {
         if (!location.forest.isAutoPlant && location.countType >= 0)
         {
-            RunCarGrow();
-            if (PlayerPrefs.GetInt("isTutorial") == 0)
-            {
-                UIManager.Instance.txtWait.text = "Wait to plant trees";
-            }
+            //RunCarGrow();
+            //if (PlayerPrefs.GetInt("isTutorial") == 0)
+            //{
+            //    UIManager.Instance.txtWait.text = "Wait to plant trees";
+            //}
+
+            location.btnSelectTree();
             if (location.id == GameManager.Instance.IDLocation)
             {
                 if (UIManager.Instance.WarningForest.activeInHierarchy)
