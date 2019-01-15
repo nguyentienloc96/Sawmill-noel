@@ -1013,6 +1013,8 @@ public class UIManager : MonoBehaviour
 
     public void AchievementOnClick()
     {
+        if (PlayerPrefs.GetInt("isTutorial") == 0)
+            return;
         Achievement.SetActive(true);
         for (int j = contentAchievement.childCount - 1; j >= 0; j--)
         {
@@ -1034,6 +1036,8 @@ public class UIManager : MonoBehaviour
 
     public void SpinOnClick()
     {
+        if (PlayerPrefs.GetInt("isTutorial") == 0)
+            return;
         panelSpin.SetActive(true);
         txtCountSpin.text = "x" + GameManager.Instance.countSpin;
         if (GameManager.Instance.countSpin > 0)
@@ -1217,7 +1221,7 @@ public class UIManager : MonoBehaviour
         {
             btnNoBuyTree.interactable = true;
             txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
-            * (typeTree + 1) / 3f);
+            * (typeTree + 1) / 5f);
         }
         else
         {
@@ -1226,7 +1230,7 @@ public class UIManager : MonoBehaviour
         }
 
         if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
-        * (typeTreeCurrent + 1) / 3f)
+        * (typeTreeCurrent + 1) / 5f)
         {
             btnYesBuyTree.interactable = true;
         }
@@ -1243,11 +1247,11 @@ public class UIManager : MonoBehaviour
         int idLocation = GameManager.Instance.IDLocation;
         int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
         if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
-            * (typeTreeCurrent + 1) / 3f)
+            * (typeTreeCurrent + 1) / 5f)
         {
             if (typeTreeCurrent != 0)
             {
-                GameManager.Instance.dollar -= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * (typeTreeCurrent + 1) / 3f;
+                GameManager.Instance.dollar -= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * (typeTreeCurrent + 1) / 5f;
 
             }
             panelBuyTree.SetActive(false);
@@ -1306,15 +1310,15 @@ public class UIManager : MonoBehaviour
         }
         PlayerPrefs.SetInt("Congratulation", count_congratulation);
 
-        coin_Congratulation = 5 * (count_congratulation+2);
-        if(coin_Congratulation > 50)
+        coin_Congratulation = 5 * (count_congratulation + 2);
+        if (coin_Congratulation > 50)
             coin_Congratulation = 50;
         dollar_Congratulation = GameManager.Instance.dollar * 0.1f;
 
         panelCongratulation.SetActive(true);
         txtDollar_Congratulation.text = dollar_Congratulation.ToString();
         txtCoin_Congratulation.text = coin_Congratulation.ToString() + " $";
-        txtNameHouse_Congratulation.text = "Double the capacity of " + GameManager.Instance.HomeRandom() + " in "+ (120/GameConfig.Instance.p0Time).ToString() + " days";
+        txtNameHouse_Congratulation.text = "Double the capacity of " + GameManager.Instance.HomeRandom() + " in " + (120 / GameConfig.Instance.p0Time).ToString() + " days";
     }
 
     public void btnYes_Congratulation()
