@@ -242,7 +242,6 @@ public class UIManager : MonoBehaviour
 
     public void Start()
     {
-        PlayerPrefs.SetInt("Congratulation", 0);
         scene = TypeScene.HOME;
         if (!PlayerPrefs.HasKey("isTutorial"))
         {
