@@ -224,6 +224,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Congratulation Millionaire")]
     public GameObject panelCongratulation;
+    public Text txtTittle_Congratulation;
     public Text txtDollar_Congratulation;
     public Text txtCoin_Congratulation;
     public Text txtNameHouse_Congratulation;
@@ -1316,6 +1317,7 @@ public class UIManager : MonoBehaviour
         dollar_Congratulation = GameManager.Instance.dollar * 0.1f;
 
         panelCongratulation.SetActive(true);
+        txtNameHouse_Congratulation.text = "You are now a " + str_congratulation + ", and you are rewarded with:";
         txtDollar_Congratulation.text = ConvertNumber(dollar_Congratulation) + " $";
         txtCoin_Congratulation.text = coin_Congratulation.ToString();
         txtNameHouse_Congratulation.text = "Double the capacity of " + GameManager.Instance.HomeRandom() + " in " + (60 / GameConfig.Instance.p0Time).ToString() + " days";
