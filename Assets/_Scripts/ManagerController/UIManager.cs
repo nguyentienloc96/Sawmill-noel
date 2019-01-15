@@ -404,7 +404,7 @@ public class UIManager : MonoBehaviour
     {
         if (!isClick)
         {
-
+            PlayerPrefs.SetInt("Congratulation",0);
             isClick = true;
             isContinue = false;
             AudioManager.Instance.Play("Click");
