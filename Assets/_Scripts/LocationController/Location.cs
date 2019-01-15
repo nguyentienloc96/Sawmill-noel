@@ -717,14 +717,36 @@ public class Location : MonoBehaviour
         {
             if (id == UIManager.Instance.lsItem[0].idLocation && UIManager.Instance.lsItem[0].isOnItem)
             {
-                if (UIManager.Instance.lsItem[0].indexType == 0)
+                if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem)
                 {
-                    lsWorking[0].output += outPutValue * 4;
+                    if (UIManager.Instance.lsItem[8].indexType == 0)
+                    {
+                        lsWorking[0].output += outPutValue * 8;
+                    }
+                    else
+                    {
+                        if (UIManager.Instance.lsItem[0].indexType == 0)
+                        {
+                            lsWorking[0].output += outPutValue * 4;
+                        }
+                        else
+                        {
+                            lsWorking[0].output += outPutValue * 2;
+                        }
+                    }
                 }
                 else
                 {
-                    lsWorking[0].output += outPutValue * 2;
+                    if (UIManager.Instance.lsItem[0].indexType == 0)
+                    {
+                        lsWorking[0].output += outPutValue * 4;
+                    }
+                    else
+                    {
+                        lsWorking[0].output += outPutValue * 2;
+                    }
                 }
+
             }
             else
             {
@@ -733,9 +755,26 @@ public class Location : MonoBehaviour
         }
         else
         {
-            if (id == UIManager.Instance.lsItem[0].idLocation && UIManager.Instance.lsItem[0].isOnItem && UIManager.Instance.lsItem[0].indexType == 0)
+            if (id == UIManager.Instance.lsItem[0].idLocation && UIManager.Instance.lsItem[0].isOnItem)
             {
-                lsWorking[0].output += outPutValue * 2;
+                if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem)
+                {
+                    if (UIManager.Instance.lsItem[8].indexType == 0)
+                    {
+                        lsWorking[0].output += outPutValue * 4;
+                    }
+                    else
+                    {
+                        if (UIManager.Instance.lsItem[0].indexType == 0)
+                        {
+                            lsWorking[0].output += outPutValue * 2;
+                        }
+                        else
+                        {
+                            lsWorking[0].output += outPutValue;
+                        }
+                    }
+                }
             }
             else
             {
@@ -801,14 +840,29 @@ public class Location : MonoBehaviour
         double outPutValue = 0;
         if (id == UIManager.Instance.lsItem[0].idLocation && UIManager.Instance.lsItem[0].isOnItem && idType == UIManager.Instance.lsItem[0].indexType)
         {
-            if (lsWorking[idType].input >= lsWorking[idType].maxOutputMade * 2)
+            if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem && idType == UIManager.Instance.lsItem[8].indexType)
             {
-                materialCurrent = lsWorking[idType].maxOutputMade * 2;
+                if (lsWorking[idType].input >= lsWorking[idType].maxOutputMade * 4)
+                {
+                    materialCurrent = lsWorking[idType].maxOutputMade * 4;
+                }
+                else
+                {
+                    materialCurrent = lsWorking[idType].input;
+                }
             }
             else
             {
-                materialCurrent = lsWorking[idType].input;
+                if (lsWorking[idType].input >= lsWorking[idType].maxOutputMade * 4)
+                {
+                    materialCurrent = lsWorking[idType].maxOutputMade * 4;
+                }
+                else
+                {
+                    materialCurrent = lsWorking[idType].input;
+                }
             }
+
             lsWorking[idType].input -= Math.Floor(materialCurrent);
             lsWorking[idType].textInput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].input);
             outPutValue = Math.Floor((double)(GameConfig.Instance.r * materialCurrent));
@@ -818,13 +872,27 @@ public class Location : MonoBehaviour
         }
         else
         {
-            if (lsWorking[idType].input >= lsWorking[idType].maxOutputMade)
+            if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem && idType == UIManager.Instance.lsItem[8].indexType)
             {
-                materialCurrent = lsWorking[idType].maxOutputMade;
+                if (lsWorking[idType].input >= lsWorking[idType].maxOutputMade * 2)
+                {
+                    materialCurrent = lsWorking[idType].maxOutputMade * 2;
+                }
+                else
+                {
+                    materialCurrent = lsWorking[idType].input;
+                }
             }
             else
             {
-                materialCurrent = lsWorking[idType].input;
+                if (lsWorking[idType].input >= lsWorking[idType].maxOutputMade)
+                {
+                    materialCurrent = lsWorking[idType].maxOutputMade;
+                }
+                else
+                {
+                    materialCurrent = lsWorking[idType].input;
+                }
             }
             lsWorking[idType].input -= Math.Floor(materialCurrent);
             lsWorking[idType].textInput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].input);
