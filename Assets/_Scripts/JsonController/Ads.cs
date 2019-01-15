@@ -265,7 +265,7 @@ public class Ads : MonoBehaviour
     #region ===RATE IN APP===
     void RateInApp()
     {
-        if (timeRate >= 10 * 7 && PlayerPrefs.GetInt("isTutorial") == 1 && countRate == 0)// && PlayerPrefs.GetInt("isRate") != 1)
+        if (timeRate >= 5 * 7 && PlayerPrefs.GetInt("isTutorial") == 1 && countRate == 0)// && PlayerPrefs.GetInt("isRate") != 1)
         {
             EPPZ.Rate.Rate.RequestReviewIfAppropriate();
             countRate = 1;
