@@ -227,6 +227,10 @@ public class UIManager : MonoBehaviour
     public Text txtDollar_Congratulation;
     public Text txtCoin_Congratulation;
     public Text txtNameHouse_Congratulation;
+    public Image imgDollarFly_Congratulation;
+    public Image imgCoinFly_Congratulation;
+    public Image imgHomeFly_Congratulation;
+    public Button buttonYes_Congratulation;
 
     public bool isClickHome;
     public bool isClickTrunk;
@@ -1321,8 +1325,17 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.CongratulationsMillionaire();
         GameManager.Instance.AddDollar(+dollar_Congratulation);
         GameManager.Instance.gold += coin_Congratulation;
+        imgCoinFly_Congratulation.GetComponent<Animator>().Play("GoldFly_C");
+        imgDollarFly_Congratulation.GetComponent<Animator>().Play("DollarFly_C");
+        imgHomeFly_Congratulation.GetComponent<Animator>().Play("HomeFly_C");
+        buttonYes_Congratulation.interactable = false;
+        Invoke("DeactiveCongratulation", 0.75f);
+    }
 
+    void DeactiveCongratulation()
+    {
         panelCongratulation.SetActive(false);
+
     }
 
     public void CloseSpin()
