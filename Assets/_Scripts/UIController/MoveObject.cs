@@ -74,7 +74,7 @@ public class MoveObject : MonoBehaviour
         }
         else
         {
-            if (GameManager.Instance.lsLocation.Count > 0 && isPlaneGive && GameManager.Instance.lsLocation[0].countType >= 0)
+            if (GameManager.Instance.lsLocation.Count > 0 && isPlaneGive && GameManager.Instance.lsLocation[0].countType >= 0 && PlayerPrefs.GetInt("isTutorial") != 0)
             {
                 timeStartPlaneGive += Time.deltaTime;
                 if (timeStartPlaneGive >= timeWaiting)
