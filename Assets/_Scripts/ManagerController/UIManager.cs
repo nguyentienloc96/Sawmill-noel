@@ -1234,38 +1234,41 @@ public class UIManager : MonoBehaviour
     int typeTreeCurrent = 0;
     public void btnBuyTree(int typeTree)
     {
+        
         int idLocation = GameManager.Instance.IDLocation;
         int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
-        typeTreeCurrent = typeTree;
-        panelBuyTree.SetActive(true);
-        txtInfoBuyTree.text = "Plan this tree to make the output price increase " + (typeTree) * 10 + "%?";
-
-        for (int i = 0; i < lsItemTreeUI.Count; i++)
+        if (typeTree <= countTypeLocation)
         {
-            if (i == typeTreeCurrent)
+            typeTreeCurrent = typeTree;
+            panelBuyTree.SetActive(true);
+            txtInfoBuyTree.text = "Plan this tree to make the output price increase " + (typeTree) * 10 + "%?";
+
+            for (int i = 0; i < lsItemTreeUI.Count; i++)
             {
-                lsItemTreeUI[i].GetChild(2).gameObject.SetActive(true);
+                if (i == typeTreeCurrent)
+                {
+                    lsItemTreeUI[i].GetChild(2).gameObject.SetActive(true);
+                }
+                else
+                {
+                    lsItemTreeUI[i].GetChild(2).gameObject.SetActive(false);
+                }
+            }
+            txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
+               * (typeTree) / 5f);
+
+
+            if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
+            * (typeTreeCurrent) / 5f)
+            {
+                btnYesBuyTree.interactable = true;
             }
             else
             {
-                lsItemTreeUI[i].GetChild(2).gameObject.SetActive(false);
+                btnYesBuyTree.interactable = false;
+
             }
         }
-        txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
-           * (typeTree) / 5f);
-
-
-        if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
-        * (typeTreeCurrent) / 5f)
-        {
-            btnYesBuyTree.interactable = true;
-        }
-        else
-        {
-            btnYesBuyTree.interactable = false;
-
-        }
-
     }
 
     public void YesBuyTreeOnclick()

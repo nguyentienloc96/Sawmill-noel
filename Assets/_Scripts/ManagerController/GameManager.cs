@@ -260,6 +260,7 @@ public class GameManager : MonoBehaviour
             .OnComplete(() => lsTypeMiniGame[IDLocationMiniGame].lsMiniGame[IndexType].outputMiniGame.transform
             .DOScale(Vector3.one, 0.25f));
     }
+
     private void Update()
     {
         time += Time.deltaTime;
@@ -283,7 +284,19 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    UIManager.Instance.imgCheckTime.fillAmount = UIManager.Instance.lsItem[i].timeItem / UIManager.Instance.lsItem[i].timeItemTatol;
+                    if (countSpin <= 0)
+                    {
+                        UIManager.Instance.imgCheckTime.fillAmount = UIManager.Instance.lsItem[i].timeItem / UIManager.Instance.lsItem[i].timeItemTatol;
+                    }
+                    else
+                    {
+                        if (UIManager.Instance.lsItem[i].isOnItem)
+                        {
+                            UIManager.Instance.lsItem[i].timeItem = 0;
+                            UIManager.Instance.lsItem[i].isOnItem = false;
+                            UIManager.Instance.imgCheckTime.fillAmount = 0;
+                        }
+                    }
                 }
                 if (UIManager.Instance.lsItem[i].timeItem <= 0)
                 {
@@ -346,10 +359,10 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                int r0 = UnityEngine.Random.Range(0, 3);
-                int r1 = UnityEngine.Random.Range(4, 9);
-                r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
-                //r = 7;
+                //int r0 = UnityEngine.Random.Range(0, 3);
+                //int r1 = UnityEngine.Random.Range(4, 9);
+                //r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
+                r = 8;
                 // anh muốn test cái item nào anh thay ròng trên bằng cho số bất kì từ 0-6 là được anh nhá
             }
         }
@@ -387,7 +400,7 @@ public class GameManager : MonoBehaviour
         }
         else if (r == 8)
         {
-            UIManager.Instance.lsItem[r - 1].random = UnityEngine.Random.Range(100, 500);
+            UIManager.Instance.lsItem[r - 1].random = UnityEngine.Random.Range(10, 100);
             UIManager.Instance.lsItem[r - 1].money = dollar;
             UIManager.Instance.panelGiveXXXMoney.SetActive(true);
             UIManager.Instance.txtGiveXXXMoney.text = UIManager.Instance.lsItem[r - 1].infoItem.Replace("X", UIManager.Instance.lsItem[r - 1].random.ToString());
@@ -573,7 +586,7 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
 
-        UIManager.Instance.ShowGetChallange( timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
+        UIManager.Instance.ShowGetChallange(timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
     }
 
     public void CheckChallenge(string nameHouse, Sprite sprHouse)
@@ -596,7 +609,7 @@ public class GameManager : MonoBehaviour
             DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
 
             PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
-            UIManager.Instance.ShowGetChallange( timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
+            UIManager.Instance.ShowGetChallange(timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
         }
     }
 
