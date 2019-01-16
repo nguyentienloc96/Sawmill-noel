@@ -569,6 +569,7 @@ public class Location : MonoBehaviour
 
     public void SellJob()
     {
+      
         if (GameManager.Instance.dollar >= lsWorking[countType + 1].price)
         {
             GameManager.Instance.AddDollar(-lsWorking[countType + 1].price);
@@ -630,8 +631,7 @@ public class Location : MonoBehaviour
             if (countType == 0)
             {
                 UIManager.Instance.WarningForest.SetActive(true);
-            }
-
+            }  
         }
     }
 
@@ -1100,18 +1100,34 @@ public class Location : MonoBehaviour
             {
                 IDLocation = 0;
             }
-            UIManager.Instance.JobSell.SetActive(true);
 
-            UIManager.Instance.UpdateInfoSellJob(
-                GameManager.Instance.lsTypeMiniGame[IDLocation].lsMiniGame[indexType].name,
-                GameManager.Instance.lsTypeMiniGame[IDLocation].lsMiniGame[indexType].info,
-                lsWorking[idType].icon.sprite,
-                lsWorking[idType].price
-            );
+            if (id == 0 && (countType + 1 == 2 || countType + 1 == 3))
+            {
+                UIManager.Instance.panelWarning.SetActive(true);
+                UIManager.Instance.btnYesWarning.onClick.RemoveAllListeners();
+                UIManager.Instance.btnYesWarning.onClick.AddListener(() => SellJobOnclick(IDLocation, idType));
+            }
+            else
+            {
+                SellJobOnclick(IDLocation, idType);
+            }
+           
 
         }
     }
 
+    public void SellJobOnclick(int IDLocation,int idType)
+    {
+        UIManager.Instance.panelWarning.SetActive(false);
+        UIManager.Instance.JobSell.SetActive(true);
+
+        UIManager.Instance.UpdateInfoSellJob(
+            GameManager.Instance.lsTypeMiniGame[IDLocation].lsMiniGame[indexType].name,
+            GameManager.Instance.lsTypeMiniGame[IDLocation].lsMiniGame[indexType].info,
+            lsWorking[idType].icon.sprite,
+            lsWorking[idType].price
+        );
+    }
 
     public void HideObject(GameObject obj, float time)
     {

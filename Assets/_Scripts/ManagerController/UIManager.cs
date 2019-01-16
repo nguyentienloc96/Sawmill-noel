@@ -255,6 +255,10 @@ public class UIManager : MonoBehaviour
     public int idLocationRedundant;
     public int typeRedundant;
 
+    [Header("Warning")]
+    public GameObject panelWarning;
+    public Button btnYesWarning;
+
     public bool isClickHome;
     public bool isClickTrunk;
     public bool isOnClickTrunk;
