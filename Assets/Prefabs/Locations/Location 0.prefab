@@ -10271,7 +10271,7 @@ MonoBehaviour:
     priceUpgradeStart: 0
     price: 0
     UN2: 0
-  - name: Maker
+  - name: Furnishing
     id: 10
     level: 0
     countPlayer: 0
@@ -10319,6 +10319,7 @@ MonoBehaviour:
   lsRiverRight: 
   lsRiverLeft: 
   lsStreet: 
+  isWaittingRein: 0
 --- !u!114 &114115795394166484
 MonoBehaviour:
   m_ObjectHideFlags: 1

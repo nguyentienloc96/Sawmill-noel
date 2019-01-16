@@ -245,6 +245,14 @@ public class UIManager : MonoBehaviour
     [Header("BuyInput")]
     public Transform tfLeft;
     public Transform tfRight;
+    public GameObject panelSellRedundant;
+    public Text[] txtInfoSellRedundant;
+    public GameObject[] highLightRedundant;
+    public int typeSellRedundant;
+    public double inputSellHomeRedundant;
+    public double priceSellRedundant;
+    public int idLocationRedundant;
+    public int typeRedundant;
 
     public bool isClickHome;
     public bool isClickTrunk;
@@ -1400,5 +1408,59 @@ public class UIManager : MonoBehaviour
     public void btnYesChallenge()
     {
 
+    }
+
+    public void SellRedundantOnclick(double inputCurrent,double price,int id,int type)
+    {
+        panelSellRedundant.SetActive(true);
+        typeSellRedundant = 0;
+        inputSellHomeRedundant = inputCurrent;
+        priceSellRedundant = price;
+        idLocationRedundant = id;
+        typeRedundant = type;
+
+        highLightRedundant[0].SetActive(true);
+        highLightRedundant[1].SetActive(false);
+        highLightRedundant[2].SetActive(false);
+
+        txtInfoSellRedundant[0].text = ConvertNumber(inputCurrent * 0.6f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.6f);
+        txtInfoSellRedundant[1].text = ConvertNumber(inputCurrent * 0.75f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.75f);
+        txtInfoSellRedundant[2].text = ConvertNumber(inputCurrent * 0.9f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.9f);
+
+    }
+
+    public void SelectTypeSellRedundant(int type)
+    {
+        typeSellRedundant = type;
+        for(int i = 0; i < 3; i++)
+        {
+            if(i == type)
+            {
+                highLightRedundant[i].SetActive(true);
+            }
+            else
+            {
+                highLightRedundant[i].SetActive(false);
+            }
+        }
+    }
+
+    public void YesSellRedundant()
+    {
+        float percent = 0.6f;
+        if (typeSellRedundant == 1)
+            percent = 0.75f;
+        else if (typeSellRedundant == 2)
+            percent = 0.9f;
+
+        if (GameManager.Instance.lsLocation[idLocationRedundant].lsWorking[typeRedundant].input >= inputSellHomeRedundant * percent)
+            GameManager.Instance.lsLocation[idLocationRedundant].lsWorking[typeRedundant].input -= inputSellHomeRedundant * percent;
+        else
+            GameManager.Instance.lsLocation[idLocationRedundant].lsWorking[typeRedundant].input = 0;
+
+        GameManager.Instance.AddDollar(+inputSellHomeRedundant * priceSellRedundant * GameConfig.Instance.Prein * percent);
+
+
+        panelSellRedundant.SetActive(false);
     }
 }

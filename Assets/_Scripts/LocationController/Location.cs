@@ -633,17 +633,20 @@ public class Location : MonoBehaviour
     public bool isWaittingRein;
     public void ReinJob(int idType)
     {
-        if (isWaittingRein) {
+        if (isWaittingRein)
+        {
             if (lsWorking[idType].input >= GameConfig.Instance.Rein * GameConfig.Instance.r * lsWorking[idType].maxOutputMade)
             {
-                //lsWorking[idType].trunk
+                Vector3 begin = new Vector3(UIManager.Instance.tfRight.position.x, lsWorking[idType].trunk.position.y);
+                Vector3 end = new Vector3(UIManager.Instance.tfLeft.position.x, lsWorking[idType].trunk.position.y);
+                lsWorking[idType].trunk.position = Vector3.MoveTowards(begin, end, GameConfig.Instance.TruckSpeed * 0.5f * Time.deltaTime);
             }
         }
     }
 
     public void ReinOnclick(int idType)
     {
-
+        UIManager.Instance.SellRedundantOnclick(lsWorking[idType].input, lsWorking[idType].priceOutput * (1 + 0.1f * forest.typeTree), id, idType);
     }
 
     #region Felling
