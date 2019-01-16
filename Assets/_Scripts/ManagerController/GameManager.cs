@@ -580,6 +580,10 @@ public class GameManager : MonoBehaviour
 
     public void CheckChallenge(string nameHouse, Sprite sprHouse)
     {
+        PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
+        double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
+        DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
+        PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
         DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
         if (_dateCheckChallenge == null)
             return;
@@ -590,30 +594,6 @@ public class GameManager : MonoBehaviour
         else
         {
             UIManager.Instance.ShowGetChallange(nameHouse_NextChallenge, timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
-        }
-
-    }
-
-    public void TestABC()
-    {
-        PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
-
-        double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
-
-        timeChallenge.AddDays(_dayChallenge);
-
-        PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
-
-        DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
-        if (_dateCheckChallenge == null)
-            return;
-        if (dateGame <= _dateCheckChallenge)
-        {
-            Debug.Log("a");
-        }
-        else
-        {
-            Debug.Log("b");
         }
 
     }
