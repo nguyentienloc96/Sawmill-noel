@@ -1103,7 +1103,7 @@ public class Location : MonoBehaviour
                 IDLocation = 0;
             }
 
-            if (id == 0 && (countType + 1 == 2 || countType + 1 == 3))
+            if (id == 0 && (countType + 1 == 1 || countType + 1 == 2))
             {
                 UIManager.Instance.panelWarning.SetActive(true);
                 UIManager.Instance.btnYesWarning.onClick.RemoveAllListeners();
