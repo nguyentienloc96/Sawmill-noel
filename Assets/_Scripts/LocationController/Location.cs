@@ -595,6 +595,7 @@ public class Location : MonoBehaviour
             else
             {
                 Invoke("ActiveChallenge", 3.5f);
+
                 if (GameManager.Instance.dollar >= lsWorking[countType + 1].price)
                 {
                     lsWorking[countType + 1].animLock.enabled = true;

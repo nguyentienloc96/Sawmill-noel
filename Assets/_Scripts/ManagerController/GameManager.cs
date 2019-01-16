@@ -169,10 +169,13 @@ public class GameManager : MonoBehaviour
         lsLocation.Add(location);
         location.LoadLocation();
         location.lsWorking[0].animLock.enabled = true;
-        _nameHouse_NextChallenge = location.lsWorking[location.countType + 1].name;
-        _nameHouse_Challenge = lsLocation[lsLocation.Count - 2].lsWorking[lsLocation[lsLocation.Count - 2].countType].name;
-        _spriteHouse_Challenge = lsLocation[lsLocation.Count - 2].lsWorking[lsLocation[lsLocation.Count - 2].countType].icon.sprite;
-        Invoke("ActiveChallenge",3.5f);
+        if (lsLocation.Count > 1)
+        {
+            _nameHouse_NextChallenge = location.lsWorking[location.countType + 1].name;
+            _nameHouse_Challenge = lsLocation[lsLocation.Count - 2].lsWorking[lsLocation[lsLocation.Count - 2].countType].name;
+            _spriteHouse_Challenge = lsLocation[lsLocation.Count - 2].lsWorking[lsLocation[lsLocation.Count - 2].countType].icon.sprite;
+            Invoke("ActiveChallenge", 3.5f);
+        }
         if (isStart)
         {
             UIManager.Instance.txtRevenue.text = "Revenue : 0$/day";
@@ -180,11 +183,8 @@ public class GameManager : MonoBehaviour
     }
     void ActiveChallenge()
     {
-        if (lsLocation.Count > 1)
-        {
-            CheckChallenge(_nameHouse_Challenge, _spriteHouse_Challenge);
-            nameHouse_NextChallenge = _nameHouse_NextChallenge;
-        }
+        CheckChallenge(_nameHouse_Challenge, _spriteHouse_Challenge);
+        nameHouse_NextChallenge = _nameHouse_NextChallenge;
     }
 
     public void BonusAds(double dollarBonus, double goldBonus)
