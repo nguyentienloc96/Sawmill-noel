@@ -148,7 +148,9 @@ public class GameManager : MonoBehaviour
         }
         lsLocation.Clear();
     }
-
+    string _nameHouse_NextChallenge;
+    string _nameHouse_Challenge;
+    UnityEngine.Sprite _spriteHouse_Challenge;
     public void CreatLocation(LocationUI locationUI, bool isStart = false)
     {
         GameObject objLocation = Instantiate(lsItemLocation[locationUI.indexTypeWork], locationManager);
@@ -167,13 +169,22 @@ public class GameManager : MonoBehaviour
         lsLocation.Add(location);
         location.LoadLocation();
         location.lsWorking[0].animLock.enabled = true;
-        //if (lsLocation.Count > 1)
-        //    GameManager.Instance.GetChallenge(location.lsWorking[0].name, location.lsWorking[0].icon.sprite);
-
+        if (lsLocation.Count > 1)
+        {
+            _nameHouse_NextChallenge = location.lsWorking[location.countType + 1].name;
+            _nameHouse_Challenge = lsLocation[lsLocation.Count - 2].lsWorking[lsLocation[lsLocation.Count - 2].countType].name;
+            _spriteHouse_Challenge = lsLocation[lsLocation.Count - 2].lsWorking[lsLocation[lsLocation.Count - 2].countType].icon.sprite;
+            Invoke("ActiveChallenge", 3.5f);
+        }
         if (isStart)
         {
             UIManager.Instance.txtRevenue.text = "Revenue : 0$/day";
         }
+    }
+    void ActiveChallenge()
+    {
+        CheckChallenge(_nameHouse_Challenge, _spriteHouse_Challenge);
+        nameHouse_NextChallenge = _nameHouse_NextChallenge;
     }
 
     public void BonusAds(double dollarBonus, double goldBonus)
@@ -564,14 +575,14 @@ public class GameManager : MonoBehaviour
 
     DateTime timeChallenge;
     [HideInInspector]
-    public string nameHouse_NextChallenge= "";
+    public string nameHouse_NextChallenge = "";
     public void GetChallenge()
     {
         PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
 
         double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
 
-        timeChallenge.AddDays(_dayChallenge);
+        DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
 
         PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
 
@@ -580,6 +591,10 @@ public class GameManager : MonoBehaviour
 
     public void CheckChallenge(string nameHouse, Sprite sprHouse)
     {
+        PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
+        double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
+        DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
+        PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
         DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
         if (_dateCheckChallenge == null)
             return;
@@ -590,30 +605,6 @@ public class GameManager : MonoBehaviour
         else
         {
             UIManager.Instance.ShowGetChallange(nameHouse_NextChallenge, timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
-        }
-
-    }
-
-    public void TestABC()
-    {
-        PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
-
-        double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
-
-        timeChallenge.AddDays(_dayChallenge);
-
-        PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
-
-        DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
-        if (_dateCheckChallenge == null)
-            return;
-        if (dateGame <= _dateCheckChallenge)
-        {
-            Debug.Log("a");
-        }
-        else
-        {
-            Debug.Log("b");
         }
 
     }

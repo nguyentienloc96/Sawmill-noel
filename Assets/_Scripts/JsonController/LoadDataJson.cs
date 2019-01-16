@@ -222,9 +222,9 @@ public class LoadDataJson : MonoBehaviour
 
     double GetDatePassed()
     {
-        Debug.Log(dateLastLaunch);
+        //Debug.Log(dateLastLaunch);
         today = System.DateTime.Now;
-        Debug.Log(today);
+        //Debug.Log(today);
         System.TimeSpan elapsed = today.Subtract(dateLastLaunch);
         double hours = elapsed.TotalHours;
 
@@ -233,7 +233,7 @@ public class LoadDataJson : MonoBehaviour
 
     public void CheckDateGift()
     {
-        Debug.Log(GetDatePassed());
+        //Debug.Log(GetDatePassed());
         if (PlayerPrefs.GetInt("DayGift") > 15)
         {
             PlayerPrefs.SetInt("DayGift", 0);

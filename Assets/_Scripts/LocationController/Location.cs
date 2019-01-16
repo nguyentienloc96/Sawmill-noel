@@ -594,7 +594,7 @@ public class Location : MonoBehaviour
             }
             else
             {
-                //GameManager.Instance.GetChallenge(lsWorking[countType + 1].name, lsWorking[countType + 1].icon.sprite);
+                Invoke("ActiveChallenge", 3.5f);
 
                 if (GameManager.Instance.dollar >= lsWorking[countType + 1].price)
                 {
@@ -632,6 +632,15 @@ public class Location : MonoBehaviour
                 UIManager.Instance.WarningForest.SetActive(true);
             }
 
+        }
+    }
+
+    void ActiveChallenge()
+    {
+        if (PlayerPrefs.GetInt("isTutorial") != 0)
+        {
+            GameManager.Instance.CheckChallenge(lsWorking[countType].name, lsWorking[countType].icon.sprite);
+            GameManager.Instance.nameHouse_NextChallenge = lsWorking[countType + 1].name;
         }
     }
 
