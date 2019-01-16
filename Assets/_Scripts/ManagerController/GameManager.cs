@@ -148,7 +148,9 @@ public class GameManager : MonoBehaviour
         }
         lsLocation.Clear();
     }
-
+    string _nameHouse_NextChallenge;
+    string _nameHouse_Challenge;
+    UnityEngine.Sprite _spriteHouse_Challenge;
     public void CreatLocation(LocationUI locationUI, bool isStart = false)
     {
         GameObject objLocation = Instantiate(lsItemLocation[locationUI.indexTypeWork], locationManager);
@@ -167,12 +169,21 @@ public class GameManager : MonoBehaviour
         lsLocation.Add(location);
         location.LoadLocation();
         location.lsWorking[0].animLock.enabled = true;
-        //if (lsLocation.Count > 1)
-        //    GameManager.Instance.GetChallenge(location.lsWorking[0].name, location.lsWorking[0].icon.sprite);
-
+        _nameHouse_NextChallenge = location.lsWorking[location.countType + 1].name;
+        _nameHouse_Challenge = lsLocation[lsLocation.Count - 2].lsWorking[lsLocation[lsLocation.Count - 2].countType].name;
+        _spriteHouse_Challenge = lsLocation[lsLocation.Count - 2].lsWorking[lsLocation[lsLocation.Count - 2].countType].icon.sprite;
+        Invoke("ActiveChallenge",3.5f);
         if (isStart)
         {
             UIManager.Instance.txtRevenue.text = "Revenue : 0$/day";
+        }
+    }
+    void ActiveChallenge()
+    {
+        if (lsLocation.Count > 1)
+        {
+            CheckChallenge(_nameHouse_Challenge, _spriteHouse_Challenge);
+            nameHouse_NextChallenge = _nameHouse_NextChallenge;
         }
     }
 
@@ -564,14 +575,14 @@ public class GameManager : MonoBehaviour
 
     DateTime timeChallenge;
     [HideInInspector]
-    public string nameHouse_NextChallenge= "";
+    public string nameHouse_NextChallenge = "";
     public void GetChallenge()
     {
         PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
 
         double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
 
-        timeChallenge.AddDays(_dayChallenge);
+        DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
 
         PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
 
