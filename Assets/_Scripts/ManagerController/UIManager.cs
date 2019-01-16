@@ -1455,9 +1455,9 @@ public class UIManager : MonoBehaviour
         highLightRedundant[1].SetActive(false);
         highLightRedundant[2].SetActive(false);
 
-        txtInfoSellRedundant[0].text = ConvertNumber(inputCurrent * 0.6f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.6f);
-        txtInfoSellRedundant[1].text = ConvertNumber(inputCurrent * 0.75f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.75f);
-        txtInfoSellRedundant[2].text = ConvertNumber(inputCurrent * 0.9f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.9f);
+        txtInfoSellRedundant[0].text = ConvertNumber(inputCurrent * 0.6f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.6f) +" $";
+        txtInfoSellRedundant[1].text = ConvertNumber(inputCurrent * 0.75f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.75f) + " $";
+        txtInfoSellRedundant[2].text = ConvertNumber(inputCurrent * 0.9f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.9f) + " $";
 
     }
 
