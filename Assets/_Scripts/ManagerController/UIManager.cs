@@ -414,7 +414,7 @@ public class UIManager : MonoBehaviour
     {
         if (!isClick)
         {
-            PlayerPrefs.SetInt("Congratulation",0);
+            PlayerPrefs.SetInt("Congratulation", 0);
             isClick = true;
             isContinue = false;
             AudioManager.Instance.Play("Click");
@@ -1234,7 +1234,7 @@ public class UIManager : MonoBehaviour
         }
         txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
            * (typeTree) / 5f);
-        
+
 
         if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
         * (typeTreeCurrent) / 5f)
@@ -1304,21 +1304,34 @@ public class UIManager : MonoBehaviour
     int coin_Congratulation = 0;
     public void CheckBillionaire()
     {
-        if (PlayerPrefs.GetInt("Congratulation") > GameConfig.Instance.richness.Count - 1)
-            return;
-        str_congratulation = "";
-        for (int i = PlayerPrefs.GetInt("Congratulation"); i < GameConfig.Instance.richness.Count; i++)
-        {
-            if (GameManager.Instance.dollar >= Mathf.Pow(10, (i + 2) * 3) && GameManager.Instance.dollar < Mathf.Pow(10, (i + 3) * 3))
-            {
-                str_congratulation = GameConfig.Instance.richness[i];
-                count_congratulation = i;
-            }
-        }
-        if (str_congratulation == "")
+        if (PlayerPrefs.GetInt("Congratulation") >= 3)
             return;
 
-        PlayerPrefs.SetInt("Congratulation", count_congratulation + 1);
+        if (GameManager.Instance.dollar >= Mathf.Pow(10, 12) && PlayerPrefs.GetInt("Congratulation") != 3)
+        {
+            PlayerPrefs.SetInt("Congratulation", 3);
+            str_congratulation = GameConfig.Instance.richness[2];
+            count_congratulation = 2;
+        }
+        else if (GameManager.Instance.dollar >= Mathf.Pow(10, 9) && GameManager.Instance.dollar < Mathf.Pow(10, 12) && PlayerPrefs.GetInt("Congratulation") != 2)
+        {
+            PlayerPrefs.SetInt("Congratulation", 2);
+            str_congratulation = GameConfig.Instance.richness[1];
+            count_congratulation = 1;
+        }
+        else if (GameManager.Instance.dollar >= Mathf.Pow(10, 6) && GameManager.Instance.dollar < Mathf.Pow(10, 9) && PlayerPrefs.GetInt("Congratulation") != 1)
+        {
+            PlayerPrefs.SetInt("Congratulation", 1);
+            str_congratulation = GameConfig.Instance.richness[0];
+            count_congratulation = 0;
+        }
+        else
+        {
+            str_congratulation = "";
+        }
+
+        if (str_congratulation == "")
+            return;
         Debug.Log(PlayerPrefs.GetInt("Congratulation"));
         coin_Congratulation = 5 * (count_congratulation + 2);
         if (coin_Congratulation > 50)
@@ -1326,14 +1339,17 @@ public class UIManager : MonoBehaviour
         dollar_Congratulation = GameManager.Instance.dollar * 0.1f;
 
         panelCongratulation.SetActive(true);
-        txtNameHouse_Congratulation.text = "You are now a " + str_congratulation + ", and you are rewarded with:";
+        txtTittle_Congratulation.text = "You are now a " + str_congratulation + ", and you are rewarded with:";
         txtDollar_Congratulation.text = ConvertNumber(dollar_Congratulation) + " $";
         txtCoin_Congratulation.text = coin_Congratulation.ToString();
         txtNameHouse_Congratulation.text = "Double the capacity of " + GameManager.Instance.HomeRandom() + " in " + (60 / GameConfig.Instance.p0Time).ToString() + " days";
+        buttonYes_Congratulation.interactable = true;
+        
     }
 
     public void btnYes_Congratulation()
     {
+        //Debug.Log(PlayerPrefs.GetInt("Congratulation"));
         imgCoinFly_Congratulation.gameObject.SetActive(true);// = true;
         imgDollarFly_Congratulation.gameObject.SetActive(true);//.enabled = true;
         imgHomeFly_Congratulation.gameObject.SetActive(true);//.enabled = true;
@@ -1350,7 +1366,9 @@ public class UIManager : MonoBehaviour
     void DeactiveCongratulation()
     {
         panelCongratulation.SetActive(false);
-
+        imgCoinFly_Congratulation.gameObject.SetActive(false);
+        imgDollarFly_Congratulation.gameObject.SetActive(false);
+        imgHomeFly_Congratulation.gameObject.SetActive(false);
     }
 
     public void CloseSpin()
