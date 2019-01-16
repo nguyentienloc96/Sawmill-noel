@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 [System.Serializable]
 public struct ForestST
@@ -37,6 +38,10 @@ public struct TypeOfWorkST
     public GameObject info;
     public GameObject iso;
     public Transform trunk;
+    public float timeHideRein;
+    public bool isWaittingRein;
+    public bool isOneRight;
+    public bool isOneLeft;
 
     [Header("Parameters")]
     public double input;
@@ -630,16 +635,42 @@ public class Location : MonoBehaviour
         }
     }
 
-    public bool isWaittingRein;
     public void ReinJob(int idType)
     {
-        if (isWaittingRein)
+
+        if (lsWorking[idType].input >= GameConfig.Instance.Rein * GameConfig.Instance.r * lsWorking[idType].maxOutputMade)
         {
-            if (lsWorking[idType].input >= GameConfig.Instance.Rein * GameConfig.Instance.r * lsWorking[idType].maxOutputMade)
+            if (!lsWorking[idType].isOneRight)
             {
-                Vector3 begin = new Vector3(UIManager.Instance.tfRight.position.x, lsWorking[idType].trunk.position.y);
-                Vector3 end = new Vector3(UIManager.Instance.tfLeft.position.x, lsWorking[idType].trunk.position.y);
-                lsWorking[idType].trunk.position = Vector3.MoveTowards(begin, end, GameConfig.Instance.TruckSpeed * 0.5f * Time.deltaTime);
+                lsWorking[idType].isOneLeft = false;
+                lsWorking[idType].isOneRight = true;
+                lsWorking[idType].trunk.DOLocalMoveX(125f, 1.5f).OnComplete(()=> lsWorking[idType].isWaittingRein = true);
+            }
+            if (lsWorking[idType].isWaittingRein)
+            {
+                lsWorking[idType].timeHideRein += Time.deltaTime;
+                if (lsWorking[idType].timeHideRein >= 3f)
+                {
+                    if (lsWorking[idType].trunk.GetChild(0).gameObject.activeInHierarchy)
+                    {
+                        lsWorking[idType].trunk.GetChild(0).gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        lsWorking[idType].trunk.GetChild(0).gameObject.SetActive(true);
+                    }
+                    lsWorking[idType].timeHideRein = 0;
+                }
+            }
+        }
+        else
+        {           
+            if (!lsWorking[idType].isOneLeft)
+            {
+                lsWorking[idType].trunk.GetChild(0).gameObject.SetActive(false);
+                lsWorking[idType].isOneRight = false;
+                lsWorking[idType].isOneLeft = true;
+                lsWorking[idType].trunk.DOLocalMoveX(450f, 1.5f);
             }
         }
     }
