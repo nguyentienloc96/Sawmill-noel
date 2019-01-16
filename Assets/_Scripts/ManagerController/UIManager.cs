@@ -237,10 +237,13 @@ public class UIManager : MonoBehaviour
     public GameObject panelChallenge;
     public Text txtChallenge;
     public GameObject panelChallenge_Claim;
-    public Text txtDateChallenge;
-    public Text txtDateChallenge_Done;
+    public Text txtNameHouse_Challenge;
+    public Text txtDate_Challenge;
+    public Text txtDate_Challenge_Done;
     public Text txtCoin_Challenge;
     public Image imgHouse_Challenge;
+    public Image imgCoin_Challenge;
+    public Button buttonYes_Challenge;
 
     [Header("BuyInput")]
     public Transform tfLeft;
@@ -1389,25 +1392,46 @@ public class UIManager : MonoBehaviour
             panelSpin.SetActive(false);
     }
 
-    public void ShowGetChallange(int _date, int _month, int _year)
+    public void ShowGetChallange(string _nameHouse, int _date, int _month, int _year)
     {
         panelChallenge.SetActive(true);
-        //txtChallenge.text = "Build " + 
+        txtChallenge.text = "Build " + _nameHouse + " before the " + _date.ToString() + "/" + _month.ToString() + "/" + _year.ToString() + " to receive bonus";
+        Invoke("Deactive_Challenge", 3f);
+    }
+    void Deactive_Challenge()
+    {
+        panelChallenge.SetActive(false);
     }
 
-    public void ShowCheckChallenge(Sprite sprHouse)
+    public void ShowCheckChallenge(string strNameHouse,Sprite sprHouse)
     {
-        panelChallenge.SetActive(true);
+        panelChallenge_Claim.SetActive(true);
         System.DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
-        txtDateChallenge.text = "Target: " + _dateCheckChallenge.Day.ToString() + "/" + _dateCheckChallenge.Month.ToString() + "/" + _dateCheckChallenge.Year.ToString();
-        txtDateChallenge_Done.text = "Daone at " + GameManager.Instance.dateGame.Day.ToString() + "/" + GameManager.Instance.dateGame.Month.ToString() + "/" + GameManager.Instance.dateGame.Year.ToString();
+        txtNameHouse_Challenge.text = strNameHouse;
+        txtDate_Challenge.text = "Target: " + _dateCheckChallenge.Day.ToString() + "/" + _dateCheckChallenge.Month.ToString() + "/" + _dateCheckChallenge.Year.ToString();
+        txtDate_Challenge_Done.text = "Done at: " + GameManager.Instance.dateGame.Day.ToString() + "/" + GameManager.Instance.dateGame.Month.ToString() + "/" + GameManager.Instance.dateGame.Year.ToString();
         txtCoin_Challenge.text = ((GameManager.Instance.sumHomeAll - 2) * 5).ToString();
         imgHouse_Challenge.sprite = sprHouse;
     }
 
     public void btnYesChallenge()
     {
+        imgCoin_Challenge.gameObject.SetActive(true);
+        int coinClaim = (GameManager.Instance.sumHomeAll - 2) * 5;
+        if(coinClaim > 50)
+            coinClaim = 50;
+        GameManager.Instance.gold += coinClaim;
+        buttonYes_Challenge.interactable = false;
+        
+        Invoke("Deactive_Challenge_Claim", 0.75f);
+    }
 
+    void Deactive_Challenge_Claim()
+    {
+        panelChallenge_Claim.SetActive(false);
+        imgCoin_Challenge.gameObject.SetActive(false);
+        buttonYes_Challenge.interactable = true;
+        GameManager.Instance.GetChallenge();
     }
 
     public void SellRedundantOnclick(double inputCurrent,double price,int id,int type)

@@ -563,10 +563,10 @@ public class GameManager : MonoBehaviour
     }
 
     DateTime timeChallenge;
-    public void GetChallenge(string a, Sprite s)
+    [HideInInspector]
+    public string nameHouse_NextChallenge= "";
+    public void GetChallenge()
     {
-        CheckChallenge(s);
-
         PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
 
         double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
@@ -575,15 +575,45 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
 
-        UIManager.Instance.ShowGetChallange(timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
+        UIManager.Instance.ShowGetChallange(nameHouse_NextChallenge, timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
     }
 
-    public void CheckChallenge(Sprite s)
+    public void CheckChallenge(string nameHouse, Sprite sprHouse)
     {
         DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
+        if (_dateCheckChallenge == null)
+            return;
         if (dateGame <= _dateCheckChallenge)
         {
-            UIManager.Instance.ShowCheckChallenge(s);
+            UIManager.Instance.ShowCheckChallenge(nameHouse, sprHouse);
+        }
+        else
+        {
+            UIManager.Instance.ShowGetChallange(nameHouse_NextChallenge, timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
+        }
+
+    }
+
+    public void TestABC()
+    {
+        PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
+
+        double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
+
+        timeChallenge.AddDays(_dayChallenge);
+
+        PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
+
+        DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
+        if (_dateCheckChallenge == null)
+            return;
+        if (dateGame <= _dateCheckChallenge)
+        {
+            Debug.Log("a");
+        }
+        else
+        {
+            Debug.Log("b");
         }
 
     }
