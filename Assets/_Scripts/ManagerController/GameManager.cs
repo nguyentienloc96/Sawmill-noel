@@ -578,14 +578,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckChallenge(string nameHouse, Sprite sprHouse)
     {
-        //PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
-
         if (!PlayerPrefs.HasKey("NextChallenge") || PlayerPrefs.GetString("NextChallenge") == "")
             PlayerPrefs.SetString("NextChallenge", System.DateTime.Now.ToString());
-        //PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
-        //double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
-        //DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
-        //PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
         DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
         if (_dateCheckChallenge == null)
             return;
@@ -604,6 +598,17 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
             UIManager.Instance.ShowGetChallange( timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
         }
+    }
 
+    public void GetTheShortestTimeBuildComplete()
+    {
+        DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild"));
+        TimeSpan elapsed = dateGame.Subtract(firstBuild);
+        double days = elapsed.TotalDays;
+
+        if (days < PlayerPrefs.GetInt("TheShortestTimeBuild"))
+        {
+            //POST SCORE
+        }
     }
 }
