@@ -33,6 +33,8 @@ public class LoadDataJson : MonoBehaviour
         Purchaser.Instance.Init();
         Ads.Instance.HideBanner();
         GetDateLauch();
+        PlayerPrefs.DeleteKey("NextChallenge");
+        PlayerPrefs.DeleteKey("LastChallenge");
     }
 
     void InitUnityAds()
