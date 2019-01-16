@@ -644,7 +644,7 @@ public class Location : MonoBehaviour
             {
                 lsWorking[idType].isOneLeft = false;
                 lsWorking[idType].isOneRight = true;
-                lsWorking[idType].trunk.DOLocalMoveX(125f, 1.5f).OnComplete(()=> lsWorking[idType].isWaittingRein = true);
+                lsWorking[idType].trunk.DOLocalMoveX(125f, 1.5f).OnComplete(() => lsWorking[idType].isWaittingRein = true);
             }
             if (lsWorking[idType].isWaittingRein)
             {
@@ -663,8 +663,8 @@ public class Location : MonoBehaviour
                 }
             }
         }
-        else
-        {           
+        else if (lsWorking[idType].input < (GameConfig.Instance.Rein * GameConfig.Instance.r * lsWorking[idType].maxOutputMade / 3f))
+        {
             if (!lsWorking[idType].isOneLeft)
             {
                 lsWorking[idType].trunk.GetChild(0).gameObject.SetActive(false);

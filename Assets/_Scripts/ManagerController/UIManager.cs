@@ -246,8 +246,6 @@ public class UIManager : MonoBehaviour
     public Button buttonYes_Challenge;
 
     [Header("BuyInput")]
-    public Transform tfLeft;
-    public Transform tfRight;
     public GameObject panelSellRedundant;
     public Text[] txtInfoSellRedundant;
     public GameObject[] highLightRedundant;
