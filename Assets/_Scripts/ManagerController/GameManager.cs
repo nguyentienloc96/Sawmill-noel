@@ -566,6 +566,9 @@ public class GameManager : MonoBehaviour
 
         double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
 
+        if (_dayChallenge == 0)
+            return;
+
         DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
 
         PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
@@ -594,7 +597,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
             double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
-
+            if (_dayChallenge == 0)
+                return;
             DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
 
             PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
