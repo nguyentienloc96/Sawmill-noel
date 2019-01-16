@@ -630,6 +630,21 @@ public class Location : MonoBehaviour
         }
     }
 
+    public bool isWaittingRein;
+    public void ReinJob(int idType)
+    {
+        if (isWaittingRein) {
+            if (lsWorking[idType].input >= GameConfig.Instance.Rein * GameConfig.Instance.r * lsWorking[idType].maxOutputMade)
+            {
+                //lsWorking[idType].trunk
+            }
+        }
+    }
+
+    public void ReinOnclick(int idType)
+    {
+
+    }
 
     #region Felling
     public void FellingForest()
@@ -708,7 +723,7 @@ public class Location : MonoBehaviour
                 lsWorking[0].truckManager.upgradeMe.SetActive(false);
             }
         }
-
+        ReinJob(0);
     }
 
     public double FellingComplete(bool isMiniGame = true)
@@ -847,6 +862,7 @@ public class Location : MonoBehaviour
                 lsWorking[idType].truckManager.upgradeMe.SetActive(false);
             }
         }
+        ReinJob(idType);
 
     }
 
