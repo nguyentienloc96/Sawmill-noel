@@ -242,6 +242,10 @@ public class UIManager : MonoBehaviour
     public Text txtCoin_Challenge;
     public Image imgHouse_Challenge;
 
+    [Header("BuyInput")]
+    public Transform tfLeft;
+    public Transform tfRight;
+
     public bool isClickHome;
     public bool isClickTrunk;
     public bool isOnClickTrunk;
