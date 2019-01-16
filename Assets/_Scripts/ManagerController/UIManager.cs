@@ -1396,11 +1396,11 @@ public class UIManager : MonoBehaviour
             panelSpin.SetActive(false);
     }
 
-    public void ShowGetChallange(string _nameHouse, int _date, int _month, int _year)
+    public void ShowGetChallange(int _date, int _month, int _year)
     {
         panelChallenge.SetActive(true);
-        txtChallenge.text = "Build " + _nameHouse + " before the " + _date.ToString() + "/" + _month.ToString() + "/" + _year.ToString() + " to receive bonus";
-        Invoke("Deactive_Challenge", 3f);
+        txtChallenge.text = "Build the next workshop before " + _date.ToString() + "/" + _month.ToString() + "/" + _year.ToString() + " to receive bonus";
+        Invoke("Deactive_Challenge", 5f);
     }
     void Deactive_Challenge()
     {
@@ -1414,7 +1414,10 @@ public class UIManager : MonoBehaviour
         txtNameHouse_Challenge.text = strNameHouse;
         txtDate_Challenge.text = "Target: " + _dateCheckChallenge.Day.ToString() + "/" + _dateCheckChallenge.Month.ToString() + "/" + _dateCheckChallenge.Year.ToString();
         txtDate_Challenge_Done.text = "Done at: " + GameManager.Instance.dateGame.Day.ToString() + "/" + GameManager.Instance.dateGame.Month.ToString() + "/" + GameManager.Instance.dateGame.Year.ToString();
-        txtCoin_Challenge.text = ((GameManager.Instance.sumHomeAll - 2) * 5).ToString();
+        int coinClaim = (GameManager.Instance.sumHomeAll - 2) * 5;
+        if (coinClaim > 50)
+            coinClaim = 50;
+        txtCoin_Challenge.text = coinClaim.ToString();
         imgHouse_Challenge.sprite = sprHouse;
     }
 

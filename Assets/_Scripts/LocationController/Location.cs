@@ -583,6 +583,9 @@ public class Location : MonoBehaviour
             lsWorking[countType].textOutput.text = UIManager.Instance.ConvertNumber(lsWorking[countType].output);
             lsWorking[countType].textLevel.text = UIManager.Instance.ConvertNumber(lsWorking[countType].level);
             lsWorking[countType].truckManager.txtLevel.text = UIManager.Instance.ConvertNumber(lsWorking[countType].levelTruck);
+
+            Invoke("ActiveChallenge", 3.25f);
+            
             if (countType + 1 == lsWorking.Length)
             {
                 if (id + 1 < UIManager.Instance.lsLocationUI.Count)
@@ -595,7 +598,7 @@ public class Location : MonoBehaviour
             }
             else
             {
-                Invoke("ActiveChallenge", 3.5f);
+                
 
                 if (GameManager.Instance.dollar >= lsWorking[countType + 1].price)
                 {
@@ -637,10 +640,9 @@ public class Location : MonoBehaviour
 
     void ActiveChallenge()
     {
-        if (PlayerPrefs.GetInt("isTutorial") != 0)
+        if (PlayerPrefs.GetInt("isTutorial") != 0 || !(id == 0 && countType == -1))
         {
             GameManager.Instance.CheckChallenge(lsWorking[countType].name, lsWorking[countType].icon.sprite);
-            GameManager.Instance.nameHouse_NextChallenge = lsWorking[countType + 1].name;
         }
     }
 
