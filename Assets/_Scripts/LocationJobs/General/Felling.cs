@@ -29,12 +29,15 @@ public class Felling : MonoBehaviour
             tutorialHand.SetActive(false);
         }
         if (GameManager.Instance.lsLocation[ID].forest.tree > 0)
-        {
+        {          
+            notification.SetActive(false);
+            int id = GameManager.Instance.IDLocation;
+            if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+                return;
             if (PlayerPrefs.GetInt("isTutorial") != 0)
             {
                 tutorialHand.SetActive(true);
             }
-            notification.SetActive(false);
         }
         else
         {

@@ -369,6 +369,9 @@ public class UIManager : MonoBehaviour
                             + ConvertNumber(GameManager.Instance.lsLocation[id].ouputFire) 
                             + " output product";
                         GameManager.Instance.lsLocation[id].inputFire = GameManager.Instance.lsLocation[id].ouputFire = 0;
+                        AudioManager.Instance.Stop("AlarmFire", true);
+                        AudioManager.Instance.Stop("Menu", true);
+                        AudioManager.Instance.Play("GamePlay", true);
                         timeFireFighting = 0;
                     }
                 }
@@ -496,6 +499,7 @@ public class UIManager : MonoBehaviour
             isClick = true;
             isContinue = false;
             AudioManager.Instance.Play("Click");
+            AudioManager.Instance.Stop("AlarmFire", true);
             AudioManager.Instance.Stop("Menu", true);
             AudioManager.Instance.Play("GamePlay", true);
             popupStart.SetActive(false);
@@ -552,6 +556,7 @@ public class UIManager : MonoBehaviour
                 isContinue = true;
 
                 AudioManager.Instance.Play("Click");
+                AudioManager.Instance.Stop("AlarmFire", true);
                 AudioManager.Instance.Stop("Menu", true);
                 AudioManager.Instance.Play("GamePlay", true);
 
@@ -594,6 +599,7 @@ public class UIManager : MonoBehaviour
         {
             ClosePupopFull();
             scene = TypeScene.HOME;
+            AudioManager.Instance.Stop("AlarmFire", true);
             AudioManager.Instance.Play("Menu", true);
             AudioManager.Instance.Stop("GamePlay", true);
             AudioManager.Instance.Play("Click");
@@ -982,6 +988,7 @@ public class UIManager : MonoBehaviour
         ClosePupopFull();
         scene = TypeScene.HOME;
         txtRevenue.enabled = true;
+        AudioManager.Instance.Stop("AlarmFire", true);
         AudioManager.Instance.Play("Menu", true);
         AudioManager.Instance.Stop("GamePlay", true);
         AudioManager.Instance.Play("Click");
@@ -1083,7 +1090,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.lsLocation[id].transform.GetChild(0).GetChild(0).localPosition = Vector3.zero;
     }
 
-    public void ClosePupopFull()
+    public void ClosePupopFull(bool isFire = false)
     {
         CloseJob();
         JobSell.SetActive(false);
@@ -1095,7 +1102,24 @@ public class UIManager : MonoBehaviour
         panelGold.SetActive(false);
         Achievement.SetActive(false);
         panelInfo.SetActive(false);
-        HideItem();
+        if (!isFire)
+        {
+            HideItem();
+        }
+        panelRisk.SetActive(false);
+        panelSellRedundant.SetActive(false);
+        panelSpin.SetActive(false);
+        panelChallenge.SetActive(false);
+        panelChallenge_Claim.SetActive(false);
+        panelCongratulation.SetActive(false);
+        panelSetting.SetActive(false);
+        panelGiveRandom.SetActive(false);
+        panelGiveXMoney.SetActive(false);
+        panelGiveXXXMoney.SetActive(false);
+        panelSeclectTree.SetActive(false);
+        panelUpgradeMachineJob.SetActive(false);
+        panelUpgradeMachineTrunk.SetActive(false);
+        panelISO.SetActive(false);
     }
 
     public void HideItem()
@@ -1586,6 +1610,10 @@ public class UIManager : MonoBehaviour
             txtInfoRisk.text = GameManager.Instance.lsLocation[id].risk + "%";
             double priceRisk = GameManager.Instance.lsLocation[id].lsWorking[countType].price * GameConfig.Instance.Pfire;
             txtPriceRisk.text = ConvertNumber(priceRisk);
+            if(GameManager.Instance.lsLocation[id].risk <= 0)
+            {
+                btnYesUpgradeRisk.interactable = false;
+            }
         }
     }
 

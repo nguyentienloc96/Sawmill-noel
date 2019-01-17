@@ -1021,6 +1021,7 @@ public class Location : MonoBehaviour
         {
             if (risk < 100)
                 risk++;
+            UIManager.Instance.btnYesUpgradeRisk.interactable = true;
             timeCheckRisk = 0;
         }
 
@@ -1042,7 +1043,10 @@ public class Location : MonoBehaviour
 
     public void WarningFire()
     {
-        UIManager.Instance.CloseJob();
+        AudioManager.Instance.Play("AlarmFire", true);
+        AudioManager.Instance.Stop("Menu", true);
+        AudioManager.Instance.Stop("GamePlay", true);
+        UIManager.Instance.ClosePupopFull(true);
         indexTypeRisk = UnityEngine.Random.Range(0, countType + 1);
         fireWarning.SetActive(true);
         fireWarning.transform.position = lsWorking[indexTypeRisk].icon.transform.position;
