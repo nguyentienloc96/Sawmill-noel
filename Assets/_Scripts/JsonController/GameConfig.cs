@@ -70,7 +70,7 @@ public class GameConfig : MonoBehaviour
     public float Pfire;
     public int Tchal;
     public float Uptruck;
-
+    public string IDLeaderboard;
 
     string app42_apiKey = "41b8289bb02efae4f37f1c9d891b09bb43f6f801bdbbf17a557bc4598ddf836b";
     string app42_secretKey = "35d9a321b8d4cfc3b375b5f212f15ffab98bb2b53e4b9da20d22881fc01a0efa";
