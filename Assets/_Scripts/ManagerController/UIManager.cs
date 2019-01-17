@@ -1626,4 +1626,9 @@ public class UIManager : MonoBehaviour
         int id = GameManager.Instance.IDLocation;
         GameManager.Instance.lsLocation[id].GoToHelpNow();
     }
+
+    public void btnShowLeaderBoard()
+    {
+        LeaderboardManager.Instance.ShowLeaderboard(GameConfig.Instance.IDLeaderboard + GameManager.Instance.IDLocation.ToString());
+    }
 }
