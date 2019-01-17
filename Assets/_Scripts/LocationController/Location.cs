@@ -93,6 +93,8 @@ public class Location : MonoBehaviour
     public int countType;
     [HideInInspector]
     public int makerType;
+    public int risk;
+    public GameObject fireWarning;
     public Text txtNameForest;
     public ForestST forest;
     public TypeOfWorkST[] lsWorking;
@@ -1161,6 +1163,11 @@ public class Location : MonoBehaviour
         {
             forest.forestClass.lsTree[j].transform.GetChild(0).GetComponent<Image>().sprite = spNewTree;
         }
+    }
+
+    public void FireFightingOncick()
+    {
+
     }
 
 }
