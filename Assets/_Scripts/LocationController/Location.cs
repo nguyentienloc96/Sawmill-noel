@@ -1021,6 +1021,9 @@ public class Location : MonoBehaviour
         {
             if (risk < 100)
                 risk++;
+            UIManager.Instance.txtInfoRisk.text = risk + "%";
+            double priceRisk = lsWorking[countType].price * GameConfig.Instance.Pfire;
+            UIManager.Instance.txtPriceRisk.text = UIManager.Instance.ConvertNumber(priceRisk);
             UIManager.Instance.btnYesUpgradeRisk.interactable = true;
             timeCheckRisk = 0;
         }
