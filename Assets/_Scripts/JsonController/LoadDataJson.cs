@@ -33,8 +33,9 @@ public class LoadDataJson : MonoBehaviour
         Purchaser.Instance.Init();
         Ads.Instance.HideBanner();
         GetDateLauch();
-        PlayerPrefs.DeleteKey("NextChallenge");
-        PlayerPrefs.DeleteKey("LastChallenge");
+        LeaderboardManager.Instance.AuthenticateToGameCenter();
+        //PlayerPrefs.DeleteKey("NextChallenge");
+        //PlayerPrefs.DeleteKey("LastChallenge");
     }
 
     void InitUnityAds()

@@ -10,12 +10,12 @@ using UnityEngine.SocialPlatforms.GameCenter;
 public class LeaderboardManager : MonoBehaviour 
 {
 	#region GAME_CENTER	
-
+    public static LeaderboardManager Instance = new LeaderboardManager();
 	/// <summary>
 	/// Authenticates to game center.
 	/// </summary>
     bool isLoginSuccessful;
-    string leaderBoardID = "PROVIDE_YOUR_LEADERBOARD_ID_HERE";
+    //string leaderBoardID = "PROVIDE_YOUR_LEADERBOARD_ID_HERE";
 	public void  AuthenticateToGameCenter()
 	{
 		#if UNITY_IPHONE
