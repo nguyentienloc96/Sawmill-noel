@@ -647,8 +647,8 @@ public class Location : MonoBehaviour
 
             if (countType == 0)
             {
-                PlayerPrefs.SetString("FirstBuild", GameManager.Instance.dateGame.ToString());
-                Debug.Log(PlayerPrefs.GetString("FirstBuild"));
+                PlayerPrefs.SetString("FirstBuild" + id, GameManager.Instance.dateGame.ToString());
+                Debug.Log(PlayerPrefs.GetString("FirstBuild" + id));
             }
 
             if (countType == (GameManager.Instance.lsLocation[id].lsWorking.Length - 1))
