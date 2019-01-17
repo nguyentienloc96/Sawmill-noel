@@ -267,7 +267,6 @@ public class UIManager : MonoBehaviour
     public GameObject handTutorialFire;
     public float timeFireFighting;
     public bool isFireFighting;
-    public float timecheckFireFighting;
     public Transform posTop;
     public GameObject panelInfoFireFight;
     public Text txtInfoFireFight;
@@ -372,15 +371,6 @@ public class UIManager : MonoBehaviour
                         GameManager.Instance.lsLocation[id].inputFire = GameManager.Instance.lsLocation[id].ouputFire = 0;
                         timeFireFighting = 0;
                     }
-                }
-
-                timecheckFireFighting += Time.deltaTime;
-                if(timecheckFireFighting >= GameConfig.Instance.p0Time * 30f)
-                {
-                    int indexTypeRisk = GameManager.Instance.lsLocation[id].indexTypeRisk;
-                    float risk = (float)GameManager.Instance.lsLocation[id].risk / 100f;
-                    GameManager.Instance.lsLocation[id].lsWorking[indexTypeRisk].input -= risk * GameManager.Instance.lsLocation[id].lsWorking[indexTypeRisk].input;
-                    GameManager.Instance.lsLocation[id].lsWorking[indexTypeRisk].output -= risk * GameManager.Instance.lsLocation[id].lsWorking[indexTypeRisk].output;
                 }
             }
         }

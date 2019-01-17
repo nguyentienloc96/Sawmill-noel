@@ -1027,7 +1027,7 @@ public class Location : MonoBehaviour
         if (countType >= 0 && PlayerPrefs.GetInt("isTutorial") != 0 && indexTypeRisk == -1)
         {
             timeCheckFire += Time.deltaTime;
-            if (timeCheckFire >= (GameConfig.Instance.p0Time * 10f) && risk > 0)
+            if (timeCheckFire >= (GameConfig.Instance.p0Time * 30f) && risk > 0)
             {
                 int warningRisk = UnityEngine.Random.Range(0, 100);
                 if (warningRisk <= risk)
