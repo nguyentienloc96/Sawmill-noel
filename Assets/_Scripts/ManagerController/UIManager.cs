@@ -276,6 +276,7 @@ public class UIManager : MonoBehaviour
     public Text txtInfoRisk;
     public Text txtPriceRisk;
     public Button btnYesUpgradeRisk;
+    public bool isLocation;
 
     public bool isClickHome;
     public bool isClickTrunk;
@@ -584,6 +585,8 @@ public class UIManager : MonoBehaviour
         int id = GameManager.Instance.IDLocation;
         if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
             return;
+        isLocation = false;
+
         if (scene != TypeScene.WOLRD)
         {
             CloseJob();
@@ -985,6 +988,7 @@ public class UIManager : MonoBehaviour
 
     public void SaveExit()
     {
+        isLocation = false;
         ClosePupopFull();
         scene = TypeScene.HOME;
         txtRevenue.enabled = true;

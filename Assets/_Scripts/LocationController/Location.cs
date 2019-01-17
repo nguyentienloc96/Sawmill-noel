@@ -1028,10 +1028,10 @@ public class Location : MonoBehaviour
             timeCheckRisk = 0;
         }
 
-        if (countType >= 0 && PlayerPrefs.GetInt("isTutorial") != 0 && indexTypeRisk == -1)
+        if (UIManager.Instance.isLocation && id == GameManager.Instance.IDLocation && countType >= 0 && PlayerPrefs.GetInt("isTutorial") != 0 && indexTypeRisk == -1)
         {
             timeCheckFire += Time.deltaTime;
-            if (timeCheckFire >= (GameConfig.Instance.p0Time * 30f) && risk > 0)
+            if (timeCheckFire >= (GameConfig.Instance.p0Time * 30f) && risk > 0 && id == GameManager.Instance.IDLocation)
             {
                 int warningRisk = UnityEngine.Random.Range(0, 100);
                 if (warningRisk <= risk)

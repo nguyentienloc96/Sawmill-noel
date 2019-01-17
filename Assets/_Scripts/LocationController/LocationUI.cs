@@ -19,6 +19,7 @@ public class LocationUI : MonoBehaviour
         UIManager.Instance.animAchievement.Rebind();
         UIManager.Instance.animAchievement.enabled = false;
         UIManager.Instance.scene = TypeScene.LOCATION;
+        UIManager.Instance.isLocation = true;
         AudioManager.Instance.Play("Click");
         GameManager.Instance.IDLocation = id;
         GameManager.Instance.LoadLocation();
@@ -56,16 +57,16 @@ public class LocationUI : MonoBehaviour
             UIManager.Instance.WarningForest.SetActive(false);
         }
 
-        for(int i = 0;i< GameManager.Instance.lsLocation[id].countType; i++)
+        for (int i = 0; i < GameManager.Instance.lsLocation[id].countType; i++)
         {
-            if(!GameManager.Instance.lsLocation[id].lsWorking[i].isClaim && GameManager.Instance.lsLocation[id].lsWorking[i].countPlayer >= 50)
+            if (!GameManager.Instance.lsLocation[id].lsWorking[i].isClaim && GameManager.Instance.lsLocation[id].lsWorking[i].countPlayer >= 50)
             {
                 UIManager.Instance.animAchievement.enabled = true;
                 break;
             }
         }
 
-        if(GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
         {
             GameManager.Instance.lsLocation[id].WarningFire();
         }
