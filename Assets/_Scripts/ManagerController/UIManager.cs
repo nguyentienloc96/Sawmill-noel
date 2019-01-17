@@ -1191,7 +1191,7 @@ public class UIManager : MonoBehaviour
 
     public void btnGiftDay_OpenGift()
     {
-        AudioManager.Instance.Play("Click");
+        AudioManager.Instance.Play("TingClaim");
         imgGiftAnim.GetComponent<Animator>().Play("Gift 1");
         Invoke("ActivePanelOpenGiftDay", 0.5f);
         int _goldGiftDay = 5 * (PlayerPrefs.GetInt("DayGift") + 1);
@@ -1207,7 +1207,7 @@ public class UIManager : MonoBehaviour
 
     public void btnGiftDay_ClaimGift()
     {
-        AudioManager.Instance.Play("Click");
+        AudioManager.Instance.Play("TingClaim");
         imgGoldFly.gameObject.SetActive(true);
         imgSpinFly.gameObject.SetActive(true);
         //imgGoldFly.GetComponent<Animator>().Play("GoldFly");
@@ -1371,7 +1371,7 @@ public class UIManager : MonoBehaviour
 
     public void btnYes_Congratulation()
     {
-        AudioManager.Instance.Play("Click");
+        AudioManager.Instance.Play("TingClaim");
         imgCoinFly_Congratulation.gameObject.SetActive(true);// = true;
         imgDollarFly_Congratulation.gameObject.SetActive(true);//.enabled = true;
         imgHomeFly_Congratulation.gameObject.SetActive(true);//.enabled = true;
@@ -1426,7 +1426,7 @@ public class UIManager : MonoBehaviour
 
     public void btnYesChallenge()
     {
-        AudioManager.Instance.Play("Click");
+        AudioManager.Instance.Play("TingClaim");
         imgCoin_Challenge.gameObject.SetActive(true);
         int coinClaim = (GameManager.Instance.sumHomeAll - 2) * 5;
         if(coinClaim > 50)
