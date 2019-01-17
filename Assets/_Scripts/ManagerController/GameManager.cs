@@ -644,22 +644,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GetTheShortestTimeBuildComplete()
+    public void GetTheShortestTimeBuildComplete(int _idHouse)
     {
-        DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild"));
+        DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild" + _idHouse.ToString()));
         TimeSpan elapsed = dateGame.Subtract(firstBuild);
         double days = elapsed.TotalDays;
-        if (!PlayerPrefs.HasKey("TheShortestTimeBuild") || PlayerPrefs.GetInt("TheShortestTimeBuild") == 0)
+        if (!PlayerPrefs.HasKey("TheShortestTimeBuild" + _idHouse.ToString()) || PlayerPrefs.GetInt("TheShortestTimeBuild" + _idHouse.ToString()) == 0)
         {
-            PlayerPrefs.SetInt("TheShortestTimeBuild", (int)days);
+            PlayerPrefs.SetInt("TheShortestTimeBuild" + _idHouse.ToString(), (int)days);
             Debug.Log("thoi gian ngan nhat " + (int)days);
         }
         else
         {
-            if (days < PlayerPrefs.GetInt("TheShortestTimeBuild"))
+            if (days < PlayerPrefs.GetInt("TheShortestTimeBuild" + _idHouse.ToString()))
             {
-                //POST SCORE
-                PlayerPrefs.SetInt("TheShortestTimeBuild", int.Parse(days.ToString()));
+                //LeaderboardManager
+                PlayerPrefs.SetInt("TheShortestTimeBuild" + _idHouse.ToString(), (int)days);
                 Debug.Log("thoi gian ngan nhat " + (int)days);
             }
             else

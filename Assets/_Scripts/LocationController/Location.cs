@@ -653,7 +653,7 @@ public class Location : MonoBehaviour
 
             if (countType == (GameManager.Instance.lsLocation[id].lsWorking.Length - 1))
             {
-                GameManager.Instance.GetTheShortestTimeBuildComplete();
+                GameManager.Instance.GetTheShortestTimeBuildComplete(id);
             }
         }
     }
