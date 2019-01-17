@@ -636,16 +636,14 @@ public class Location : MonoBehaviour
                 UIManager.Instance.WarningForest.SetActive(true);
             }
 
-            if (id == 0 && countType == 0)
+            if (countType == 0)
             {
-                // nhaf ddau tien
                 PlayerPrefs.SetString("FirstBuild", GameManager.Instance.dateGame.ToString());
                 Debug.Log(PlayerPrefs.GetString("FirstBuild"));
             }
 
-            if (id == UIManager.Instance.lsBtnLocationUI.Count - 1 && countType == GameManager.Instance.lsLocation[UIManager.Instance.lsBtnLocationUI.Count - 1].lsWorking.Length)
+            if (countType == (GameManager.Instance.lsLocation[id].lsWorking.Length - 1))
             {
-                // nha cuoi
                 GameManager.Instance.GetTheShortestTimeBuildComplete();
             }
         }
