@@ -1242,7 +1242,15 @@ public class Location : MonoBehaviour
     {
         UIManager.Instance.panelRisk.SetActive(true);
         UIManager.Instance.txtInfoRisk.text = risk + "%";
-        double priceRisk = lsWorking[countType].price * GameConfig.Instance.Pfire;
+        double priceRisk;
+        if (countType == -1)
+        {
+            priceRisk = 0;
+        }
+        else
+        {
+            priceRisk = lsWorking[countType].price * GameConfig.Instance.Pfire;
+        }
         UIManager.Instance.txtPriceRisk.text = UIManager.Instance.ConvertNumber(priceRisk);
         if (GameManager.Instance.dollar >= priceRisk)
         {
