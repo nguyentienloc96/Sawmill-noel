@@ -658,7 +658,8 @@ public class GameManager : MonoBehaviour
         {
             if (days < PlayerPrefs.GetInt("TheShortestTimeBuild" + _idHouse.ToString()))
             {
-                //LeaderboardManager
+                string idLD = GameConfig.Instance.IDLeaderboard + _idHouse.ToString();
+                LeaderboardManager.Instance.ReportScore((long)days,idLD);
                 PlayerPrefs.SetInt("TheShortestTimeBuild" + _idHouse.ToString(), (int)days);
                 Debug.Log("thoi gian ngan nhat " + (int)days);
             }
