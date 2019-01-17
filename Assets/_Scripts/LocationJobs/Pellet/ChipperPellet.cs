@@ -41,11 +41,14 @@ public class ChipperPellet : MonoBehaviour
     {
         int randomBG = Random.Range(0, UIManager.Instance.spBG.Length);
         imgBG.sprite = UIManager.Instance.spBG[randomBG];
-        isTutorial = true;
         animFlour.transform.localScale = Vector3.one;
 
         int ID = GameManager.Instance.IDLocation;
         int IndexType = GameManager.Instance.lsLocation[ID].indexType;
+        if (GameManager.Instance.lsLocation[ID].indexTypeRisk == -1)
+        {
+            isTutorial = true;
+        }
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
             notification.SetActive(false);
@@ -95,7 +98,8 @@ public class ChipperPellet : MonoBehaviour
 
     public void TapDown()
     {
-        if (isInput)
+        int id = GameManager.Instance.IDLocation;
+        if (isInput && GameManager.Instance.lsLocation[id].indexTypeRisk == -1)
         {
             anim.enabled = true;
             particleEmissions.Play();
@@ -174,6 +178,9 @@ public class ChipperPellet : MonoBehaviour
 
     public void Help()
     {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         tutorialHand.SetActive(true);
     }
 }

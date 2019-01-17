@@ -34,11 +34,14 @@ public class ReelingPaper : MonoBehaviour
     {
         int randomBG = Random.Range(0, UIManager.Instance.spBG.Length);
         imgBG.sprite = UIManager.Instance.spBG[randomBG];
-        isTutorial = true;
         cart.localScale = new Vector3(0.5f, 0.5f, 1f);
 
         int ID = GameManager.Instance.IDLocation;
         int IndexType = GameManager.Instance.lsLocation[ID].indexType;
+        if (GameManager.Instance.lsLocation[ID].indexTypeRisk == -1)
+        {
+            isTutorial = true;
+        }
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
             notification.SetActive(false);
@@ -85,7 +88,8 @@ public class ReelingPaper : MonoBehaviour
 
     public void TapDown()
     {
-        if (isInput)
+        int id = GameManager.Instance.IDLocation;
+        if (isInput && GameManager.Instance.lsLocation[id].indexTypeRisk == -1)
         {
             animGear.speed = 2f;
             anim.enabled = true;
@@ -149,5 +153,13 @@ public class ReelingPaper : MonoBehaviour
                 notification.SetActive(true);
             }
         });
+    }
+
+    public void Help()
+    {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
+        tutorialHand.SetActive(true);
     }
 }

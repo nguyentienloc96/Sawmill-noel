@@ -262,6 +262,15 @@ public class UIManager : MonoBehaviour
     [Header("WarningFire")]
     public GameObject panelWarningFire;
     public Text txtInfoWarningFire;
+    public GameObject rain;
+    public GameObject[] lsFire;
+    public GameObject handTutorialFire;
+    public float timeFireFighting;
+    public bool isFireFighting;
+    public float timecheckFireFighting;
+    public Transform posTop;
+    public GameObject panelInfoFireFight;
+    public Text txtInfoFireFight;
 
     [Header("Risk")]
     public GameObject panelRisk;
@@ -327,6 +336,53 @@ public class UIManager : MonoBehaviour
             if (indexType != 0) GameManager.Instance.lsTypeMiniGame[indexTypeWork].lsMiniGame[indexType].inputMiniGame.text = ConvertNumber(GameManager.Instance.lsLocation[id].lsWorking[indexType].input);
             GameManager.Instance.lsTypeMiniGame[indexTypeWork].lsMiniGame[indexType].outputMiniGame.text = ConvertNumber(GameManager.Instance.lsLocation[id].lsWorking[indexType].output);
 
+            if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            {
+                if (Input.GetMouseButtonDown(0) && !isFireFighting)
+                {
+                    handTutorialFire.SetActive(false);
+                    rain.SetActive(true);
+                    isFireFighting = true;
+                }
+
+                if (Input.GetMouseButtonUp(0) && isFireFighting)
+                {
+                    rain.SetActive(false);
+                    isFireFighting = false;
+                }
+
+                if (isFireFighting)
+                {
+                    timeFireFighting -= Time.deltaTime;
+                    for (int i = 0; i < lsFire.Length; i++)
+                    {
+                        float P = timeFireFighting / 10f;
+                        lsFire[i].transform.localScale = new Vector3(P, P, P);
+                    }
+                    if (timeFireFighting <= 0)
+                    {
+                        rain.SetActive(false);
+                        GameManager.Instance.lsLocation[id].indexTypeRisk = -1;
+                        GameManager.Instance.lsLocation[id].fireWarning.SetActive(false);
+                        panelInfoFireFight.SetActive(true);
+                        txtInfoFireFight.text = "You lost "+ ConvertNumber( GameManager.Instance.lsLocation[id].inputFire)
+                            + " input material and " 
+                            + ConvertNumber(GameManager.Instance.lsLocation[id].ouputFire) 
+                            + " output product";
+                        GameManager.Instance.lsLocation[id].inputFire = GameManager.Instance.lsLocation[id].ouputFire = 0;
+                        timeFireFighting = 0;
+                    }
+                }
+
+                timecheckFireFighting += Time.deltaTime;
+                if(timecheckFireFighting >= GameConfig.Instance.p0Time * 30f)
+                {
+                    int indexTypeRisk = GameManager.Instance.lsLocation[id].indexTypeRisk;
+                    float risk = (float)GameManager.Instance.lsLocation[id].risk / 100f;
+                    GameManager.Instance.lsLocation[id].lsWorking[indexTypeRisk].input -= risk * GameManager.Instance.lsLocation[id].lsWorking[indexTypeRisk].input;
+                    GameManager.Instance.lsLocation[id].lsWorking[indexTypeRisk].output -= risk * GameManager.Instance.lsLocation[id].lsWorking[indexTypeRisk].output;
+                }
+            }
         }
 
         if (JobUpgrade.activeInHierarchy && !btnUpgradeJob.interactable)
@@ -420,6 +476,9 @@ public class UIManager : MonoBehaviour
 
     public void BtnSettingOnclick()
     {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         if (!panelSetting.activeSelf)
             panelSetting.SetActive(true);
         else
@@ -442,6 +501,8 @@ public class UIManager : MonoBehaviour
         if (!isClick)
         {
             PlayerPrefs.SetInt("Congratulation", 0);
+            PlayerPrefs.SetString("NextChallenge", "");
+            PlayerPrefs.SetString("LastChallenge", "");
             isClick = true;
             isContinue = false;
             AudioManager.Instance.Play("Click");
@@ -525,6 +586,9 @@ public class UIManager : MonoBehaviour
     }
     public void BtnBackToWorld()
     {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         if (scene != TypeScene.WOLRD)
         {
             CloseJob();
@@ -593,6 +657,8 @@ public class UIManager : MonoBehaviour
     {
         int id = GameManager.Instance.IDLocation;
         int indexType = GameManager.Instance.lsLocation[id].indexType;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         GameManager.Instance.lsLocation[id].CheckInfoTypeOfWorkST(indexType);
         if (PlayerPrefs.GetInt("isTutorial") == 0)
         {
@@ -849,9 +915,11 @@ public class UIManager : MonoBehaviour
 
     public void CloseJob()
     {
-        scene = TypeScene.LOCATION;
         int id = GameManager.Instance.IDLocation;
         int indexType = GameManager.Instance.lsLocation[id].indexType;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
+        scene = TypeScene.LOCATION;
         GameManager.Instance.lsTypeMiniGame[GameManager.Instance.lsLocation[id].indexTypeWork].lsMiniGame[indexType].miniGame.SetActive(false);
         GameManager.Instance.lsLocation[id].lsWorking[indexType].isXJob = false;
         AudioManager.Instance.Stop("Felling");
@@ -865,6 +933,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowPanelDollar()
     {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         if (!panelDollar.activeSelf)
         {
             panelDollar.SetActive(true);
@@ -899,6 +970,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowPanelGold()
     {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         if (!panelGold.activeSelf)
         {
             panelGold.SetActive(true);
@@ -1244,7 +1318,7 @@ public class UIManager : MonoBehaviour
     int typeTreeCurrent = 0;
     public void btnBuyTree(int typeTree)
     {
-        
+
         int idLocation = GameManager.Instance.IDLocation;
         int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
         if (typeTree <= countTypeLocation)
@@ -1376,7 +1450,7 @@ public class UIManager : MonoBehaviour
         txtCoin_Congratulation.text = coin_Congratulation.ToString();
         txtNameHouse_Congratulation.text = "Double the capacity of " + GameManager.Instance.HomeRandom() + " in " + (60 / GameConfig.Instance.p0Time).ToString() + " days";
         buttonYes_Congratulation.interactable = true;
-        
+
     }
 
     public void btnYes_Congratulation()
@@ -1420,7 +1494,7 @@ public class UIManager : MonoBehaviour
         panelChallenge.SetActive(false);
     }
 
-    public void ShowCheckChallenge(string strNameHouse,Sprite sprHouse)
+    public void ShowCheckChallenge(string strNameHouse, Sprite sprHouse)
     {
         panelChallenge_Claim.SetActive(true);
         System.DateTime _dateCheckChallenge = System.Convert.ToDateTime(PlayerPrefs.GetString("NextChallenge"));
@@ -1439,11 +1513,11 @@ public class UIManager : MonoBehaviour
         AudioManager.Instance.Play("TingClaim");
         imgCoin_Challenge.gameObject.SetActive(true);
         int coinClaim = (GameManager.Instance.sumHomeAll - 2) * 5;
-        if(coinClaim > 50)
+        if (coinClaim > 50)
             coinClaim = 50;
         GameManager.Instance.gold += coinClaim;
         buttonYes_Challenge.interactable = false;
-        
+
         Invoke("Deactive_Challenge_Claim", 0.75f);
     }
 
@@ -1455,7 +1529,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.GetChallenge();
     }
 
-    public void SellRedundantOnclick(double inputCurrent,double price,int id,int type)
+    public void SellRedundantOnclick(double inputCurrent, double price, int id, int type)
     {
         panelSellRedundant.SetActive(true);
         typeSellRedundant = 0;
@@ -1468,7 +1542,7 @@ public class UIManager : MonoBehaviour
         highLightRedundant[1].SetActive(false);
         highLightRedundant[2].SetActive(false);
 
-        txtInfoSellRedundant[0].text = ConvertNumber(inputCurrent * 0.6f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.6f) +" $";
+        txtInfoSellRedundant[0].text = ConvertNumber(inputCurrent * 0.6f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.6f) + " $";
         txtInfoSellRedundant[1].text = ConvertNumber(inputCurrent * 0.75f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.75f) + " $";
         txtInfoSellRedundant[2].text = ConvertNumber(inputCurrent * 0.9f) + " input to " + ConvertNumber(inputCurrent * price * GameConfig.Instance.Prein * 0.9f) + " $";
 
@@ -1477,9 +1551,9 @@ public class UIManager : MonoBehaviour
     public void SelectTypeSellRedundant(int type)
     {
         typeSellRedundant = type;
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
-            if(i == type)
+            if (i == type)
             {
                 highLightRedundant[i].SetActive(true);
             }
@@ -1523,5 +1597,11 @@ public class UIManager : MonoBehaviour
             double priceRisk = GameManager.Instance.lsLocation[id].lsWorking[countType].price * GameConfig.Instance.Pfire;
             txtPriceRisk.text = ConvertNumber(priceRisk);
         }
+    }
+
+    public void GoToHelpNow()
+    {
+        int id = GameManager.Instance.IDLocation;
+        GameManager.Instance.lsLocation[id].GoToHelpNow();
     }
 }

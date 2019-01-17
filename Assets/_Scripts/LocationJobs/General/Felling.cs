@@ -23,9 +23,14 @@ public class Felling : MonoBehaviour
             GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].FellingComplete();
         }
         int ID = GameManager.Instance.IDLocation;
+
+        if (GameManager.Instance.lsLocation[ID].indexTypeRisk == -1)
+        {
+            tutorialHand.SetActive(false);
+        }
         if (GameManager.Instance.lsLocation[ID].forest.tree > 0)
         {
-            if(PlayerPrefs.GetInt("isTutorial") != 0)
+            if (PlayerPrefs.GetInt("isTutorial") != 0)
             {
                 tutorialHand.SetActive(true);
             }
@@ -39,7 +44,9 @@ public class Felling : MonoBehaviour
 
     public void FellingTree()
     {
-        if (!isWaiting)
+        int id = GameManager.Instance.IDLocation;
+
+        if (!isWaiting && GameManager.Instance.lsLocation[id].indexTypeRisk == -1)
         {
             int ID = GameManager.Instance.IDLocation;
             if (GameManager.Instance.lsLocation[ID].forest.tree > 0)
@@ -96,6 +103,9 @@ public class Felling : MonoBehaviour
 
     public void Help()
     {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         tutorialHand.SetActive(true);
     }
 

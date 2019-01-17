@@ -94,6 +94,13 @@ public class Location : MonoBehaviour
     [HideInInspector]
     public int makerType;
     public int risk;
+    public int indexTypeRisk = -1;
+    public float timeCheckRisk;
+    public float timeCheckFire;
+
+    public double inputFire;
+    public double ouputFire;
+
     public GameObject fireWarning;
     public Text txtNameForest;
     public ForestST forest;
@@ -799,7 +806,15 @@ public class Location : MonoBehaviour
         {
             if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem && UIManager.Instance.lsItem[8].indexType == 0)
             {
-                lsWorking[0].output += outPutValue * 4;
+                if (id == UIManager.Instance.lsItem[4].idLocation && UIManager.Instance.lsItem[4].isOnItem)
+                {
+
+                    lsWorking[0].output += outPutValue * 8;
+                }
+                else
+                {
+                    lsWorking[0].output += outPutValue * 4;
+                }
             }
             else
             {
@@ -811,7 +826,15 @@ public class Location : MonoBehaviour
         {
             if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem && UIManager.Instance.lsItem[8].indexType == 0)
             {
-                lsWorking[0].output += outPutValue * 2;
+                if (id == UIManager.Instance.lsItem[4].idLocation && UIManager.Instance.lsItem[4].isOnItem)
+                {
+
+                    lsWorking[0].output += outPutValue * 4;
+                }
+                else
+                {
+                    lsWorking[0].output += outPutValue * 2;
+                }
             }
             else
             {
@@ -908,7 +931,7 @@ public class Location : MonoBehaviour
                 }
             }
 
-           
+
         }
         else
         {
@@ -934,7 +957,7 @@ public class Location : MonoBehaviour
                     materialCurrent = lsWorking[idType].input;
                 }
             }
-            
+
         }
 
         lsWorking[idType].input -= Math.Floor(materialCurrent);
@@ -992,8 +1015,51 @@ public class Location : MonoBehaviour
         {
             forest.btnAutoPlant.gameObject.SetActive(false);
         }
+
+        timeCheckRisk += Time.deltaTime;
+        if (timeCheckRisk >= GameConfig.Instance.p0Time * 7f)
+        {
+            if (risk < 100)
+                risk++;
+            timeCheckRisk = 0;
+        }
+
+        if (countType >= 0 && PlayerPrefs.GetInt("isTutorial") != 0 && indexTypeRisk == -1)
+        {
+            timeCheckFire += Time.deltaTime;
+            if (timeCheckFire >= (GameConfig.Instance.p0Time * 10f) && risk > 0)
+            {
+                int warningRisk = UnityEngine.Random.Range(0, 100);
+                if (warningRisk <= risk)
+                {
+                    WarningFire();
+                }
+                timeCheckFire = 0;
+            }
+        }
     }
 
+
+    public void WarningFire()
+    {
+        UIManager.Instance.CloseJob();
+        indexTypeRisk = UnityEngine.Random.Range(0, countType + 1);
+        fireWarning.SetActive(true);
+        fireWarning.transform.position = lsWorking[indexTypeRisk].icon.transform.position;
+        ScrollRect scrollRect = transform.GetComponent<ScrollRect>();
+        float Yx = lsWorking[indexTypeRisk].icon.transform.localPosition.y - 765f;
+        float heightScroll = transform.GetChild(0).GetChild(0).GetComponent<RectTransform>().sizeDelta.y;
+        transform.GetComponent<ScrollRect>().verticalNormalizedPosition = (1f - Mathf.Abs(Yx) / heightScroll);
+        UIManager.Instance.panelWarningFire.SetActive(true);
+        UIManager.Instance.txtInfoWarningFire.text = "Fire in " + lsWorking[indexTypeRisk].name;
+        float riskkk = risk / 100f;
+        double inputRisk = riskkk * lsWorking[indexTypeRisk].input;
+        double outputRisk = riskkk * lsWorking[indexTypeRisk].output;
+        lsWorking[indexTypeRisk].input -= inputRisk;
+        lsWorking[indexTypeRisk].output -= outputRisk;
+        inputFire = inputRisk;
+        ouputFire = outputRisk;
+    }
 
     public void AutoPlant()
     {
@@ -1171,7 +1237,7 @@ public class Location : MonoBehaviour
         UIManager.Instance.txtInfoRisk.text = risk + "%";
         double priceRisk = lsWorking[countType].price * GameConfig.Instance.Pfire;
         UIManager.Instance.txtPriceRisk.text = UIManager.Instance.ConvertNumber(priceRisk);
-        if(GameManager.Instance.dollar >= priceRisk)
+        if (GameManager.Instance.dollar >= priceRisk)
         {
             UIManager.Instance.btnYesUpgradeRisk.interactable = true;
         }
@@ -1181,4 +1247,16 @@ public class Location : MonoBehaviour
         }
     }
 
+    public void GoToHelpNow()
+    {
+        WordYourSelf(indexTypeRisk);
+        UIManager.Instance.timeFireFighting = 10f;
+        UIManager.Instance.handTutorialFire.SetActive(true);
+        for (int i = 0; i < UIManager.Instance.lsFire.Length; i++)
+        {
+            UIManager.Instance.lsFire[i].SetActive(true);
+            UIManager.Instance.lsFire[i].transform.localScale = Vector3.one;
+        }
+        UIManager.Instance.panelWarningFire.SetActive(false);
+    }
 }

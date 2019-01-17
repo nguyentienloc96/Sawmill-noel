@@ -34,11 +34,14 @@ public class Dryer : MonoBehaviour
     {
         int randomBG = Random.Range(0, UIManager.Instance.spBG.Length);
         imgBG.sprite = UIManager.Instance.spBG[randomBG];
-        isTutorial = true;
         tree.transform.localScale = new Vector3(1f, 1f, 1f);
 
         int ID = GameManager.Instance.IDLocation;
         int IndexType = GameManager.Instance.lsLocation[ID].indexType;
+        if (GameManager.Instance.lsLocation[ID].indexTypeRisk == -1)
+        {
+            isTutorial = true;
+        }
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
             notification.SetActive(false);
@@ -89,7 +92,8 @@ public class Dryer : MonoBehaviour
 
     public void TapDown()
     {
-        if (isInput)
+        int id = GameManager.Instance.IDLocation;
+        if (isInput && GameManager.Instance.lsLocation[id].indexTypeRisk == -1)
         {
             timeNeedle = 0;
             needle.DOLocalRotate(new Vector3(0f, 0f, Random.Range(-90f, 45f)), 1f);
@@ -159,6 +163,9 @@ public class Dryer : MonoBehaviour
 
     public void Help()
     {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         tutorialHand.SetActive(true);
     }
 }

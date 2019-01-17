@@ -81,6 +81,9 @@ public class DataPlayer : MonoBehaviour
             locationJson.indexType = GameManager.Instance.lsLocation[i].indexType;
             locationJson.makerType = GameManager.Instance.lsLocation[i].makerType;
             locationJson.risk = GameManager.Instance.lsLocation[i].risk;
+            locationJson.indexTypeRisk = GameManager.Instance.lsLocation[i].indexTypeRisk;
+            locationJson.timeCheckRisk = GameManager.Instance.lsLocation[i].timeCheckRisk;
+            locationJson.timeCheckFire = GameManager.Instance.lsLocation[i].timeCheckFire;
 
             locationJson.forest = GameManager.Instance.lsLocation[i].forest;
             locationJson.lsWorking = GameManager.Instance.lsLocation[i].lsWorking;
@@ -210,6 +213,9 @@ public class DataPlayer : MonoBehaviour
             location.countType = lsData[i]["countType"].AsInt;
             location.makerType = lsData[i]["makerType"].AsInt;
             location.risk = lsData[i]["risk"].AsInt;
+            location.indexTypeRisk = lsData[i]["indexTypeRisk"].AsInt;
+            location.timeCheckRisk = lsData[i]["timeCheckRisk"].AsFloat;
+            location.timeCheckFire = lsData[i]["timeCheckFire"].AsFloat;
 
             location.forest.tree = lsData[i]["forest"]["tree"].AsInt;
             location.forest.isOnBtnAutoPlant = lsData[i]["forest"]["isOnBtnAutoPlant"].AsBool;
@@ -506,6 +512,9 @@ public class DataPlayer : MonoBehaviour
             locationJson.indexType = GameManager.Instance.lsLocation[i].indexType;
             locationJson.makerType = GameManager.Instance.lsLocation[i].makerType;
             locationJson.risk = GameManager.Instance.lsLocation[i].risk;
+            locationJson.indexTypeRisk = GameManager.Instance.lsLocation[i].indexTypeRisk;
+            locationJson.timeCheckRisk = GameManager.Instance.lsLocation[i].timeCheckRisk;
+            locationJson.timeCheckFire = GameManager.Instance.lsLocation[i].timeCheckFire;
 
             locationJson.forest = GameManager.Instance.lsLocation[i].forest;
             locationJson.lsWorking = GameManager.Instance.lsLocation[i].lsWorking;

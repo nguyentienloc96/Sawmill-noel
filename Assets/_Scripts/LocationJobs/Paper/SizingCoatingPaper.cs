@@ -46,11 +46,14 @@ public class SizingCoatingPaper : MonoBehaviour
     {
         int randomBG = Random.Range(0, UIManager.Instance.spBG.Length);
         imgBG.sprite = UIManager.Instance.spBG[randomBG];
-        isTutorial = true;
         paper.localScale = new Vector3(-0.325f, 1f, 0.375f);
 
         int ID = GameManager.Instance.IDLocation;
         int IndexType = GameManager.Instance.lsLocation[ID].indexType;
+        if (GameManager.Instance.lsLocation[ID].indexTypeRisk == -1)
+        {
+            isTutorial = true;
+        }
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
             notification.SetActive(false);
@@ -114,7 +117,8 @@ public class SizingCoatingPaper : MonoBehaviour
 
     public void TapDown()
     {
-        if (isInput)
+        int id = GameManager.Instance.IDLocation;
+        if (isInput && GameManager.Instance.lsLocation[id].indexTypeRisk == -1)
         {
             AudioManager.Instance.Play("Painting");
             isRun = true;
@@ -225,5 +229,13 @@ public class SizingCoatingPaper : MonoBehaviour
             isFull = false;
         }
         return isFull;
+    }
+
+    public void Help()
+    {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
+        tutorialHand.SetActive(true);
     }
 }

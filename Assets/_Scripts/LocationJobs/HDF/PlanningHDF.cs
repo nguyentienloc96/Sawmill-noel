@@ -4,9 +4,10 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlanningHDF : MonoBehaviour {
+public class PlanningHDF : MonoBehaviour
+{
 
-	public bool isInput;
+    public bool isInput;
     public Transform cart;
     public Transform tree;
     public GameObject notification;
@@ -33,14 +34,18 @@ public class PlanningHDF : MonoBehaviour {
     {
         int randomBG = Random.Range(0, UIManager.Instance.spBG.Length);
         imgBG.sprite = UIManager.Instance.spBG[randomBG];
-        isTutorial = true;
         tree.localScale = new Vector3(1f, 1f, 1f);
 
         int ID = GameManager.Instance.IDLocation;
         int IndexType = GameManager.Instance.lsLocation[ID].indexType;
+
+        if (GameManager.Instance.lsLocation[ID].indexTypeRisk == -1)
+        {
+            isTutorial = true;
+        }
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
-			cart.localPosition = new Vector3(-1f, 0f, 0f);
+            cart.localPosition = new Vector3(-1f, 0f, 0f);
             notification.SetActive(false);
             tree.gameObject.SetActive(true);
             LoadInput();
@@ -62,7 +67,7 @@ public class PlanningHDF : MonoBehaviour {
                 if (Input.mousePosition.x > posDown.x)
                 {
                     float dis = Input.mousePosition.x - posDown.x;
-                    cart.position += new Vector3(dis * 0.01f * Time.deltaTime, 0f,0f);
+                    cart.position += new Vector3(dis * 0.01f * Time.deltaTime, 0f, 0f);
                 }
                 if (cart.position.x > posCheck.x)
                 {
@@ -85,7 +90,8 @@ public class PlanningHDF : MonoBehaviour {
 
     public void TapDown()
     {
-        if (isInput)
+        int id = GameManager.Instance.IDLocation;
+        if (isInput && GameManager.Instance.lsLocation[id].indexTypeRisk == -1)
         {
             anim.enabled = true;
             AudioManager.Instance.Play("Polish");
@@ -122,7 +128,7 @@ public class PlanningHDF : MonoBehaviour {
         int ID = GameManager.Instance.IDLocation;
         int IndexType = GameManager.Instance.lsLocation[ID].indexType;
         yield return new WaitForSeconds(0.5f);
-        
+
         tree.DOScale(Vector3.zero, 0.5f);
         tree.DOMove(tfEnd.position, 0.5f).OnComplete(() =>
         {
@@ -147,8 +153,11 @@ public class PlanningHDF : MonoBehaviour {
         });
     }
 
-       public void Help()
+    public void Help()
     {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         tutorialHand.SetActive(true);
     }
 }

@@ -38,11 +38,14 @@ public class HeadboxFormingPaper : MonoBehaviour
     {
         int randomBG = Random.Range(0, UIManager.Instance.spBG.Length);
         imgBG.sprite = UIManager.Instance.spBG[randomBG];
-        isTutorial = true;
         paperRoll.localScale = new Vector3(60f, 60f, 1f);
 
         int ID = GameManager.Instance.IDLocation;
         int IndexType = GameManager.Instance.lsLocation[ID].indexType;
+        if (GameManager.Instance.lsLocation[ID].indexTypeRisk == -1)
+        {
+            isTutorial = true;
+        }
         tree.localPosition = new Vector3(-1f, 0f, 0f);
         cart.localPosition = new Vector3(0f, 0f, 0f);
         paperRoll.localPosition = Vector3.zero;
@@ -92,7 +95,8 @@ public class HeadboxFormingPaper : MonoBehaviour
 
     public void TapDown()
     {
-        if (isInput)
+        int id = GameManager.Instance.IDLocation;
+        if (isInput && GameManager.Instance.lsLocation[id].indexTypeRisk == -1)
         {
             anim.enabled = true;
             foreach (ParticleSystem ps in particleLimbing)
@@ -170,5 +174,13 @@ public class HeadboxFormingPaper : MonoBehaviour
             });
         });
 
+    }
+
+    public void Help()
+    {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
+        tutorialHand.SetActive(true);
     }
 }

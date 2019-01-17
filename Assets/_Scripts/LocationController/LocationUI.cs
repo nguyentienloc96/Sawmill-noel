@@ -64,5 +64,10 @@ public class LocationUI : MonoBehaviour
                 break;
             }
         }
+
+        if(GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+        {
+            GameManager.Instance.lsLocation[id].WarningFire();
+        }
     }
 }

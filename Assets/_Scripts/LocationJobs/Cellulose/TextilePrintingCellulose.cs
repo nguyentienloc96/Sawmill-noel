@@ -37,9 +37,13 @@ public class TextilePrintingCellulose : MonoBehaviour
     {
         int randomBG = Random.Range(0, UIManager.Instance.spBG.Length);
         imgBG.sprite = UIManager.Instance.spBG[randomBG];
-        isTutorial = true;
         int ID = GameManager.Instance.IDLocation;
         int IndexType = GameManager.Instance.lsLocation[ID].indexType;
+
+        if (GameManager.Instance.lsLocation[ID].indexTypeRisk == -1)
+        {
+            isTutorial = true;
+        }
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
             cart.localPosition = new Vector3(-4f, 0f, 0f);
@@ -90,7 +94,8 @@ public class TextilePrintingCellulose : MonoBehaviour
 
     public void TapDown()
     {
-        if (isInput)
+        int id = GameManager.Instance.IDLocation;
+        if (isInput && GameManager.Instance.lsLocation[id].indexTypeRisk == -1)
         {
             anim.enabled = true;
             AudioManager.Instance.Play("Polish");
@@ -132,7 +137,7 @@ public class TextilePrintingCellulose : MonoBehaviour
         cart.DOLocalMoveY(6f, 0.5f).OnComplete(() =>
         {
             anim.enabled = false;
-            
+
             tree.DOScale(Vector3.zero, 0.5f);
             tree.DOMove(tfEnd.position, 0.5f).OnComplete(() =>
             {
@@ -159,8 +164,11 @@ public class TextilePrintingCellulose : MonoBehaviour
 
     }
 
-       public void Help()
+    public void Help()
     {
+        int id = GameManager.Instance.IDLocation;
+        if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
+            return;
         tutorialHand.SetActive(true);
     }
 }
