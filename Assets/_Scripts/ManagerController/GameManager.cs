@@ -359,17 +359,35 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                int r0 = UnityEngine.Random.Range(0, 5);
-                int r1 = UnityEngine.Random.Range(6, 9);
-                r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
+                if (UIManager.Instance.lsItem[7].isOnItem)
+                {
+                    int r0 = UnityEngine.Random.Range(0, 5);
+                    int r1 = UnityEngine.Random.Range(6, 9);
+                    r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
+                }
+                else
+                {
+                    int r0 = UnityEngine.Random.Range(0, 5);
+                    int r1 = UnityEngine.Random.Range(6, 8);
+                    r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
+                }
                 // anh muốn test cái item nào anh thay ròng trên bằng cho số bất kì từ 0-8/5 là được anh nhá
             }
         }
         else
         {
-            int r0 = UnityEngine.Random.Range(0, 5);
-            int r1 = UnityEngine.Random.Range(6, 9);
-            r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
+            if (UIManager.Instance.lsItem[7].isOnItem)
+            {
+                int r0 = UnityEngine.Random.Range(0, 5);
+                int r1 = UnityEngine.Random.Range(6, 9);
+                r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
+            }
+            else
+            {
+                int r0 = UnityEngine.Random.Range(0, 5);
+                int r1 = UnityEngine.Random.Range(6, 8);
+                r = UnityEngine.Random.Range(0, 2) == 0 ? r0 : r1;
+            }
             if (jobEnd == -1)
             {
                 locationEnd--;
