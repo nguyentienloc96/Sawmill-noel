@@ -50,5 +50,6 @@
   "Prein" : 0.7,
   "Tchal" : 2,
   "Pfire" : 0.1,
-  "Uptruck" : 0.7
+  "Uptruck" : 0.7,
+  "IDLeaderboard" : "com.lumic.sm.cff"
 }

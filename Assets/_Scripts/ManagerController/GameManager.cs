@@ -635,17 +635,24 @@ public class GameManager : MonoBehaviour
         DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild"));
         TimeSpan elapsed = dateGame.Subtract(firstBuild);
         double days = elapsed.TotalDays;
-        Debug.Log(days);
-        Debug.Log(PlayerPrefs.GetInt("TheShortestTimeBuild"));
-        if (days < PlayerPrefs.GetInt("TheShortestTimeBuild"))
+        if (!PlayerPrefs.HasKey("TheShortestTimeBuild") || PlayerPrefs.GetInt("TheShortestTimeBuild") == 0)
         {
-            //POST SCORE
-            PlayerPrefs.SetInt("TheShortestTimeBuild", int.Parse(days.ToString()));
-            Debug.Log("thoi gian ngan nhat " + days);
+            PlayerPrefs.SetInt("TheShortestTimeBuild", (int)days);
+            Debug.Log("thoi gian ngan nhat " + (int)days);
         }
         else
         {
-            Debug.Log("Ko phai thoi gian ngan nhat ");
+            if (days < PlayerPrefs.GetInt("TheShortestTimeBuild"))
+            {
+                //POST SCORE
+                PlayerPrefs.SetInt("TheShortestTimeBuild", int.Parse(days.ToString()));
+                Debug.Log("thoi gian ngan nhat " + (int)days);
+            }
+            else
+            {
+                Debug.Log("Ko phai thoi gian ngan nhat ");
+            }
         }
+        
     }
 }

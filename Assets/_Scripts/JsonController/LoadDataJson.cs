@@ -105,6 +105,7 @@ public class LoadDataJson : MonoBehaviour
             GameConfig.Instance.Pfire = objJson["Pfire"].AsFloat;
             GameConfig.Instance.Tchal = objJson["Tchal"].AsInt;
             GameConfig.Instance.Uptruck = objJson["Uptruck"].AsFloat;
+            GameConfig.Instance.IDLeaderboard = objJson["IDLeaderboard"];
 
             for (int j = 0; j < objJson["richness"].Count; j++)
             {
