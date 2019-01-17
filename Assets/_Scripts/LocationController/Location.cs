@@ -569,7 +569,7 @@ public class Location : MonoBehaviour
 
     public void SellJob()
     {
-      
+
         if (GameManager.Instance.dollar >= lsWorking[countType + 1].price)
         {
             GameManager.Instance.AddDollar(-lsWorking[countType + 1].price);
@@ -585,7 +585,7 @@ public class Location : MonoBehaviour
             lsWorking[countType].truckManager.txtLevel.text = UIManager.Instance.ConvertNumber(lsWorking[countType].levelTruck);
 
             Invoke("ActiveChallenge", 3.25f);
-            
+
             if (countType + 1 == lsWorking.Length)
             {
                 if (id + 1 < UIManager.Instance.lsLocationUI.Count)
@@ -598,7 +598,7 @@ public class Location : MonoBehaviour
             }
             else
             {
-                
+
 
                 if (GameManager.Instance.dollar >= lsWorking[countType + 1].price)
                 {
@@ -634,7 +634,7 @@ public class Location : MonoBehaviour
             if (countType == 0)
             {
                 UIManager.Instance.WarningForest.SetActive(true);
-            }  
+            }
         }
     }
 
@@ -782,75 +782,30 @@ public class Location : MonoBehaviour
                 UIManager.Instance.animAchievement.enabled = true;
             }
         }
-        if (id == UIManager.Instance.lsItem[4].idLocation && UIManager.Instance.lsItem[4].isOnItem)
+        if (id == UIManager.Instance.lsItem[0].idLocation && UIManager.Instance.lsItem[0].isOnItem && UIManager.Instance.lsItem[0].indexType == 0)
         {
-            if (id == UIManager.Instance.lsItem[0].idLocation && UIManager.Instance.lsItem[0].isOnItem)
+            if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem && UIManager.Instance.lsItem[8].indexType == 0)
             {
-                if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem)
-                {
-                    if (UIManager.Instance.lsItem[8].indexType == 0)
-                    {
-                        lsWorking[0].output += outPutValue * 8;
-                    }
-                    else
-                    {
-                        if (UIManager.Instance.lsItem[0].indexType == 0)
-                        {
-                            lsWorking[0].output += outPutValue * 4;
-                        }
-                        else
-                        {
-                            lsWorking[0].output += outPutValue * 2;
-                        }
-                    }
-                }
-                else
-                {
-                    if (UIManager.Instance.lsItem[0].indexType == 0)
-                    {
-                        lsWorking[0].output += outPutValue * 4;
-                    }
-                    else
-                    {
-                        lsWorking[0].output += outPutValue * 2;
-                    }
-                }
-
+                lsWorking[0].output += outPutValue * 4;
             }
             else
             {
                 lsWorking[0].output += outPutValue * 2;
             }
+
         }
         else
         {
-            if (id == UIManager.Instance.lsItem[0].idLocation && UIManager.Instance.lsItem[0].isOnItem)
+            if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem && UIManager.Instance.lsItem[8].indexType == 0)
             {
-                if (id == UIManager.Instance.lsItem[8].idLocation && UIManager.Instance.lsItem[8].isOnItem)
-                {
-                    if (UIManager.Instance.lsItem[8].indexType == 0)
-                    {
-                        lsWorking[0].output += outPutValue * 4;
-                    }
-                    else
-                    {
-                        if (UIManager.Instance.lsItem[0].indexType == 0)
-                        {
-                            lsWorking[0].output += outPutValue * 2;
-                        }
-                        else
-                        {
-                            lsWorking[0].output += outPutValue;
-                        }
-                    }
-                }
+                lsWorking[0].output += outPutValue * 2;
             }
             else
             {
                 lsWorking[0].output += outPutValue;
             }
-
         }
+
         lsWorking[0].textOutput.text = UIManager.Instance.ConvertNumber(lsWorking[0].output);
 
         if (lsWorking[0].id < lsWorking.Length)
@@ -930,9 +885,9 @@ public class Location : MonoBehaviour
             }
             else
             {
-                if (lsWorking[idType].input >= lsWorking[idType].maxOutputMade * 4)
+                if (lsWorking[idType].input >= lsWorking[idType].maxOutputMade * 2)
                 {
-                    materialCurrent = lsWorking[idType].maxOutputMade * 4;
+                    materialCurrent = lsWorking[idType].maxOutputMade * 2;
                 }
                 else
                 {
@@ -940,12 +895,7 @@ public class Location : MonoBehaviour
                 }
             }
 
-            lsWorking[idType].input -= Math.Floor(materialCurrent);
-            lsWorking[idType].textInput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].input);
-            outPutValue = Math.Floor((double)(GameConfig.Instance.r * materialCurrent));
-
-            lsWorking[idType].output += outPutValue;
-            lsWorking[idType].textOutput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].output);
+           
         }
         else
         {
@@ -971,13 +921,15 @@ public class Location : MonoBehaviour
                     materialCurrent = lsWorking[idType].input;
                 }
             }
-            lsWorking[idType].input -= Math.Floor(materialCurrent);
-            lsWorking[idType].textInput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].input);
-            outPutValue = Math.Floor((double)(GameConfig.Instance.r * materialCurrent));
-
-            lsWorking[idType].output += outPutValue;
-            lsWorking[idType].textOutput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].output);
+            
         }
+
+        lsWorking[idType].input -= Math.Floor(materialCurrent);
+        lsWorking[idType].textInput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].input);
+        outPutValue = Math.Floor((double)(GameConfig.Instance.r * materialCurrent));
+
+        lsWorking[idType].output += outPutValue;
+        lsWorking[idType].textOutput.text = UIManager.Instance.ConvertNumber(lsWorking[idType].output);
 
         if (isMiniGame)
         {
@@ -1113,12 +1065,12 @@ public class Location : MonoBehaviour
             {
                 SellJobOnclick(IDLocation, idType);
             }
-           
+
 
         }
     }
 
-    public void SellJobOnclick(int IDLocation,int idType)
+    public void SellJobOnclick(int IDLocation, int idType)
     {
         UIManager.Instance.panelWarning.SetActive(false);
         UIManager.Instance.JobSell.SetActive(true);
@@ -1152,6 +1104,10 @@ public class Location : MonoBehaviour
         if (countType <= 0)
         {
             forest.forestClass.RunCarGrow();
+            if (PlayerPrefs.GetInt("isTutorial") == 0)
+            {
+                UIManager.Instance.txtWait.text = "Wait to plant trees";
+            }
         }
         else
         {

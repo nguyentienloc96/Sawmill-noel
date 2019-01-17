@@ -82,10 +82,6 @@ public class Forest : MonoBehaviour
         if (!location.forest.isAutoPlant && location.countType >= 0)
         {
             //RunCarGrow();
-            //if (PlayerPrefs.GetInt("isTutorial") == 0)
-            //{
-            //    UIManager.Instance.txtWait.text = "Wait to plant trees";
-            //}
 
             location.btnSelectTree();
             if (location.id == GameManager.Instance.IDLocation)
