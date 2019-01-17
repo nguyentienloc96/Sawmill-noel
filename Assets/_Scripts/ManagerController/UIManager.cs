@@ -1341,7 +1341,7 @@ public class UIManager : MonoBehaviour
             str_congratulation = GameConfig.Instance.richness[1];
             count_congratulation = 1;
         }
-        else if (GameManager.Instance.dollar >= Mathf.Pow(10, 6) && GameManager.Instance.dollar < Mathf.Pow(10, 9) && PlayerPrefs.GetInt("Congratulation") != 1)
+        else if (GameManager.Instance.dollar >= Mathf.Pow(10, 6) && GameManager.Instance.dollar < Mathf.Pow(10, 9) && PlayerPrefs.GetInt("Congratulation") < 1)
         {
             PlayerPrefs.SetInt("Congratulation", 1);
             str_congratulation = GameConfig.Instance.richness[0];

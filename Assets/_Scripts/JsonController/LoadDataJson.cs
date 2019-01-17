@@ -149,6 +149,7 @@ public class LoadDataJson : MonoBehaviour
 
         if (GameManager.Instance.gold >= goldExchange && GameManager.Instance.gold > 0)
         {
+            AudioManager.Instance.Play("TingClaim");
             GameManager.Instance.gold -= goldExchange;
             GameManager.Instance.AddDollar(+dollarRecive);
             //UIManager.Instance.PushGiveGold("You have received " + UIManager.Instance.ConvertNumber(dollarRecive) + "$");
@@ -158,9 +159,9 @@ public class LoadDataJson : MonoBehaviour
         }
         else if (GameManager.Instance.gold < goldExchange && GameManager.Instance.gold > 0)
         {
+            AudioManager.Instance.Play("TingClaim");
             goldExchange = GameManager.Instance.gold;
             dollarRecive = (goldExchange * dollarRecive) / (5 + (GameManager.Instance.sumHomeAll - 1));
-
             GameManager.Instance.gold -= goldExchange;
             GameManager.Instance.AddDollar(+dollarRecive);
             //UIManager.Instance.PushGiveGold("You have received " + UIManager.Instance.ConvertNumber(dollarRecive) + "$");
