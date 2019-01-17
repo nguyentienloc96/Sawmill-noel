@@ -1608,14 +1608,24 @@ public class UIManager : MonoBehaviour
     {
         int id = GameManager.Instance.IDLocation;
         int countType = GameManager.Instance.lsLocation[id].countType;
-        if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[id].lsWorking[countType].price * GameConfig.Instance.Pfire)
+
+        double priceRisk;
+        if (countType == -1)
         {
-            GameManager.Instance.dollar -= GameManager.Instance.lsLocation[id].lsWorking[countType].price * GameConfig.Instance.Pfire;
+            priceRisk = 0;
+        }
+        else
+        {
+            priceRisk = GameManager.Instance.lsLocation[id].lsWorking[countType].price * GameConfig.Instance.Pfire;
+        }
+
+        if (GameManager.Instance.dollar >= priceRisk)
+        {
+            GameManager.Instance.dollar -= priceRisk;
             GameManager.Instance.lsLocation[id].risk -= 10;
             if (GameManager.Instance.lsLocation[id].risk < 0)
                 GameManager.Instance.lsLocation[id].risk = 0;
             txtInfoRisk.text = GameManager.Instance.lsLocation[id].risk + "%";
-            double priceRisk = GameManager.Instance.lsLocation[id].lsWorking[countType].price * GameConfig.Instance.Pfire;
             txtPriceRisk.text = ConvertNumber(priceRisk);
             if(GameManager.Instance.lsLocation[id].risk <= 0)
             {
