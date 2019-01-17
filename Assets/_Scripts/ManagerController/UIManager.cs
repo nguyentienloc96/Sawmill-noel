@@ -174,6 +174,7 @@ public class UIManager : MonoBehaviour
     public Transform contentAchievement;
     public Sprite spGoldClaim;
     public Animator animAchievement;
+    public GameObject btnLeaderboard;
 
     [Header("InfoForest")]
     public GameObject panelInfo;
@@ -612,6 +613,7 @@ public class UIManager : MonoBehaviour
             Ads.Instance.HideBanner();
         }
         btnAchievement.SetActive(false);
+        btnLeaderboard.SetActive(false);
     }
 
     public void PushGiveGold(string str)
@@ -1000,6 +1002,7 @@ public class UIManager : MonoBehaviour
         panelSetting.SetActive(false);
         ScenesManager.Instance.secenes[0].objects.SetActive(true);
         btnAchievement.SetActive(false);
+        btnLeaderboard.SetActive(false);
         if (PlayerPrefs.GetInt("Continue") == 0)
         {
             btncontinue.interactable = false;

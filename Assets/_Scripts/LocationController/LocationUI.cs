@@ -25,6 +25,7 @@ public class LocationUI : MonoBehaviour
         GameManager.Instance.LoadLocation();
         UIManager.Instance.worldManager.transform.SetAsFirstSibling();
         UIManager.Instance.btnAchievement.SetActive(true);
+        UIManager.Instance.btnLeaderboard.SetActive(true);
         if (PlayerPrefs.GetInt("isTutorial") == 0)
         {
             if (!UIManager.Instance.popupTutorial.activeInHierarchy)
