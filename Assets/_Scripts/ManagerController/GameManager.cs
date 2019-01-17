@@ -211,6 +211,19 @@ public class GameManager : MonoBehaviour
         }
 
         UIManager.Instance.CheckBillionaire();
+
+        if (UIManager.Instance.panelRisk.activeInHierarchy)
+        {
+            double priceRisk = lsLocation[IDLocation].lsWorking[lsLocation[IDLocation].countType].price * GameConfig.Instance.Pfire;
+            if (dollar >= priceRisk)
+            {
+                UIManager.Instance.btnYesUpgradeRisk.interactable = true;
+            }
+            else
+            {
+                UIManager.Instance.btnYesUpgradeRisk.interactable = false;
+            }
+        }
     }
 
     public void AddOutPut(double numberAddOutput, Sprite icon, Vector3 startMove, Vector3 endMove, UnityAction actionLoadScenesDone = null)
@@ -271,6 +284,7 @@ public class GameManager : MonoBehaviour
             dateGame = dateGame.AddDays(1f);
             SetDate();
             time = 0;
+
         }
 
         for (int i = 0; i < UIManager.Instance.lsItem.Length; i++)

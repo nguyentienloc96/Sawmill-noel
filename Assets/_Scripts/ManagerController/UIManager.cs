@@ -259,6 +259,16 @@ public class UIManager : MonoBehaviour
     public GameObject panelWarning;
     public Button btnYesWarning;
 
+    [Header("WarningFire")]
+    public GameObject panelWarningFire;
+    public Text txtInfoWarningFire;
+
+    [Header("Risk")]
+    public GameObject panelRisk;
+    public Text txtInfoRisk;
+    public Text txtPriceRisk;
+    public Button btnYesUpgradeRisk;
+
     public bool isClickHome;
     public bool isClickTrunk;
     public bool isOnClickTrunk;
@@ -1497,5 +1507,21 @@ public class UIManager : MonoBehaviour
 
 
         panelSellRedundant.SetActive(false);
+    }
+
+    public void YesUpgradeRisk()
+    {
+        int id = GameManager.Instance.IDLocation;
+        int countType = GameManager.Instance.lsLocation[id].countType;
+        if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[id].lsWorking[countType].price * GameConfig.Instance.Pfire)
+        {
+            GameManager.Instance.dollar -= GameManager.Instance.lsLocation[id].lsWorking[countType].price * GameConfig.Instance.Pfire;
+            GameManager.Instance.lsLocation[id].risk -= 10;
+            if (GameManager.Instance.lsLocation[id].risk < 0)
+                GameManager.Instance.lsLocation[id].risk = 0;
+            txtInfoRisk.text = GameManager.Instance.lsLocation[id].risk + "%";
+            double priceRisk = GameManager.Instance.lsLocation[id].lsWorking[countType].price * GameConfig.Instance.Pfire;
+            txtPriceRisk.text = ConvertNumber(priceRisk);
+        }
     }
 }

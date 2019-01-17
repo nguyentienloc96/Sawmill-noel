@@ -9,6 +9,7 @@ public class LocationJSON {
     public int countType = 0;
     public int indexType = 0;
     public int makerType;
+    public int risk;
 
     public int capIndex = 4;
     public int captruckIndex = 4;

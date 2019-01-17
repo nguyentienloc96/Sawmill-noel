@@ -1167,7 +1167,18 @@ public class Location : MonoBehaviour
 
     public void FireFightingOncick()
     {
-
+        UIManager.Instance.panelRisk.SetActive(true);
+        UIManager.Instance.txtInfoRisk.text = risk + "%";
+        double priceRisk = lsWorking[countType].price * GameConfig.Instance.Pfire;
+        UIManager.Instance.txtPriceRisk.text = UIManager.Instance.ConvertNumber(priceRisk);
+        if(GameManager.Instance.dollar >= priceRisk)
+        {
+            UIManager.Instance.btnYesUpgradeRisk.interactable = true;
+        }
+        else
+        {
+            UIManager.Instance.btnYesUpgradeRisk.interactable = false;
+        }
     }
 
 }
