@@ -646,21 +646,21 @@ public class GameManager : MonoBehaviour
 
     public void GetTheShortestTimeBuildComplete(int _idHouse)
     {
-        DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild" + _idHouse));
+        DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild" + (_idHouse+1)));
         TimeSpan elapsed = dateGame.Subtract(firstBuild);
         double days = elapsed.TotalDays;
-        if (!PlayerPrefs.HasKey("TheShortestTimeBuild" + _idHouse) || PlayerPrefs.GetInt("TheShortestTimeBuild" + _idHouse.ToString()) == 0)
+        if (!PlayerPrefs.HasKey("TheShortestTimeBuild" + _idHouse) || PlayerPrefs.GetInt("TheShortestTimeBuild" + (_idHouse + 1)) == 0)
         {
-            PlayerPrefs.SetInt("TheShortestTimeBuild" + _idHouse, (int)days);
+            PlayerPrefs.SetInt("TheShortestTimeBuild" + (_idHouse + 1), (int)days);
             Debug.Log("thoi gian ngan nhat " + (int)days);
         }
         else
         {
-            if (days < PlayerPrefs.GetInt("TheShortestTimeBuild" + _idHouse.ToString()))
+            if (days < PlayerPrefs.GetInt("TheShortestTimeBuild" + (_idHouse + 1)))
             {
-                string idLD = GameConfig.Instance.IDLeaderboard + _idHouse.ToString();
+                string idLD = GameConfig.Instance.IDLeaderboard + (_idHouse + 1);
                 LeaderboardManager.Instance.ReportScore((long)days,idLD);
-                PlayerPrefs.SetInt("TheShortestTimeBuild" + _idHouse, (int)days);
+                PlayerPrefs.SetInt("TheShortestTimeBuild" + (_idHouse + 1), (int)days);
                 Debug.Log("thoi gian ngan nhat " + (int)days);
             }
             else

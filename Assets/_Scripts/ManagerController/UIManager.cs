@@ -498,6 +498,11 @@ public class UIManager : MonoBehaviour
             PlayerPrefs.SetInt("Congratulation", 0);
             PlayerPrefs.SetString("NextChallenge", "");
             PlayerPrefs.SetString("LastChallenge", "");
+            for (int t = 1; t <= 12; t++)
+            {
+                PlayerPrefs.SetInt("TheShortestTimeBuild" + t, 0);
+                PlayerPrefs.SetString("FirstBuild" + t, "");
+            }
             isClick = true;
             isContinue = false;
             AudioManager.Instance.Play("Click");
@@ -1459,7 +1464,7 @@ public class UIManager : MonoBehaviour
 
         if (str_congratulation == "")
             return;
-        Debug.Log(PlayerPrefs.GetInt("Congratulation"));
+        //Debug.Log(PlayerPrefs.GetInt("Congratulation"));
         coin_Congratulation = 5 * (count_congratulation + 2);
         if (coin_Congratulation > 50)
             coin_Congratulation = 50;
