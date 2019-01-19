@@ -36,7 +36,7 @@ public class Limbing : MonoBehaviour
     {
         int randomBG = Random.Range(0, UIManager.Instance.spBG.Length);
         imgBG.sprite = UIManager.Instance.spBG[randomBG];
-       
+
         tree.localScale = Vector3.one;
 
         int ID = GameManager.Instance.IDLocation;
@@ -44,6 +44,11 @@ public class Limbing : MonoBehaviour
         if (GameManager.Instance.lsLocation[ID].indexTypeRisk == -1)
         {
             isTutorial = true;
+        }
+        else
+        {
+            isTutorial = false;
+            tutorialHand.SetActive(false);
         }
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
@@ -75,16 +80,30 @@ public class Limbing : MonoBehaviour
                     StartCoroutine(CompleteJob());
                 }
             }
+
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
+            {
+                notification.SetActive(false);
+            }
+           
         }
         else
         {
-            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
-                .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
             {
                 notification.SetActive(false);
-                tree.gameObject.SetActive(true);
-                LoadInput();
-                isStop = false;
+            }
+            else
+            {
+
+                if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
+                    .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+                {
+                    notification.SetActive(false);
+                    tree.gameObject.SetActive(true);
+                    LoadInput();
+                    isStop = false;
+                }
             }
         }
     }
@@ -137,7 +156,7 @@ public class Limbing : MonoBehaviour
         int ID = GameManager.Instance.IDLocation;
         int IndexType = GameManager.Instance.lsLocation[ID].indexType;
         yield return new WaitForSeconds(0.5f);
-        
+
         tree.DOScale(Vector3.zero, 0.5f);
         tree.DOMove(tfEnd.position, 0.5f).OnComplete(() =>
         {

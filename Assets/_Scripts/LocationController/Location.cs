@@ -1039,10 +1039,10 @@ public class Location : MonoBehaviour
         if (UIManager.Instance.isLocation && id == GameManager.Instance.IDLocation && countType >= 0 && PlayerPrefs.GetInt("isTutorial") != 0 && indexTypeRisk == -1)
         {
             timeCheckFire += Time.deltaTime;
-            if (timeCheckFire >= (GameConfig.Instance.p0Time * 30f) && risk > 0 && id == GameManager.Instance.IDLocation && !UIManager.Instance.isSpinning)
+            if (timeCheckFire >= 30f && risk > 0 && id == GameManager.Instance.IDLocation && !UIManager.Instance.isSpinning)
             {
-                int warningRisk = UnityEngine.Random.Range(0, 100);
-                if (warningRisk <= risk)
+                //int warningRisk = UnityEngine.Random.Range(0, 100);
+                //if (warningRisk <= risk)
                 {
                     WarningFire();
                 }

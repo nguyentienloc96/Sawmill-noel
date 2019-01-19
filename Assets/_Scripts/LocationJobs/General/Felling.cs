@@ -28,8 +28,9 @@ public class Felling : MonoBehaviour
         {
             tutorialHand.SetActive(false);
         }
+        else { tutorialHand.SetActive(false); }
         if (GameManager.Instance.lsLocation[ID].forest.tree > 0)
-        {          
+        {
             notification.SetActive(false);
             int id = GameManager.Instance.IDLocation;
             if (GameManager.Instance.lsLocation[id].indexTypeRisk != -1)
@@ -115,13 +116,20 @@ public class Felling : MonoBehaviour
     private void Update()
     {
         int ID = GameManager.Instance.IDLocation;
-        if (GameManager.Instance.lsLocation[ID].forest.tree > 0)
+        if (GameManager.Instance.lsLocation[ID].indexTypeRisk != -1)
         {
             notification.SetActive(false);
         }
         else
         {
-            notification.SetActive(true);
+            if (GameManager.Instance.lsLocation[ID].forest.tree > 0)
+            {
+                notification.SetActive(false);
+            }
+            else
+            {
+                notification.SetActive(true);
+            }
         }
     }
 

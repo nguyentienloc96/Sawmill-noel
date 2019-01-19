@@ -1665,4 +1665,6 @@ public class UIManager : MonoBehaviour
             LeaderboardManager.Instance.ShowLeaderboard(GameConfig.Instance.IDLeaderboard + GameManager.Instance.IDLocation.ToString());
         }
     }
+
+
 }

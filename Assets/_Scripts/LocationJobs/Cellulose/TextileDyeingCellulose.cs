@@ -45,6 +45,11 @@ public class TextileDyeingCellulose : MonoBehaviour
         {
             isTutorial = true;
         }
+        else
+        {
+            isTutorial = false;
+            tutorialHand.SetActive(false);
+        }
         cart.localPosition = new Vector3(-1.5f, 0f, 0f);
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
@@ -77,16 +82,28 @@ public class TextileDyeingCellulose : MonoBehaviour
                     StartCoroutine(CompleteJob());
                 }
             }
+
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
+            {
+                notification.SetActive(false);
+            }
         }
         else
         {
-            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
-           .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
             {
                 notification.SetActive(false);
-                tree.gameObject.SetActive(true);
-                LoadInput();
-                isStop = false;
+            }
+            else
+            {
+                if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
+               .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+                {
+                    notification.SetActive(false);
+                    tree.gameObject.SetActive(true);
+                    LoadInput();
+                    isStop = false;
+                }
             }
         }
     }

@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
         }
 
         for (int i = 0; i < UIManager.Instance.lsItemTreeUI.Count; i++)
-        {   
+        {
             if (i <= lsLocation[IDLocation].countType)
             {
                 if (dollar >= lsLocation[IDLocation].lsWorking[lsLocation[IDLocation].countType].price * i / UIManager.Instance._priceTree)
@@ -228,7 +228,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-            UIManager.Instance.CheckBillionaire();
+        UIManager.Instance.CheckBillionaire();
 
         if (UIManager.Instance.panelRisk.activeInHierarchy)
         {
@@ -662,7 +662,7 @@ public class GameManager : MonoBehaviour
 
     public void GetTheShortestTimeBuildComplete(int _idHouse)
     {
-        DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild" + (_idHouse+1)));
+        DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild" + (_idHouse + 1)));
         TimeSpan elapsed = dateGame.Subtract(firstBuild);
         double days = elapsed.TotalDays;
         if (!PlayerPrefs.HasKey("TheShortestTimeBuild" + _idHouse) || PlayerPrefs.GetInt("TheShortestTimeBuild" + (_idHouse + 1)) == 0)
@@ -675,7 +675,7 @@ public class GameManager : MonoBehaviour
             if (days < PlayerPrefs.GetInt("TheShortestTimeBuild" + (_idHouse + 1)))
             {
                 string idLD = GameConfig.Instance.IDLeaderboard + (_idHouse + 1);
-                LeaderboardManager.Instance.ReportScore((long)days,idLD);
+                LeaderboardManager.Instance.ReportScore((long)days, idLD);
                 PlayerPrefs.SetInt("TheShortestTimeBuild" + (_idHouse + 1), (int)days);
                 Debug.Log("thoi gian ngan nhat " + (int)days);
             }
@@ -684,6 +684,6 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Ko phai thoi gian ngan nhat ");
             }
         }
-        
+
     }
 }

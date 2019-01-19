@@ -50,6 +50,11 @@ public class PressingDryingPaper : MonoBehaviour
         {
             isTutorial = true;
         }
+        else
+        {
+            isTutorial = false;
+            tutorialHand.SetActive(false);
+        }
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
             notification.SetActive(false);
@@ -86,17 +91,31 @@ public class PressingDryingPaper : MonoBehaviour
                     StartCoroutine(CompleteJob());
                 }
             }
+
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
+            {
+                notification.SetActive(false);
+            }
         }
         else
         {
-            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
-               .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
             {
-                isStop = false;
                 notification.SetActive(false);
-                paper.gameObject.SetActive(true);
-                StartCoroutine(LoadInput());
-                Debug.Log("1");
+            }
+            else
+            {
+
+                if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
+                   .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+                {
+                    isStop = false;
+                    notification.SetActive(false);
+                    paper.gameObject.SetActive(true);
+                    StartCoroutine(LoadInput());
+                    Debug.Log("1");
+                }
             }
         }
 
