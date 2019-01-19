@@ -1342,6 +1342,7 @@ public class UIManager : MonoBehaviour
     }
 
     int typeTreeCurrent = 0;
+    float _priceTree = 10f;
     public void btnBuyTree(int typeTree)
     {
 
@@ -1351,7 +1352,7 @@ public class UIManager : MonoBehaviour
         {
             typeTreeCurrent = typeTree;
             panelBuyTree.SetActive(true);
-            txtInfoBuyTree.text = "Plan this tree to make the output price increase " + (typeTree) * 10 + "%?";
+            txtInfoBuyTree.text = "Plan this tree to make the output price increase " + (typeTree * 10f) + "%?";
 
             for (int i = 0; i < lsItemTreeUI.Count; i++)
             {
@@ -1365,11 +1366,11 @@ public class UIManager : MonoBehaviour
                 }
             }
             txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
-               * (typeTree) / 5f);
+               * (typeTree) / _priceTree);
 
 
             if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
-            * (typeTreeCurrent) / 5f)
+            * (typeTreeCurrent) / _priceTree)
             {
                 btnYesBuyTree.interactable = true;
             }
@@ -1386,12 +1387,11 @@ public class UIManager : MonoBehaviour
         int idLocation = GameManager.Instance.IDLocation;
         int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
         if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
-            * (typeTreeCurrent) / 5f)
+            * (typeTreeCurrent) / _priceTree)
         {
             if (typeTreeCurrent != 0)
             {
-                GameManager.Instance.dollar -= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * (typeTreeCurrent) / 5f;
-
+                GameManager.Instance.dollar -= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * (typeTreeCurrent) / _priceTree;
             }
             panelBuyTree.SetActive(false);
             GameManager.Instance.lsLocation[idLocation].forest.typeTree = typeTreeCurrent;

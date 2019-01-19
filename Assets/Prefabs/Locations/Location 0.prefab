@@ -10143,6 +10143,11 @@ MonoBehaviour:
   countType: -1
   makerType: 0
   risk: 0
+  indexTypeRisk: -1
+  timeCheckRisk: 0
+  timeCheckFire: 0
+  inputFire: 0
+  ouputFire: 0
   fireWarning: {fileID: 1743976682226912}
   txtNameForest: {fileID: 114209452854070806}
   forest:
