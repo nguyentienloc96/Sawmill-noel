@@ -68,7 +68,7 @@ public class GameConfig : MonoBehaviour
     public float Prein;
     public int Rein;
     public float Pfire;
-    public int Tchal;
+    public float Tchal;
     public float Uptruck;
     public string IDLeaderboard;
 

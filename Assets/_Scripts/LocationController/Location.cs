@@ -1017,7 +1017,7 @@ public class Location : MonoBehaviour
         }
 
         timeCheckRisk += Time.deltaTime;
-        if (timeCheckRisk >= GameConfig.Instance.p0Time * 7f)
+        if (timeCheckRisk >= GameConfig.Instance.p0Time * 21f)
         {
             if (risk < 100)
                 risk++;
@@ -1039,7 +1039,7 @@ public class Location : MonoBehaviour
         if (UIManager.Instance.isLocation && id == GameManager.Instance.IDLocation && countType >= 0 && PlayerPrefs.GetInt("isTutorial") != 0 && indexTypeRisk == -1)
         {
             timeCheckFire += Time.deltaTime;
-            if (timeCheckFire >= (GameConfig.Instance.p0Time * 30f) && risk > 0 && id == GameManager.Instance.IDLocation)
+            if (timeCheckFire >= (GameConfig.Instance.p0Time * 30f) && risk > 0 && id == GameManager.Instance.IDLocation && !UIManager.Instance.isSpinning)
             {
                 int warningRisk = UnityEngine.Random.Range(0, 100);
                 if (warningRisk <= risk)
@@ -1224,8 +1224,15 @@ public class Location : MonoBehaviour
                 }
                 if (i <= countType)
                 {
+                    if(GameManager.Instance.dollar >= (lsWorking[countType].price  * i / UIManager.Instance._priceTree))
+                    {
+                        UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                    }
+                    else
+                    {
+                        UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(0, 0, 0, 255);
+                    }
                     UIManager.Instance.lsItemTreeUI[i].GetChild(3).gameObject.SetActive(false);
-                    UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(255, 255, 255, 255);
                 }
                 else
                 {

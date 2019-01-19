@@ -104,7 +104,7 @@ public class LoadDataJson : MonoBehaviour
             GameConfig.Instance.Prein = objJson["Prein"].AsFloat;
             GameConfig.Instance.Rein = objJson["Rein"].AsInt;
             GameConfig.Instance.Pfire = objJson["Pfire"].AsFloat;
-            GameConfig.Instance.Tchal = objJson["Tchal"].AsInt;
+            GameConfig.Instance.Tchal = objJson["Tchal"].AsFloat;
             GameConfig.Instance.Uptruck = objJson["Uptruck"].AsFloat;
             GameConfig.Instance.IDLeaderboard = objJson["IDLeaderboard"];
 

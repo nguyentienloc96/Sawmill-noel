@@ -8,6 +8,7 @@ public class SpinManager : MonoBehaviour
 {
 
     public static SpinManager Instance;
+
     void Awake()
     {
         if (Instance != null)
@@ -21,7 +22,7 @@ public class SpinManager : MonoBehaviour
 
     public void BtnSpin()
     {
-        if (GameManager.Instance.countSpin > 0 && !UIManager.Instance.lsItem[6].isOnItem)
+        if (GameManager.Instance.countSpin > 0 && !UIManager.Instance.lsItem[6].isOnItem && !UIManager.Instance.isSpinning)
         {
             UIManager.Instance.isSpinning = true;
             GameManager.Instance.countSpin--;
@@ -46,6 +47,7 @@ public class SpinManager : MonoBehaviour
         transform.DOPause();
         yield return new WaitForSeconds(0.05f);
         CheckComplete();
+
 
     }
 

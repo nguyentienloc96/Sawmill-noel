@@ -72,7 +72,7 @@ public class Forest : MonoBehaviour
         {
             location.forest.typeTree = 0;
             Sprite spNewTree = UIManager.Instance.lsItemTreeUI[0].GetChild(0).GetComponent<Image>().sprite;
-            GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].ChangeTree(spNewTree);
+            location.ChangeTree(spNewTree);
             RunCarGrow();
         }
     }
