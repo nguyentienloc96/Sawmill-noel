@@ -1044,7 +1044,7 @@ public class Location : MonoBehaviour
                 if (indexTypeRisk == -1)
                 {
                     timeCheckFire += Time.deltaTime;
-                    if (timeCheckFire >= 30f && risk > 0 && id == GameManager.Instance.IDLocation && !UIManager.Instance.isSpinning)
+                    if (timeCheckFire >= (GameConfig.Instance.p0Time * 60f) && risk > 0 && id == GameManager.Instance.IDLocation && !UIManager.Instance.isSpinning)
                     {
                         int warningRisk = UnityEngine.Random.Range(0, 100);
                         if (warningRisk <= risk)

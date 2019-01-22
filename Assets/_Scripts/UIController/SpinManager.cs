@@ -29,8 +29,8 @@ public class SpinManager : MonoBehaviour
             if (GameManager.Instance.countSpin <= 0)
             {
                 UIManager.Instance.imgCheckTime.fillAmount = 1;
-                UIManager.Instance.lsItem[6].timeItem = 15 * 60;
-                UIManager.Instance.lsItem[6].timeItemTatol = 15 * 60;
+                UIManager.Instance.lsItem[6].timeItem = 10 * 60;
+                UIManager.Instance.lsItem[6].timeItemTatol = 10 * 60;
                 UIManager.Instance.lsItem[6].isOnItem = true;
             }
             UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;

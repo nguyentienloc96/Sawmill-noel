@@ -380,6 +380,7 @@ public class UIManager : MonoBehaviour
                         AudioManager.Instance.Stop("AlarmFire", true);
                         AudioManager.Instance.Stop("Menu", true);
                         AudioManager.Instance.Play("GamePlay", true);
+                        Invoke("HideInfoFireFight", 3f);
                         timeFireFighting = 0;
                     }
                 }
@@ -474,6 +475,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void HideInfoFireFight()
+    {
+        panelInfoFireFight.SetActive(false);
+        CloseJob();
+    }
 
     public void BtnSettingOnclick()
     {
@@ -1355,14 +1361,13 @@ public class UIManager : MonoBehaviour
     {
         int idLocation = GameManager.Instance.IDLocation;
         int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
-        if (GameManager.Instance.dollar >= (GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * typeTreeCurrent / _priceTree))
-        { 
-            if (typeTree <= countTypeLocation)
+        if (typeTree <= countTypeLocation)
+        {
+            if (GameManager.Instance.dollar >= (GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * typeTree / _priceTree))
             {
                 typeTreeCurrent = typeTree;
                 panelBuyTree.SetActive(true);
-                txtInfoBuyTree.text = "Plan this tree to make the output price increase " + (typeTree * 10f) + "%?";
-
+               
                 for (int i = 0; i < lsItemTreeUI.Count; i++)
                 {
                     if (i == typeTreeCurrent)
@@ -1374,6 +1379,16 @@ public class UIManager : MonoBehaviour
                         lsItemTreeUI[i].GetChild(2).gameObject.SetActive(false);
                     }
                 }
+
+                if (typeTree != 0)
+                {
+                    txtInfoBuyTree.text = "Plant this tree to increase the output price by " + (typeTree * 10f) + "%?";
+                }
+                else
+                {
+                    txtInfoBuyTree.text = "Plant this tree for free.";
+                }
+
                 txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
                    * (typeTree) / _priceTree);
 
@@ -1433,7 +1448,6 @@ public class UIManager : MonoBehaviour
     {
         panelBuyTree.SetActive(false);
         panelSeclectTree.SetActive(false);
-        //GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
         if (PlayerPrefs.GetInt("isTutorial") == 0)
         {
             txtWait.text = "Wait to plant trees";
