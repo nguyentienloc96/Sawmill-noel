@@ -1527,12 +1527,6 @@ public class UIManager : MonoBehaviour
         imgHomeFly_Congratulation.gameObject.SetActive(false);
     }
 
-    public void CloseSpin()
-    {
-        if (!isSpinning)
-            panelSpin.SetActive(false);
-    }
-
     public string infoChallenge;
     public void ShowGetChallange(int _date, int _month, int _year)
     {

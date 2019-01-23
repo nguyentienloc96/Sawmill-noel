@@ -162,4 +162,24 @@ public class SpinManager : MonoBehaviour
         UIManager.Instance.isSpinning = false;
 
     }
+
+    public void CloseSpin()
+    {
+        UIManager.Instance.panelSpin.SetActive(false);
+        if (UIManager.Instance.isSpinning)
+        {
+            UIManager.Instance.isSpinning = false;
+            GameManager.Instance.countSpin++;
+            UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
+            UIManager.Instance.txtCountSpin.text = "x" + GameManager.Instance.countSpin;
+            if (UIManager.Instance.lsItem[6].isOnItem)
+            {
+                UIManager.Instance.imgCheckTime.fillAmount = 0;
+                UIManager.Instance.lsItem[6].timeItem = 0;
+                UIManager.Instance.lsItem[6].isOnItem = false;
+            }
+        }
+        transform.DOKill();
+        StopAllCoroutines();
+    }
 }
