@@ -391,7 +391,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if (UIManager.Instance.lsItem[7].isOnItem)
+                if (!UIManager.Instance.lsItem[7].isOnItem)
                 {
                     int r0 = UnityEngine.Random.Range(0, 3);
                     int r1 = UnityEngine.Random.Range(4, 9);
@@ -408,7 +408,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (UIManager.Instance.lsItem[7].isOnItem)
+            if (!UIManager.Instance.lsItem[7].isOnItem)
             {
                 int r0 = UnityEngine.Random.Range(0, 3);
                 int r1 = UnityEngine.Random.Range(4, 9);

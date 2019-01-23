@@ -1126,9 +1126,9 @@ public class Location : MonoBehaviour
         UIManager.Instance.PopupAutoPlant.SetActive(true);
         UIManager.Instance.PopupAutoPlant.GetComponent<AutoPlant>().AutoPlant_Onclick(str, () =>
         {
-            if (GameManager.Instance.dollar >= Math.Floor((double)(lsWorking[0].price * GameConfig.Instance.AutoPlant)))
+            if (GameManager.Instance.dollar >= Math.Floor((double)(lsWorking[lsWorking.Length - 1].price * GameConfig.Instance.AutoPlant)))
             {
-                GameManager.Instance.AddDollar(-Math.Floor((double)(lsWorking[0].price * GameConfig.Instance.AutoPlant)));
+                GameManager.Instance.AddDollar(-Math.Floor((double)(lsWorking[lsWorking.Length - 1].price * GameConfig.Instance.AutoPlant)));
                 forest.isAutoPlant = true;
                 forest.btnAutoPlant.interactable = false;
                 UIManager.Instance.PopupAutoPlant.SetActive(false);
@@ -1193,13 +1193,13 @@ public class Location : MonoBehaviour
                 IDLocation = 0;
             }
 
-            if (id == 0 && (countType + 1 == 1 || countType + 1 == 2))
-            {
-                UIManager.Instance.panelWarning.SetActive(true);
-                UIManager.Instance.btnYesWarning.onClick.RemoveAllListeners();
-                UIManager.Instance.btnYesWarning.onClick.AddListener(() => SellJobOnclick(IDLocation, idType));
-            }
-            else
+            //if (id == 0 && (countType + 1 == 1 || countType + 1 == 2))
+            //{
+            //    UIManager.Instance.panelWarning.SetActive(true);
+            //    UIManager.Instance.btnYesWarning.onClick.RemoveAllListeners();
+            //    UIManager.Instance.btnYesWarning.onClick.AddListener(() => SellJobOnclick(IDLocation, idType));
+            //}
+            //else
             {
                 SellJobOnclick(IDLocation, idType);
             }

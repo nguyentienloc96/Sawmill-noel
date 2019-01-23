@@ -1386,7 +1386,7 @@ public class UIManager : MonoBehaviour
                 }
                 else
                 {
-                    txtInfoBuyTree.text = "Plant this tree for free.";
+                    txtInfoBuyTree.text = "Plant this default tree with lowest quality.";
                 }
 
                 txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
