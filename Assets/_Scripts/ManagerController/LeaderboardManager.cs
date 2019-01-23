@@ -77,7 +77,8 @@ public class LeaderboardManager : MonoBehaviour
 #if UNITY_IPHONE
         if (isLoginSuccessful)
         {
-            GameCenterPlatform.ShowLeaderboardUI(leaderboardID, UnityEngine.SocialPlatforms.TimeScope.AllTime);
+            Social.ShowLeaderboardUI();
+            //GameCenterPlatform.ShowLeaderboardUI(leaderboardID, UnityEngine.SocialPlatforms.TimeScope.AllTime);
         }
         else
         {
