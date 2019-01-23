@@ -220,6 +220,7 @@ MonoBehaviour:
   Statistical: {fileID: 114272567777154288}
   imgStatistical: {fileID: 114656820908924562}
   goldClaim: {fileID: 95370790602376994}
+  txtGold: {fileID: 114941653531500824}
 --- !u!114 &114228109016726620
 MonoBehaviour:
   m_ObjectHideFlags: 1

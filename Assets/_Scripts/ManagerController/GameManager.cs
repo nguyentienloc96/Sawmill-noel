@@ -210,6 +210,24 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < UIManager.Instance.lsItemTreeUI.Count; i++)
+        {
+            if (i <= lsLocation[IDLocation].countType)
+            {
+                if (dollar >= lsLocation[IDLocation].lsWorking[lsLocation[IDLocation].countType].price * i / UIManager.Instance._priceTree)
+                {
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+
+                }
+                else
+                {
+                    UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(0, 0, 0, 255);
+
+                }
+                UIManager.Instance.lsItemTreeUI[i].GetChild(3).gameObject.SetActive(false);
+            }
+        }
+
         UIManager.Instance.CheckBillionaire();
 
         if (UIManager.Instance.panelRisk.activeInHierarchy)
@@ -373,7 +391,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if (UIManager.Instance.lsItem[7].isOnItem)
+                if (!UIManager.Instance.lsItem[7].isOnItem)
                 {
                     int r0 = UnityEngine.Random.Range(0, 3);
                     int r1 = UnityEngine.Random.Range(4, 9);
@@ -390,7 +408,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (UIManager.Instance.lsItem[7].isOnItem)
+            if (!UIManager.Instance.lsItem[7].isOnItem)
             {
                 int r0 = UnityEngine.Random.Range(0, 3);
                 int r1 = UnityEngine.Random.Range(4, 9);
@@ -603,7 +621,6 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.lsItem[8].txtNameItem.text = lsLocation[randomLocation].lsWorking[randomHome].name;
     }
 
-    DateTime timeChallenge;
     public void GetChallenge()
     {
         PlayerPrefs.SetString("LastChallenge", dateGame.ToString());
@@ -612,7 +629,6 @@ public class GameManager : MonoBehaviour
 
         if (_dayChallenge == 0)
             return;
-
         DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
 
         PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
@@ -637,16 +653,16 @@ public class GameManager : MonoBehaviour
             double _dayChallenge = (GameConfig.Instance.Tchal * (sumHomeAll - 1) * 60) / GameConfig.Instance.p0Time;
             if (_dayChallenge == 0)
                 return;
-            DateTime timeChallenge = dateGame.AddDays(_dayChallenge);
+            DateTime timeChallenge2 = dateGame.AddDays(_dayChallenge);
 
-            PlayerPrefs.SetString("NextChallenge", timeChallenge.ToString());
-            UIManager.Instance.ShowGetChallange(timeChallenge.Day, timeChallenge.Month, timeChallenge.Year);
+            PlayerPrefs.SetString("NextChallenge", timeChallenge2.ToString());
+            UIManager.Instance.ShowGetChallange(timeChallenge2.Day, timeChallenge2.Month, timeChallenge2.Year);
         }
     }
 
     public void GetTheShortestTimeBuildComplete(int _idHouse)
     {
-        DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild" + (_idHouse+1)));
+        DateTime firstBuild = System.Convert.ToDateTime(PlayerPrefs.GetString("FirstBuild" + (_idHouse + 1)));
         TimeSpan elapsed = dateGame.Subtract(firstBuild);
         double days = elapsed.TotalDays;
         if (!PlayerPrefs.HasKey("TheShortestTimeBuild" + _idHouse) || PlayerPrefs.GetInt("TheShortestTimeBuild" + (_idHouse + 1)) == 0)
@@ -659,7 +675,7 @@ public class GameManager : MonoBehaviour
             if (days < PlayerPrefs.GetInt("TheShortestTimeBuild" + (_idHouse + 1)))
             {
                 string idLD = GameConfig.Instance.IDLeaderboard + (_idHouse + 1);
-                LeaderboardManager.Instance.ReportScore((long)days,idLD);
+                LeaderboardManager.Instance.ReportScore((long)days, idLD);
                 PlayerPrefs.SetInt("TheShortestTimeBuild" + (_idHouse + 1), (int)days);
                 Debug.Log("thoi gian ngan nhat " + (int)days);
             }
@@ -668,6 +684,6 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Ko phai thoi gian ngan nhat ");
             }
         }
-        
+
     }
 }

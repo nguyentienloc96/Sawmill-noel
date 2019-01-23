@@ -46,6 +46,11 @@ public class HeadboxFormingPaper : MonoBehaviour
         {
             isTutorial = true;
         }
+        else
+        {
+            isTutorial = false;
+            tutorialHand.SetActive(false);
+        }
         tree.localPosition = new Vector3(-1f, 0f, 0f);
         cart.localPosition = new Vector3(0f, 0f, 0f);
         paperRoll.localPosition = Vector3.zero;
@@ -79,16 +84,29 @@ public class HeadboxFormingPaper : MonoBehaviour
                     CompleteJob();
                 }
             }
+
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
+            {
+                notification.SetActive(false);
+            }
         }
         else
         {
-            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
-               .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
             {
                 notification.SetActive(false);
-                tree.gameObject.SetActive(true);
-                LoadInput();
-                isStop = false;
+            }
+            else
+            {
+
+                if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
+                   .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+                {
+                    notification.SetActive(false);
+                    tree.gameObject.SetActive(true);
+                    LoadInput();
+                    isStop = false;
+                }
             }
         }
     }

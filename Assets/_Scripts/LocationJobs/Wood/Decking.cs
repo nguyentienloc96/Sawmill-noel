@@ -41,6 +41,11 @@ public class Decking : MonoBehaviour
         {
             isTutorial = true;
         }
+        else
+        {
+            isTutorial = false;
+            tutorialHand.SetActive(false);
+        }
         random = Random.Range(0, tree.Length);
         ResetTree();
         cart.localPosition = new Vector3(-4f, 0f, 0f);
@@ -73,18 +78,32 @@ public class Decking : MonoBehaviour
                     CompleteJob();
                 }
             }
+
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
+            {
+                notification.SetActive(false);
+            }
+
         }
         else
         {
-            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
-               .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
             {
-                random = Random.Range(0, tree.Length);
-                ResetTree();
-                tree[random].gameObject.SetActive(true);
                 notification.SetActive(false);
-                LoadInput();
-                isStop = false;
+            }
+            else
+            {
+
+                if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
+                   .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+                {
+                    random = Random.Range(0, tree.Length);
+                    ResetTree();
+                    tree[random].gameObject.SetActive(true);
+                    notification.SetActive(false);
+                    LoadInput();
+                    isStop = false;
+                }
             }
         }
     }

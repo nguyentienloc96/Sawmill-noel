@@ -302,16 +302,22 @@ public class UIManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("Continue"))
         {
             PlayerPrefs.SetInt("Continue", 0);
+            infoChallenge = PlayerPrefs.GetString("infoChallenge");
             btncontinue.interactable = false;
         }
         else
         {
+
             if (PlayerPrefs.GetInt("Continue") == 0)
             {
+                infoChallenge = "";
+
                 btncontinue.interactable = false;
             }
             else
             {
+                infoChallenge = PlayerPrefs.GetString("infoChallenge");
+
                 btncontinue.interactable = true;
             }
         }
@@ -366,14 +372,15 @@ public class UIManager : MonoBehaviour
                         GameManager.Instance.lsLocation[id].indexTypeRisk = -1;
                         GameManager.Instance.lsLocation[id].fireWarning.SetActive(false);
                         panelInfoFireFight.SetActive(true);
-                        txtInfoFireFight.text = "You lost "+ ConvertNumber( GameManager.Instance.lsLocation[id].inputFire)
-                            + " input material and " 
-                            + ConvertNumber(GameManager.Instance.lsLocation[id].ouputFire) 
+                        txtInfoFireFight.text = "You lost " + ConvertNumber(GameManager.Instance.lsLocation[id].inputFire)
+                            + " input material and "
+                            + ConvertNumber(GameManager.Instance.lsLocation[id].ouputFire)
                             + " output product";
                         GameManager.Instance.lsLocation[id].inputFire = GameManager.Instance.lsLocation[id].ouputFire = 0;
                         AudioManager.Instance.Stop("AlarmFire", true);
                         AudioManager.Instance.Stop("Menu", true);
                         AudioManager.Instance.Play("GamePlay", true);
+                        Invoke("HideInfoFireFight", 3f);
                         timeFireFighting = 0;
                     }
                 }
@@ -468,6 +475,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void HideInfoFireFight()
+    {
+        panelInfoFireFight.SetActive(false);
+        CloseJob();
+    }
 
     public void BtnSettingOnclick()
     {
@@ -503,6 +515,7 @@ public class UIManager : MonoBehaviour
                 PlayerPrefs.SetInt("TheShortestTimeBuild" + t, 0);
                 PlayerPrefs.SetString("FirstBuild" + t, "");
             }
+            infoChallenge = "";
             isClick = true;
             isContinue = false;
             AudioManager.Instance.Play("Click");
@@ -528,6 +541,7 @@ public class UIManager : MonoBehaviour
 
                 lsItem[i].obj.SetActive(false);
             }
+            imgCheckTime.fillAmount = 0;
             GameManager.Instance.countSpin = 1;
             txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
             GameManager.Instance.ClearLocation();
@@ -1082,7 +1096,7 @@ public class UIManager : MonoBehaviour
         btnSell.gameObject.SetActive(true);
         iconJob.color = new Color32(128, 128, 128, 255);
         nameJob.text = name;
-        infoSell.text = info;
+        infoSell.text = info + "\n" + infoChallenge;
         iconJob.sprite = spIcon;
         CostJob.text = ConvertNumber(cost);
         if (GameManager.Instance.dollar >= cost)
@@ -1342,41 +1356,53 @@ public class UIManager : MonoBehaviour
     }
 
     int typeTreeCurrent = 0;
+    public float _priceTree = 10f;
     public void btnBuyTree(int typeTree)
     {
-
         int idLocation = GameManager.Instance.IDLocation;
         int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
         if (typeTree <= countTypeLocation)
         {
-            typeTreeCurrent = typeTree;
-            panelBuyTree.SetActive(true);
-            txtInfoBuyTree.text = "Plan this tree to make the output price increase " + (typeTree) * 10 + "%?";
-
-            for (int i = 0; i < lsItemTreeUI.Count; i++)
+            if (GameManager.Instance.dollar >= (GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * typeTree / _priceTree))
             {
-                if (i == typeTreeCurrent)
+                typeTreeCurrent = typeTree;
+                panelBuyTree.SetActive(true);
+               
+                for (int i = 0; i < lsItemTreeUI.Count; i++)
                 {
-                    lsItemTreeUI[i].GetChild(2).gameObject.SetActive(true);
+                    if (i == typeTreeCurrent)
+                    {
+                        lsItemTreeUI[i].GetChild(2).gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        lsItemTreeUI[i].GetChild(2).gameObject.SetActive(false);
+                    }
+                }
+
+                if (typeTree != 0)
+                {
+                    txtInfoBuyTree.text = "Plant this tree to increase the output price by " + (typeTree * 10f) + "%?";
                 }
                 else
                 {
-                    lsItemTreeUI[i].GetChild(2).gameObject.SetActive(false);
+                    txtInfoBuyTree.text = "Plant this default tree with lowest quality.";
                 }
-            }
-            txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
-               * (typeTree) / 5f);
+
+                txtPriceBuyTree.text = ConvertNumber(GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
+                   * (typeTree) / _priceTree);
 
 
-            if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].lsWorking[0].price
-            * (typeTreeCurrent) / 5f)
-            {
-                btnYesBuyTree.interactable = true;
-            }
-            else
-            {
-                btnYesBuyTree.interactable = false;
+                if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
+                * (typeTreeCurrent) / _priceTree)
+                {
+                    btnYesBuyTree.interactable = true;
+                }
+                else
+                {
+                    btnYesBuyTree.interactable = false;
 
+                }
             }
         }
     }
@@ -1386,12 +1412,11 @@ public class UIManager : MonoBehaviour
         int idLocation = GameManager.Instance.IDLocation;
         int countTypeLocation = GameManager.Instance.lsLocation[idLocation].countType;
         if (GameManager.Instance.dollar >= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price
-            * (typeTreeCurrent) / 5f)
+            * (typeTreeCurrent) / _priceTree)
         {
             if (typeTreeCurrent != 0)
             {
-                GameManager.Instance.dollar -= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * (typeTreeCurrent) / 5f;
-
+                GameManager.Instance.dollar -= GameManager.Instance.lsLocation[idLocation].lsWorking[countTypeLocation].price * (typeTreeCurrent) / _priceTree;
             }
             panelBuyTree.SetActive(false);
             GameManager.Instance.lsLocation[idLocation].forest.typeTree = typeTreeCurrent;
@@ -1423,7 +1448,6 @@ public class UIManager : MonoBehaviour
     {
         panelBuyTree.SetActive(false);
         panelSeclectTree.SetActive(false);
-        //GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].forest.forestClass.RunCarGrow();
         if (PlayerPrefs.GetInt("isTutorial") == 0)
         {
             txtWait.text = "Wait to plant trees";
@@ -1503,16 +1527,13 @@ public class UIManager : MonoBehaviour
         imgHomeFly_Congratulation.gameObject.SetActive(false);
     }
 
-    public void CloseSpin()
-    {
-        if (!isSpinning)
-            panelSpin.SetActive(false);
-    }
-
+    public string infoChallenge;
     public void ShowGetChallange(int _date, int _month, int _year)
     {
         panelChallenge.SetActive(true);
-        txtChallenge.text = "Build the next workshop before " + _date.ToString() + "/" + _month.ToString() + "/" + _year.ToString() + " to receive bonus";
+        infoChallenge = "Build the next workshop before " + _date.ToString() + "/" + _month.ToString() + "/" + _year.ToString() + " to receive bonus";
+        PlayerPrefs.SetString("infoChallenge", infoChallenge);
+        txtChallenge.text = infoChallenge;
         Invoke("Deactive_Challenge", 5f);
     }
     void Deactive_Challenge()
@@ -1632,7 +1653,7 @@ public class UIManager : MonoBehaviour
                 GameManager.Instance.lsLocation[id].risk = 0;
             txtInfoRisk.text = GameManager.Instance.lsLocation[id].risk + "%";
             txtPriceRisk.text = ConvertNumber(priceRisk);
-            if(GameManager.Instance.lsLocation[id].risk <= 0)
+            if (GameManager.Instance.lsLocation[id].risk <= 0)
             {
                 btnYesUpgradeRisk.interactable = false;
             }
@@ -1647,6 +1668,11 @@ public class UIManager : MonoBehaviour
 
     public void btnShowLeaderBoard()
     {
-        LeaderboardManager.Instance.ShowLeaderboard(GameConfig.Instance.IDLeaderboard + GameManager.Instance.IDLocation.ToString());
+        if (PlayerPrefs.GetInt("isTutorial") != 0)
+        {
+            LeaderboardManager.Instance.ShowLeaderboard(GameConfig.Instance.IDLeaderboard + GameManager.Instance.IDLocation.ToString());
+        }
     }
+
+
 }

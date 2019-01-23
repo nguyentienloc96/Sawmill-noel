@@ -97,10 +97,12 @@ public class Location : MonoBehaviour
     public int indexTypeRisk = -1;
     public float timeCheckRisk;
     public float timeCheckFire;
+    public float timeCheckRiskUpgradeMe;
 
     public double inputFire;
     public double ouputFire;
 
+    public GameObject upgradeMeRisk;
     public GameObject fireWarning;
     public Text txtNameForest;
     public ForestST forest;
@@ -647,7 +649,7 @@ public class Location : MonoBehaviour
 
             if (countType == 0)
             {
-                PlayerPrefs.SetString("FirstBuild" + (id+ 1), GameManager.Instance.dateGame.ToString());
+                PlayerPrefs.SetString("FirstBuild" + (id + 1), GameManager.Instance.dateGame.ToString());
                 //Debug.Log(PlayerPrefs.GetString("FirstBuild" + (id+1)));
             }
 
@@ -1017,7 +1019,7 @@ public class Location : MonoBehaviour
         }
 
         timeCheckRisk += Time.deltaTime;
-        if (timeCheckRisk >= GameConfig.Instance.p0Time * 7f)
+        if (timeCheckRisk >= GameConfig.Instance.p0Time * 21f)
         {
             if (risk < 100)
                 risk++;
@@ -1035,20 +1037,62 @@ public class Location : MonoBehaviour
             UIManager.Instance.btnYesUpgradeRisk.interactable = true;
             timeCheckRisk = 0;
         }
-
-        if (UIManager.Instance.isLocation && id == GameManager.Instance.IDLocation && countType >= 0 && PlayerPrefs.GetInt("isTutorial") != 0 && indexTypeRisk == -1)
+        if (UIManager.Instance.isLocation && PlayerPrefs.GetInt("isTutorial") != 0 && id == GameManager.Instance.IDLocation)
         {
-            timeCheckFire += Time.deltaTime;
-            if (timeCheckFire >= (GameConfig.Instance.p0Time * 30f) && risk > 0 && id == GameManager.Instance.IDLocation)
+            if (countType >= 0)
             {
-                int warningRisk = UnityEngine.Random.Range(0, 100);
-                if (warningRisk <= risk)
+                if (indexTypeRisk == -1)
                 {
-                    WarningFire();
+                    timeCheckFire += Time.deltaTime;
+                    if (timeCheckFire >= (GameConfig.Instance.p0Time * 60f) && risk > 0 && id == GameManager.Instance.IDLocation && !UIManager.Instance.isSpinning)
+                    {
+                        int warningRisk = UnityEngine.Random.Range(0, 100);
+                        if (warningRisk <= risk)
+                        {
+                            WarningFire();
+                        }
+                        timeCheckFire = 0;
+                    }
                 }
-                timeCheckFire = 0;
+            }
+            else
+            {
+                if (fireWarning.activeInHierarchy)
+                {
+                    AudioManager.Instance.Stop("AlarmFire", true);
+                    AudioManager.Instance.Stop("Menu", true);
+                    AudioManager.Instance.Play("GamePlay", true);
+                    UIManager.Instance.panelWarningFire.SetActive(false);
+                    indexTypeRisk = -1;
+                    fireWarning.SetActive(false);
+                }
             }
         }
+
+        if (risk >= 20)
+        {
+            timeCheckRiskUpgradeMe += Time.deltaTime;
+            if (timeCheckRiskUpgradeMe >= 3f)
+            {
+                if (upgradeMeRisk.activeInHierarchy)
+                {
+                    upgradeMeRisk.SetActive(false);
+                }
+                else
+                {
+                    upgradeMeRisk.SetActive(true);
+                }
+                timeCheckRiskUpgradeMe = 0;
+            }
+        }
+        else
+        {
+            if (upgradeMeRisk.activeInHierarchy)
+            {
+                upgradeMeRisk.SetActive(false);
+            }
+        }
+
     }
 
 
@@ -1082,9 +1126,9 @@ public class Location : MonoBehaviour
         UIManager.Instance.PopupAutoPlant.SetActive(true);
         UIManager.Instance.PopupAutoPlant.GetComponent<AutoPlant>().AutoPlant_Onclick(str, () =>
         {
-            if (GameManager.Instance.dollar >= Math.Floor((double)(lsWorking[0].price * GameConfig.Instance.AutoPlant)))
+            if (GameManager.Instance.dollar >= Math.Floor((double)(lsWorking[lsWorking.Length - 1].price * GameConfig.Instance.AutoPlant)))
             {
-                GameManager.Instance.AddDollar(-Math.Floor((double)(lsWorking[0].price * GameConfig.Instance.AutoPlant)));
+                GameManager.Instance.AddDollar(-Math.Floor((double)(lsWorking[lsWorking.Length - 1].price * GameConfig.Instance.AutoPlant)));
                 forest.isAutoPlant = true;
                 forest.btnAutoPlant.interactable = false;
                 UIManager.Instance.PopupAutoPlant.SetActive(false);
@@ -1149,13 +1193,13 @@ public class Location : MonoBehaviour
                 IDLocation = 0;
             }
 
-            if (id == 0 && (countType + 1 == 1 || countType + 1 == 2))
-            {
-                UIManager.Instance.panelWarning.SetActive(true);
-                UIManager.Instance.btnYesWarning.onClick.RemoveAllListeners();
-                UIManager.Instance.btnYesWarning.onClick.AddListener(() => SellJobOnclick(IDLocation, idType));
-            }
-            else
+            //if (id == 0 && (countType + 1 == 1 || countType + 1 == 2))
+            //{
+            //    UIManager.Instance.panelWarning.SetActive(true);
+            //    UIManager.Instance.btnYesWarning.onClick.RemoveAllListeners();
+            //    UIManager.Instance.btnYesWarning.onClick.AddListener(() => SellJobOnclick(IDLocation, idType));
+            //}
+            //else
             {
                 SellJobOnclick(IDLocation, idType);
             }
@@ -1224,8 +1268,15 @@ public class Location : MonoBehaviour
                 }
                 if (i <= countType)
                 {
+                    if (GameManager.Instance.dollar >= (lsWorking[countType].price * i / UIManager.Instance._priceTree))
+                    {
+                        UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                    }
+                    else
+                    {
+                        UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(0, 0, 0, 255);
+                    }
                     UIManager.Instance.lsItemTreeUI[i].GetChild(3).gameObject.SetActive(false);
-                    UIManager.Instance.lsItemTreeUI[i].GetChild(0).GetComponent<Image>().color = new Color32(255, 255, 255, 255);
                 }
                 else
                 {

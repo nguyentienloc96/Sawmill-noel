@@ -41,6 +41,11 @@ public class LimbingPellet : MonoBehaviour
         {
             isTutorial = true;
         }
+        else
+        {
+            isTutorial = false;
+            tutorialHand.SetActive(false);
+        }
         if (GameManager.Instance.lsLocation[ID].lsWorking[IndexType].input > 0)
         {
             notification.SetActive(false);
@@ -73,16 +78,28 @@ public class LimbingPellet : MonoBehaviour
                     CompleteJob();
                 }
             }
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
+            {
+                notification.SetActive(false);
+            }
         }
         else
         {
-            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
-            .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+            if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexTypeRisk != -1)
             {
                 notification.SetActive(false);
-                tree.gameObject.SetActive(true);
-                LoadInput();
-                isStop = false;
+            }
+            else
+            {
+
+                if (GameManager.Instance.lsLocation[GameManager.Instance.IDLocation]
+                .lsWorking[GameManager.Instance.lsLocation[GameManager.Instance.IDLocation].indexType].input > 0)
+                {
+                    notification.SetActive(false);
+                    tree.gameObject.SetActive(true);
+                    LoadInput();
+                    isStop = false;
+                }
             }
         }
     }

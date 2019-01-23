@@ -12,6 +12,7 @@ public class ItemAchievement : MonoBehaviour
     public Text Statistical;
     public Image imgStatistical;
     public Animator goldClaim;
+    public Text txtGold;
 
     public void GetItemAchievement()
     {
@@ -24,6 +25,10 @@ public class ItemAchievement : MonoBehaviour
             {
                 btnClaim.interactable = true;
                 goldClaim.enabled = true;
+                int goldadd = 5 + (GameManager.Instance.sumHomeAll - 1);
+                if (goldadd > 50)
+                    goldadd = 50;
+                txtGold.text = goldadd.ToString();
             }
             else
             {
@@ -56,7 +61,10 @@ public class ItemAchievement : MonoBehaviour
             () =>
                 {
                     int count = 0;
-                    GameManager.Instance.gold += 5;
+                    int goldadd = 5 + (GameManager.Instance.sumHomeAll - 1);
+                    if (goldadd > 50)
+                        goldadd = 50;
+                    GameManager.Instance.gold += goldadd;
                     for (int i = 0; i < location.countType; i++)
                     {
                         if (!location.lsWorking[i].isClaim && location.lsWorking[i].countPlayer >= 50)
