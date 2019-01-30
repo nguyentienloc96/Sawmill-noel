@@ -95,44 +95,50 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.txtRevenue.enabled = false;
         lsLocation[IDLocation].gameObject.SetActive(true);
         lsLocation[IDLocation].transform.localPosition = Vector3.zero;
-        for (int animL = 0; animL < lsLocation[IDLocation].lsWorking.Length; animL++)
+        if (UIManager.Instance.lsLocationUI[IDLocation].indexTypeWork >= 3)
         {
-            lsLocation[IDLocation].lsWorking[animL].anim.enabled = true;
-        }
-        for (int animR = 0; animR < lsLocation[IDLocation].rivers.arrAnim.Count; animR++)
-        {
-            lsLocation[IDLocation].rivers.arrAnim[animR].enabled = true;
-        }
-        for (int animO = 0; animO < lsLocation[IDLocation].others.arrAnim.Count; animO++)
-        {
-            lsLocation[IDLocation].others.arrAnim[animO].enabled = true;
+            for (int animL = 0; animL < lsLocation[IDLocation].lsWorking.Length; animL++)
+            {
+                lsLocation[IDLocation].lsWorking[animL].anim.enabled = true;
+            }
+            for (int animR = 0; animR < lsLocation[IDLocation].rivers.arrAnim.Count; animR++)
+            {
+                lsLocation[IDLocation].rivers.arrAnim[animR].enabled = true;
+            }
+            for (int animO = 0; animO < lsLocation[IDLocation].others.arrAnim.Count; animO++)
+            {
+                lsLocation[IDLocation].others.arrAnim[animO].enabled = true;
+            }
         }
         for (int i = 0; i < lsLocation.Count; i++)
         {
-            if (i != IDLocation)
+            if (UIManager.Instance.lsLocationUI[i].indexTypeWork >= 3)
             {
-                lsLocation[i].transform.localPosition = new Vector3(3000f, 0f, 0f);
-                for (int animLH = 0; animLH < lsLocation[i].lsWorking.Length; animLH++)
+                if (i != IDLocation)
                 {
-                    lsLocation[i].lsWorking[animLH].anim.enabled = false;
-                }
-                for (int animRH = 0; animRH < lsLocation[i].rivers.arrAnim.Count; animRH++)
-                {
-                    lsLocation[i].rivers.arrAnim[animRH].enabled = false;
-                }
-                for (int animOH = 0; animOH < lsLocation[i].others.arrAnim.Count; animOH++)
-                {
-                    lsLocation[i].others.arrAnim[animOH].enabled = false;
-                }
-                if (lsLocation.Count > 5)
-                {
-                    if (i < (lsLocation.Count - 3))
+                    lsLocation[i].transform.localPosition = new Vector3(3000f, 0f, 0f);
+                    for (int animLH = 0; animLH < lsLocation[i].lsWorking.Length; animLH++)
                     {
-                        lsLocation[i].gameObject.SetActive(false);
+                        lsLocation[i].lsWorking[animLH].anim.enabled = false;
                     }
-                    else
+                    for (int animRH = 0; animRH < lsLocation[i].rivers.arrAnim.Count; animRH++)
                     {
-                        lsLocation[i].gameObject.SetActive(true);
+                        lsLocation[i].rivers.arrAnim[animRH].enabled = false;
+                    }
+                    for (int animOH = 0; animOH < lsLocation[i].others.arrAnim.Count; animOH++)
+                    {
+                        lsLocation[i].others.arrAnim[animOH].enabled = false;
+                    }
+                    if (lsLocation.Count > 5)
+                    {
+                        if (i < (lsLocation.Count - 3))
+                        {
+                            lsLocation[i].gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            lsLocation[i].gameObject.SetActive(true);
+                        }
                     }
                 }
             }
