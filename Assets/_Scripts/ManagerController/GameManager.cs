@@ -24,12 +24,6 @@ public struct TypeMiniGame
     public MiniGame[] lsMiniGame;
 }
 
-[System.Serializable]
-public struct LocationOther
-{
-    public GameObject[] lsOther;
-}
-
 public class GameManager : MonoBehaviour
 {
 
@@ -57,7 +51,6 @@ public class GameManager : MonoBehaviour
     public GameObject[] lsItemLocation;
     public GameObject[] arrPrefabOther;
     public GameObject[] arrPrefabsStreet;
-    public LocationOther[] arrotherLocation;
 
     #endregion
 

@@ -107,6 +107,7 @@ public class Location : MonoBehaviour
     public Text txtNameForest;
     public ForestST forest;
     public TypeOfWorkST[] lsWorking;
+    public GameObject[] arrPrefabOther;
 
     public Streets streets;
     public Others others;
