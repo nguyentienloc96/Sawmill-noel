@@ -19,7 +19,7 @@ public class Others : MonoBehaviour
         Animator anim;
         for (int i = 0; i < lsPoint.Count; i++)
         {
-            if (location.indexTypeWork <= 3)
+            if (location.indexTypeWork < 3)
             {
                 int begin = Random.Range(0, 100) <= 50 ? 0 : 3; ;
                 random = Random.Range(begin, location.arrPrefabOther.Length);
@@ -42,7 +42,7 @@ public class Others : MonoBehaviour
         for (int i = 0; i < lsPoint.Count; i++)
         {
             Animator anim;
-            if (location.indexTypeWork <= 3)
+            if (location.indexTypeWork < 3)
             {
                 anim = Instantiate(location.arrPrefabOther[location.lsOther[i]], lsPoint[i]).GetComponent<Animator>();
             }

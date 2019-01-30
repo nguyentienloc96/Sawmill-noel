@@ -8802,6 +8802,18 @@ MonoBehaviour:
     priceUpgradeStart: 0
     price: 0
     UN2: 0
+  arrPrefabOther:
+  - {fileID: 1119209399747138, guid: 12af1e20ef71c9b4092c79f22431fe52, type: 2}
+  - {fileID: 1454989241750460, guid: 9bd7beef3afebe44088809fe0312ef12, type: 2}
+  - {fileID: 1017521817132026, guid: ddfb7121201c9274391a0abc173b1ac2, type: 2}
+  - {fileID: 1458888041773226, guid: 45d1bba25aced794a85172b3bc19b9bb, type: 2}
+  - {fileID: 1513628715141316, guid: 5c4ef9462252eb3409c395741df57486, type: 2}
+  - {fileID: 1756042818916890, guid: 448517a19f5f4c7429ac34edf5052275, type: 2}
+  - {fileID: 1302936306673670, guid: 622440b7e731d384c8b73ac2ae6a454c, type: 2}
+  - {fileID: 1928743025012356, guid: 77e46abf55f6ead42b04cb84bbcdd49b, type: 2}
+  - {fileID: 1448081917063712, guid: bf64d610a25b9484896bd8db3c6a6f0a, type: 2}
+  - {fileID: 1756042818916890, guid: 448517a19f5f4c7429ac34edf5052275, type: 2}
+  - {fileID: 1756042818916890, guid: 448517a19f5f4c7429ac34edf5052275, type: 2}
   streets: {fileID: 114795963361588864}
   others: {fileID: 114406078050205066}
   rivers: {fileID: 114908576665149982}
@@ -23333,7 +23345,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.500061, y: -404.6}
+  m_AnchoredPosition: {x: 9.5, y: -404.6}
   m_SizeDelta: {x: -261.1, y: 432.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224846537582249364
