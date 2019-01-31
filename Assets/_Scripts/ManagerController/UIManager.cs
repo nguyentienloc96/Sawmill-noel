@@ -207,6 +207,7 @@ public class UIManager : MonoBehaviour
     public Sprite spGiveSpin;
     public Text txtCountSpinMain;
     public bool isSpinning;
+    public GameObject btnSpin;
 
     [Header("GiveXXXMoney")]
     public GameObject panelGiveXXXMoney;
@@ -507,9 +508,13 @@ public class UIManager : MonoBehaviour
     {
         if (!isClick)
         {
+            btnSpin.SetActive(false);
+            btnAchievement.SetActive(false);
+            btnLeaderboard.SetActive(false);
             PlayerPrefs.SetInt("Congratulation", 0);
             PlayerPrefs.SetString("NextChallenge", "");
             PlayerPrefs.SetString("LastChallenge", "");
+            PlayerPrefs.SetInt("isBeginAds", 0);
             for (int t = 1; t <= 12; t++)
             {
                 PlayerPrefs.SetInt("TheShortestTimeBuild" + t, 0);
@@ -928,6 +933,20 @@ public class UIManager : MonoBehaviour
         avatar.position = posAva;
         JobSell.SetActive(false);
         txtWait.text = "Tap to plant trees";
+        int id = GameManager.Instance.IDLocation;
+        if (id == 0)
+        {
+            if (GameManager.Instance.lsLocation[id].countType == 2)
+            {
+                btnSpin.SetActive(true);
+                btnAchievement.SetActive(true);
+                btnLeaderboard.SetActive(true);
+            }
+            if (GameManager.Instance.lsLocation[id].countType == 3)
+            {
+                PlayerPrefs.SetInt("isBeginAds", 1);
+            }
+        }
     }
 
     public void NoSellJob()

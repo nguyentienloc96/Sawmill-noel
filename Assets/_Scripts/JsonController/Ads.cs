@@ -45,10 +45,13 @@ public class Ads : MonoBehaviour
 
     void Update()
     {
-        timeAds += Time.deltaTime;
-        timeRate += Time.deltaTime;
-        ShowInterstitialAd();
-        RateInApp();
+        if (PlayerPrefs.GetInt("isBeginAds", 0) == 1)
+        {
+            timeAds += Time.deltaTime;
+            timeRate += Time.deltaTime;
+            ShowInterstitialAd();
+            RateInApp();
+        }
     }
 
     #region ===ADMOB===

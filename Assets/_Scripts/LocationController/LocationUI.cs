@@ -24,8 +24,7 @@ public class LocationUI : MonoBehaviour
         GameManager.Instance.IDLocation = id;
         GameManager.Instance.LoadLocation();
         UIManager.Instance.worldManager.transform.SetAsFirstSibling();
-        UIManager.Instance.btnAchievement.SetActive(true);
-        UIManager.Instance.btnLeaderboard.SetActive(true);
+
         if (PlayerPrefs.GetInt("isTutorial") == 0)
         {
             if (!UIManager.Instance.popupTutorial.activeInHierarchy)
@@ -56,6 +55,13 @@ public class LocationUI : MonoBehaviour
         else
         {
             UIManager.Instance.WarningForest.SetActive(false);
+        }
+
+        if (id > 0 || (id == 0 && GameManager.Instance.lsLocation[id].countType > 2))
+        {
+            UIManager.Instance.btnAchievement.SetActive(true);
+            UIManager.Instance.btnLeaderboard.SetActive(true);
+
         }
 
         for (int i = 0; i < GameManager.Instance.lsLocation[id].countType; i++)

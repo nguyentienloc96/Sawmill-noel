@@ -149,6 +149,10 @@ public class DataPlayer : MonoBehaviour
             }
         }
         var lsData = objJson["lsLocation"].AsArray;
+        if(lsData.Count > 1 || lsData[0]["countType"].AsInt > 2)
+        {
+            UIManager.Instance.btnSpin.SetActive(true);
+        }
         lsLocation = new List<LocationJSON>();
         GameManager.Instance.lsLocation = new List<Location>();
         StartCoroutine(IELoadLocationJson(lsData));

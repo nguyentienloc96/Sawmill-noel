@@ -1018,82 +1018,84 @@ public class Location : MonoBehaviour
         {
             forest.btnAutoPlant.gameObject.SetActive(false);
         }
-
-        timeCheckRisk += Time.deltaTime;
-        if (timeCheckRisk >= GameConfig.Instance.p0Time * 21f)
+        if (id > 0)
         {
-            if (risk < 100)
-                risk++;
-            UIManager.Instance.txtInfoRisk.text = risk + "%";
-            double priceRisk;
-            if (countType == -1)
+            timeCheckRisk += Time.deltaTime;
+            if (timeCheckRisk >= GameConfig.Instance.p0Time * 21f)
             {
-                priceRisk = 0;
-            }
-            else
-            {
-                priceRisk = lsWorking[countType].price * GameConfig.Instance.Pfire;
-            }
-            UIManager.Instance.txtPriceRisk.text = UIManager.Instance.ConvertNumber(priceRisk);
-            UIManager.Instance.btnYesUpgradeRisk.interactable = true;
-            timeCheckRisk = 0;
-        }
-        if (UIManager.Instance.isLocation && PlayerPrefs.GetInt("isTutorial") != 0 && id == GameManager.Instance.IDLocation)
-        {
-            if (countType >= 0)
-            {
-                if (indexTypeRisk == -1)
+                if (risk < 100)
+                    risk++;
+                UIManager.Instance.txtInfoRisk.text = risk + "%";
+                double priceRisk;
+                if (countType == -1)
                 {
-                    timeCheckFire += Time.deltaTime;
-                    if (timeCheckFire >= (GameConfig.Instance.p0Time * 60f) && risk > 0 && id == GameManager.Instance.IDLocation && !UIManager.Instance.isSpinning)
+                    priceRisk = 0;
+                }
+                else
+                {
+                    priceRisk = lsWorking[countType].price * GameConfig.Instance.Pfire;
+                }
+                UIManager.Instance.txtPriceRisk.text = UIManager.Instance.ConvertNumber(priceRisk);
+                UIManager.Instance.btnYesUpgradeRisk.interactable = true;
+                timeCheckRisk = 0;
+            }
+
+            if (UIManager.Instance.isLocation && PlayerPrefs.GetInt("isTutorial") != 0 && id == GameManager.Instance.IDLocation)
+            {
+                if (countType >= 0)
+                {
+                    if (indexTypeRisk == -1)
                     {
-                        int warningRisk = UnityEngine.Random.Range(0, 100);
-                        if (warningRisk <= risk)
+                        timeCheckFire += Time.deltaTime;
+                        if (timeCheckFire >= (GameConfig.Instance.p0Time * 60f) && risk > 20 && id == GameManager.Instance.IDLocation && !UIManager.Instance.isSpinning)
                         {
-                            WarningFire();
+                            int warningRisk = UnityEngine.Random.Range(0, 100);
+                            if (warningRisk <= risk)
+                            {
+                                WarningFire();
+                            }
+                            timeCheckFire = 0;
                         }
-                        timeCheckFire = 0;
+                    }
+                }
+                else
+                {
+                    if (fireWarning.activeInHierarchy)
+                    {
+                        AudioManager.Instance.Stop("AlarmFire", true);
+                        AudioManager.Instance.Stop("Menu", true);
+                        AudioManager.Instance.Play("GamePlay", true);
+                        UIManager.Instance.panelWarningFire.SetActive(false);
+                        indexTypeRisk = -1;
+                        fireWarning.SetActive(false);
                     }
                 }
             }
-            else
+
+            if (risk >= 20)
             {
-                if (fireWarning.activeInHierarchy)
+                timeCheckRiskUpgradeMe += Time.deltaTime;
+                if (timeCheckRiskUpgradeMe >= 3f)
                 {
-                    AudioManager.Instance.Stop("AlarmFire", true);
-                    AudioManager.Instance.Stop("Menu", true);
-                    AudioManager.Instance.Play("GamePlay", true);
-                    UIManager.Instance.panelWarningFire.SetActive(false);
-                    indexTypeRisk = -1;
-                    fireWarning.SetActive(false);
+                    if (upgradeMeRisk.activeInHierarchy)
+                    {
+                        upgradeMeRisk.SetActive(false);
+                    }
+                    else
+                    {
+                        upgradeMeRisk.SetActive(true);
+                    }
+                    timeCheckRiskUpgradeMe = 0;
                 }
             }
-        }
-
-        if (risk >= 20)
-        {
-            timeCheckRiskUpgradeMe += Time.deltaTime;
-            if (timeCheckRiskUpgradeMe >= 3f)
+            else
             {
                 if (upgradeMeRisk.activeInHierarchy)
                 {
                     upgradeMeRisk.SetActive(false);
                 }
-                else
-                {
-                    upgradeMeRisk.SetActive(true);
-                }
-                timeCheckRiskUpgradeMe = 0;
             }
         }
-        else
-        {
-            if (upgradeMeRisk.activeInHierarchy)
-            {
-                upgradeMeRisk.SetActive(false);
-            }
-        }
-
     }
 
 
