@@ -111,11 +111,12 @@ public class GameManager : MonoBehaviour
         }
         for (int i = 0; i < lsLocation.Count; i++)
         {
-            if (UIManager.Instance.lsLocationUI[i].indexTypeWork >= 3)
+
+            if (i != IDLocation)
             {
-                if (i != IDLocation)
+                lsLocation[i].transform.localPosition = new Vector3(3000f, 0f, 0f);
+                if (UIManager.Instance.lsLocationUI[i].indexTypeWork >= 3)
                 {
-                    lsLocation[i].transform.localPosition = new Vector3(3000f, 0f, 0f);
                     for (int animLH = 0; animLH < lsLocation[i].lsWorking.Length; animLH++)
                     {
                         lsLocation[i].lsWorking[animLH].anim.enabled = false;
@@ -128,19 +129,20 @@ public class GameManager : MonoBehaviour
                     {
                         lsLocation[i].others.arrAnim[animOH].enabled = false;
                     }
-                    if (lsLocation.Count > 5)
+                }
+                if (lsLocation.Count > 5)
+                {
+                    if (i < (lsLocation.Count - 3))
                     {
-                        if (i < (lsLocation.Count - 3))
-                        {
-                            lsLocation[i].gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            lsLocation[i].gameObject.SetActive(true);
-                        }
+                        lsLocation[i].gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        lsLocation[i].gameObject.SetActive(true);
                     }
                 }
             }
+
         }
     }
 

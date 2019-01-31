@@ -678,7 +678,7 @@ public class Location : MonoBehaviour
             {
                 lsWorking[idType].isOneLeft = false;
                 lsWorking[idType].isOneRight = true;
-                lsWorking[idType].trunk.DOLocalMoveX(125f, 1.5f).OnComplete(() => lsWorking[idType].isWaittingRein = true);
+                lsWorking[idType].trunk.DOLocalMoveX(175f, 1.5f).OnComplete(() => lsWorking[idType].isWaittingRein = true);
             }
             if (lsWorking[idType].isWaittingRein)
             {

@@ -560,6 +560,8 @@ public class UIManager : MonoBehaviour
                 if (PlayerPrefs.GetInt("isTutorial") == 0)
                 {
                     panelWaitGrow.SetActive(true);
+                    panelWaitGrow.transform.GetChild(0).localPosition = Vector3.zero;
+                    Invoke("IVDoMoveWaitGrow", 2f);
                     txtWait.text = "Tap to Africa";
                     Ads.Instance.HideBanner();
                 }
@@ -633,6 +635,10 @@ public class UIManager : MonoBehaviour
         }
         btnAchievement.SetActive(false);
         btnLeaderboard.SetActive(false);
+    }
+    public void IVDoMoveWaitGrow()
+    {
+        panelWaitGrow.transform.GetChild(0).DOLocalMoveY(562f, 1f);
     }
 
     public void PushGiveGold(string str)
