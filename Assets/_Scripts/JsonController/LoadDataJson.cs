@@ -4,7 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_ADS
-using UnityEngine.Advertisements; // only compile Ads code on supported platforms
+using UnityEngine.Advertisements;
+using Facebook.Unity; // only compile Ads code on supported platforms
 #endif
 
 public class LoadDataJson : MonoBehaviour
@@ -17,6 +18,19 @@ public class LoadDataJson : MonoBehaviour
             return;
         }
         Instance = this;
+
+        if (FB.IsInitialized)
+        {
+            FB.ActivateApp();
+        }
+        else
+        {
+            //Handle FB.Init
+            FB.Init(() =>
+            {
+                FB.ActivateApp();
+            });
+        }
     }
 
     private string gameConfig = "GameConfig";
@@ -274,4 +288,15 @@ public class LoadDataJson : MonoBehaviour
     }
     #endregion
 
+    public void LogCompletedTutorialEvent(string contentData, string contentId, bool success)
+    {
+        var parameters = new Dictionary<string, object>();
+        parameters[AppEventParameterName.Description] = contentData;
+        parameters[AppEventParameterName.ContentID] = contentId;
+        parameters[AppEventParameterName.Success] = success ? 1 : 0;
+        FB.LogAppEvent(
+            AppEventName.CompletedTutorial,null,
+            parameters
+        );
+    }
 }

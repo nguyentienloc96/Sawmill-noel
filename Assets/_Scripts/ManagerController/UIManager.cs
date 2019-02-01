@@ -890,6 +890,7 @@ public class UIManager : MonoBehaviour
     {
         panelWaitGrow.SetActive(false);
         Ads.Instance.ShowBanner();
+        LoadDataJson.Instance.LogCompletedTutorialEvent("Done tutorial !", "Tutorial", true);
     }
 
     public void YesSellJob()

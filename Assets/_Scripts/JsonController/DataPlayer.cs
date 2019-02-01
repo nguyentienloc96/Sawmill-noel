@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Facebook.Unity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -149,7 +150,7 @@ public class DataPlayer : MonoBehaviour
             }
         }
         var lsData = objJson["lsLocation"].AsArray;
-        if(lsData.Count > 1 || lsData[0]["countType"].AsInt > 2)
+        if (lsData.Count > 1 || lsData[0]["countType"].AsInt > 2)
         {
             UIManager.Instance.btnSpin.SetActive(true);
         }
@@ -483,6 +484,19 @@ public class DataPlayer : MonoBehaviour
             else
             {
                 isFirst = false;
+            }
+
+            if (FB.IsInitialized)
+            {
+                FB.ActivateApp();
+            }
+            else
+            {
+                //Handle FB.Init
+                FB.Init(() =>
+                {
+                    FB.ActivateApp();
+                });
             }
         }
     }
