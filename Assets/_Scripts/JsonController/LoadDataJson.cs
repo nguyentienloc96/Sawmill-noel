@@ -50,8 +50,6 @@ public class LoadDataJson : MonoBehaviour
         Ads.Instance.HideBanner();
         GetDateLauch();
         LeaderboardManager.Instance.AuthenticateToGameCenter();
-        //PlayerPrefs.DeleteKey("NextChallenge");
-        //PlayerPrefs.DeleteKey("LastChallenge");
     }
 
     void InitUnityAds()
