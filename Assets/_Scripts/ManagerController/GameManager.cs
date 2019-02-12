@@ -552,6 +552,8 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.iconRandom.sprite = UIManager.Instance.spGiveSpin;
         UIManager.Instance.infoRandom.text = "You have been rewarded with a draw of lucky spin";
         Invoke("HideGiveRandom", 3f);
+
+        AppsFlyerAnalytic.Instance.Ad_View("UNITY");
     }
 
     public void BtnYesOnclick()

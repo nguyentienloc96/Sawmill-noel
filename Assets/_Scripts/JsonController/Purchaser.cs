@@ -152,6 +152,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         if (String.Equals(args.purchasedProduct.definition.id, GameConfig.Instance.kProductID50, StringComparison.Ordinal))
         {
             GameManager.Instance.gold += 50;
+            AppsFlyerAnalytic.Instance.Purchaser(GameConfig.Instance.kProductID50, "Gold 50", "0.99", "USD", System.DateTime.Now.Date.ToString());
             //if (PlayerPrefs.GetInt("Gold", 10) > 50 && Mathf.Abs(PlayerPrefs.GetInt("GoldPre", 0) - PlayerPrefs.GetInt("Gold", 10)) >= 50)
             //{
             PlayerPrefs.SetInt("GoldPre", (int)GameManager.Instance.gold);
@@ -166,7 +167,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         else if (String.Equals(args.purchasedProduct.definition.id, GameConfig.Instance.kProductID300, StringComparison.Ordinal))
         {
             GameManager.Instance.gold += 300;
-
+            AppsFlyerAnalytic.Instance.Purchaser(GameConfig.Instance.kProductID300, "Gold 300", "3.99", "USD", System.DateTime.Now.Date.ToString());
             PlayerPrefs.SetInt("GoldPre", (int)GameManager.Instance.gold);
             StorageService storageService = App42API.BuildStorageService();
             storageService.UpdateDocumentByKeyValue("Db", "Data", "id", GameConfig.id, JsonUtility.ToJson(new SaveGold(GameConfig.id, (int)GameManager.Instance.gold)), new UnityCallBack2());
@@ -179,7 +180,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         else if (String.Equals(args.purchasedProduct.definition.id, GameConfig.Instance.kProductID5000, StringComparison.Ordinal))
         {
             GameManager.Instance.gold += 5000;
-
+            AppsFlyerAnalytic.Instance.Purchaser(GameConfig.Instance.kProductID5000, "Gold 5000", "39.99", "USD", System.DateTime.Now.Date.ToString());
             PlayerPrefs.SetInt("GoldPre", (int)GameManager.Instance.gold);
             StorageService storageService = App42API.BuildStorageService();
             storageService.UpdateDocumentByKeyValue("Db", "Data", "id", GameConfig.id, JsonUtility.ToJson(new SaveGold(GameConfig.id, (int)GameManager.Instance.gold)), new UnityCallBack2());

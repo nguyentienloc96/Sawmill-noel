@@ -110,6 +110,7 @@ public class Ads : MonoBehaviour
                     isLoadAds = false;
                     timeAds = 0;
                     Debug.Log("Show Ads");
+                    AppsFlyerAnalytic.Instance.Ad_View("ADMOB");
                 }
             }
             else
@@ -202,7 +203,6 @@ public class Ads : MonoBehaviour
 
     public void SuccessAdsUnity()
     {
-        //Debug.Log("Cong tien : " + GameConfig.Instance.dollarVideoAd);
         int locationEnd = GameManager.Instance.lsLocation.Count - 1;
         int jobEnd = GameManager.Instance.lsLocation[locationEnd].countType;
         double dollarRecive = 0;
@@ -225,11 +225,11 @@ public class Ads : MonoBehaviour
             {
                 dollarRecive = GameManager.Instance.lsLocation[locationEnd].lsWorking[jobEnd].price / 2;
             }
-        }
-        Debug.Log(GameManager.Instance.lsLocation[locationEnd].lsWorking[jobEnd].price + " / " + dollarRecive);
+        }       
         GameManager.Instance.AddDollar(+Math.Floor(dollarRecive)); // số tiền nhà cuối
         UIManager.Instance.PushGiveGold("You have recived " + UIManager.Instance.ConvertNumber(dollarRecive) + "$");
         panelPlane.SetActive(false);
+        AppsFlyerAnalytic.Instance.Ad_View("UNITY");
     }
 
     public void GiveAds()

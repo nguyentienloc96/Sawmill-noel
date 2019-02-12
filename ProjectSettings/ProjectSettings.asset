@@ -644,11 +644,11 @@ PlayerSettings:
     ErrorHub: 0
     Hub: 0
     UNet: 1
-  facebookSdkVersion: 7.9.4
+  facebookSdkVersion: pluginIncompatible
   apiCompatibilityLevel: 2
-  cloudProjectId: 001aa504-af7e-4b12-949b-1a333311952f
-  projectName: wtfLo9c
-  organizationId: nguenloc271096
+  cloudProjectId: a913803f-c61a-4c18-a337-0f59a282e891
+  projectName: Sawmill-League-2
+  organizationId: supergun512
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

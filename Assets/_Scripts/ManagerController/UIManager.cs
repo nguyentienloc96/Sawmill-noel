@@ -890,6 +890,7 @@ public class UIManager : MonoBehaviour
     {
         panelWaitGrow.SetActive(false);
         Ads.Instance.ShowBanner();
+        AppsFlyerAnalytic.Instance.Tutorial_Completion();
         LoadDataJson.Instance.LogCompletedTutorialEvent("Done tutorial !", "Tutorial", true);
     }
 

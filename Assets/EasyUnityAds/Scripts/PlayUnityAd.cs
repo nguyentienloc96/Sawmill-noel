@@ -121,6 +121,8 @@ public class PlayUnityAd : MonoBehaviour
                 showDefaultAd();
             }
         }
+
+        AppsFlyerAnalytic.Instance.Ad_Click("UNITY");
     }
 
     /*

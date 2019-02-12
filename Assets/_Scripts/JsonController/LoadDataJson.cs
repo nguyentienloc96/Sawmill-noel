@@ -1,8 +1,10 @@
 ﻿using com.shephertz.app42.paas.sdk.csharp;
 using com.shephertz.app42.paas.sdk.csharp.storage;
+using Facebook.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 #if UNITY_ADS
 using UnityEngine.Advertisements;
 using Facebook.Unity; // only compile Ads code on supported platforms

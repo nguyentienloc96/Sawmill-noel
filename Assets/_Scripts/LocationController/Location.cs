@@ -657,6 +657,7 @@ public class Location : MonoBehaviour
             if (countType == (GameManager.Instance.lsLocation[id].lsWorking.Length - 1))
             {
                 GameManager.Instance.GetTheShortestTimeBuildComplete(id);
+                AppsFlyerAnalytic.Instance.Level_Achieved((GameManager.Instance.IDLocation + 1).ToString());
             }
         }
     }
