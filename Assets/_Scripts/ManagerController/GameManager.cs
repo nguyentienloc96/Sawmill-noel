@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.txtRevenue.enabled = false;
         lsLocation[IDLocation].gameObject.SetActive(true);
         lsLocation[IDLocation].transform.localPosition = Vector3.zero;
-        if (UIManager.Instance.lsLocationUI[IDLocation].indexTypeWork >= 4)
+        if (UIManager.Instance.lsLocationUI[IDLocation].indexTypeWork >= 5)
         {
             for (int animL = 0; animL < lsLocation[IDLocation].lsWorking.Length; animL++)
             {
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
             if (i != IDLocation)
             {
                 lsLocation[i].transform.localPosition = new Vector3(3000f, 0f, 0f);
-                if (UIManager.Instance.lsLocationUI[i].indexTypeWork >= 4)
+                if (UIManager.Instance.lsLocationUI[i].indexTypeWork >= 5)
                 {
                     for (int animLH = 0; animLH < lsLocation[i].lsWorking.Length; animLH++)
                     {

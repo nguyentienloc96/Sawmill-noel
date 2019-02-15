@@ -42,7 +42,7 @@ public class Others : MonoBehaviour
         for (int i = 0; i < lsPoint.Count; i++)
         {
             Animator anim;
-            if (location.indexTypeWork < 4)
+            if (location.indexTypeWork < 5)
             {
                 anim = Instantiate(location.arrPrefabOther[location.lsOther[i]], lsPoint[i]).GetComponent<Animator>();
             }
