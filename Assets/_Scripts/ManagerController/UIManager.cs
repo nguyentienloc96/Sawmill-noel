@@ -643,7 +643,8 @@ public class UIManager : MonoBehaviour
     }
     public void IVDoMoveWaitGrow()
     {
-        panelWaitGrow.transform.GetChild(0).DOLocalMoveY(562f, 1f);
+        float pX = (panelWaitGrow.GetComponent<RectTransform>().rect.height - 1285) / 2f;
+        panelWaitGrow.transform.GetChild(0).DOLocalMoveY(562f + pX, 1f);
     }
 
     public void PushGiveGold(string str)
@@ -1394,7 +1395,7 @@ public class UIManager : MonoBehaviour
             {
                 typeTreeCurrent = typeTree;
                 panelBuyTree.SetActive(true);
-               
+
                 for (int i = 0; i < lsItemTreeUI.Count; i++)
                 {
                     if (i == typeTreeCurrent)
