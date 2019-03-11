@@ -15,7 +15,7 @@ public class Forest : MonoBehaviour
 
     public GameObject[] lsTree;
 
-    private float speedCar = 1.5f;
+    private float speedCar = 3f;
 
     private bool isGrow;
 
